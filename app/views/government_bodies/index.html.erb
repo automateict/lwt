@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Government Bodies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Government body type</th>
+      <th>Name</th>
+      <th>Region</th>
+      <th>City</th>
+      <th>Url</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @government_bodies.each do |government_body| %>
+      <tr>
+        <td><%= government_body.government_body_type %></td>
+        <td><%= government_body.name %></td>
+        <td><%= government_body.region %></td>
+        <td><%= government_body.city %></td>
+        <td><%= government_body.url %></td>
+        <td><%= government_body.email %></td>
+        <td><%= government_body.phone %></td>
+        <td><%= government_body.description %></td>
+        <td><%= link_to 'Show', government_body %></td>
+        <td><%= link_to 'Edit', edit_government_body_path(government_body) %></td>
+        <td><%= link_to 'Destroy', government_body, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Government Body', new_government_body_path %>

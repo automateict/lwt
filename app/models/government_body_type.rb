@@ -1,0 +1,2 @@
+class GovernmentBodyType < ApplicationRecord
+end

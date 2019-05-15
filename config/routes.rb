@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+  resources :pr_committee_members
+  resources :pr_committees
+  resources :sectors
+  resources :government_bodies
+  resources :government_body_types
+  resources :regions
   resources :training_funds do
     collection do
       get 'funding_by_area'
     end
   end
-  resources :languages
-  resources :professions
-  resources :profession_categories
   get 'reports/trainings'
   post 'reports/trainings'
   get 'reports/health_workers'

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Government body type:</strong>
+  <%= @government_body.government_body_type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @government_body.name %>
+</p>
+
+<p>
+  <strong>Region:</strong>
+  <%= @government_body.region %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @government_body.city %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @government_body.url %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @government_body.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @government_body.phone %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @government_body.description %>
+</p>
+
+<%= link_to 'Edit', edit_government_body_path(@government_body) %> |
+<%= link_to 'Back', government_bodies_path %>

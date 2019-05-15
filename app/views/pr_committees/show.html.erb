@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Government body:</strong>
+  <%= @pr_committee.government_body %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @pr_committee.sector %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pr_committee.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @pr_committee.description %>
+</p>
+
+<%= link_to 'Edit', edit_pr_committee_path(@pr_committee) %> |
+<%= link_to 'Back', pr_committees_path %>

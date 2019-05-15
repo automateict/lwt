@@ -1,0 +1,14 @@
+<%= simple_form_for(@pr_committee) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :government_body %>
+    <%= f.association :sector %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

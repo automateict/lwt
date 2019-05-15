@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  government_body: one
+  sector: one
+  name: MyString
+  description: MyText
+
+two:
+  government_body: two
+  sector: two
+  name: MyString
+  description: MyText

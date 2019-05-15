@@ -1,0 +1,764 @@
+  [1m[35m (45.9ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (792.7ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (344.1ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (24.8ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateRoles (20180105122837)
+  [1m[35m (402.1ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (55.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105122837')[0m
+  [1m[35m (68.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrganizationTypes (20180105122938)
+  [1m[35m (309.4ms)[0m  [1m[35mCREATE TABLE `organization_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105122938')[0m
+  [1m[35m (72.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrganizationUnits (20180105123025)
+  [1m[35m (466.9ms)[0m  [1m[35mCREATE TABLE `organization_units` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `short_name` varchar(255), `code` varchar(255), `organization_type_id` bigint, `parent_organization_unit_id` int, `url` varchar(255), `contact_person` varchar(255), `contact_phone` varchar(255), `contact_email` varchar(255), `latitude` float, `longitude` float, `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_organization_units_on_organization_type_id`  (`organization_type_id`), CONSTRAINT `fk_rails_e0dc785afc`
+FOREIGN KEY (`organization_type_id`)
+  REFERENCES `organization_types` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105123025')[0m
+  [1m[35m (50.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateUsers (20180105123026)
+  [1m[35m (351.4ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `role_id` int, `user_name` varchar(255), `organization_unit_id` int, `facility_id` int, `institution_id` int, `user_type` varchar(255), `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (406.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (266.6ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105123026')[0m
+  [1m[35m (43.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInstitutionTypes (20180111113109)
+  [1m[35m (365.8ms)[0m  [1m[35mCREATE TABLE `institution_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180111113109')[0m
+  [1m[35m (50.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInstitutions (20180111113800)
+  [1m[35m (351.9ms)[0m  [1m[35mCREATE TABLE `institutions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `institution_type_id` bigint, `address` varchar(255), `url` varchar(255), `contact_person` varchar(255), `email` varchar(255), `phone` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_institutions_on_institution_type_id`  (`institution_type_id`), CONSTRAINT `fk_rails_a4be856fe1`
+FOREIGN KEY (`institution_type_id`)
+  REFERENCES `institution_types` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180111113800')[0m
+  [1m[35m (50.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFacilityTypes (20180112133509)
+  [1m[35m (342.8ms)[0m  [1m[35mCREATE TABLE `facility_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180112133509')[0m
+  [1m[35m (50.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFacilities (20180112135103)
+  [1m[35m (432.4ms)[0m  [1m[35mCREATE TABLE `facilities` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `facility_type_id` bigint, `code` varchar(255), `organization_unit_id` bigint, `ownership` varchar(255), `contact_person` varchar(255), `contact_phone` varchar(255), `contact_email` varchar(255), `url` varchar(255), `latitude` int, `longitude` int, `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_facilities_on_facility_type_id`  (`facility_type_id`),  INDEX `index_facilities_on_organization_unit_id`  (`organization_unit_id`), CONSTRAINT `fk_rails_5500d451c1`
+FOREIGN KEY (`facility_type_id`)
+  REFERENCES `facility_types` (`id`)
+, CONSTRAINT `fk_rails_845e30e5fe`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180112135103')[0m
+  [1m[35m (50.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfessionCategories (20180112135528)
+  [1m[35m (344.9ms)[0m  [1m[35mCREATE TABLE `profession_categories` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180112135528')[0m
+  [1m[35m (61.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProfessions (20180223151717)
+  [1m[35m (407.4ms)[0m  [1m[35mCREATE TABLE `professions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `profession_category_id` bigint, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_professions_on_profession_category_id`  (`profession_category_id`), CONSTRAINT `fk_rails_624de3a3a7`
+FOREIGN KEY (`profession_category_id`)
+  REFERENCES `profession_categories` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180223151717')[0m
+  [1m[35m (50.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePeople (20180223151850)
+  [1m[35m (721.6ms)[0m  [1m[35mCREATE TABLE `people` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `first_name` varchar(255), `middle_name` varchar(255), `last_name` varchar(255), `date_of_birth` date, `gender` varchar(255), `email` varchar(255), `phone_number` varchar(255), `address` varchar(255), `country` varchar(255), `institution_id` bigint, `organization_unit_id` bigint, `facility_id` bigint, `user_id` bigint, `job_title` varchar(255), `profession_category_id` bigint, `profession_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_people_on_institution_id`  (`institution_id`),  INDEX `index_people_on_organization_unit_id`  (`organization_unit_id`),  INDEX `index_people_on_facility_id`  (`facility_id`),  INDEX `index_people_on_user_id`  (`user_id`),  INDEX `index_people_on_profession_category_id`  (`profession_category_id`),  INDEX `index_people_on_profession_id`  (`profession_id`), CONSTRAINT `fk_rails_8ae9180bb3`
+FOREIGN KEY (`institution_id`)
+  REFERENCES `institutions` (`id`)
+, CONSTRAINT `fk_rails_3bb9e93e89`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+, CONSTRAINT `fk_rails_1ebc14ee22`
+FOREIGN KEY (`facility_id`)
+  REFERENCES `facilities` (`id`)
+, CONSTRAINT `fk_rails_b39dcee1e8`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_47d0039ce6`
+FOREIGN KEY (`profession_category_id`)
+  REFERENCES `profession_categories` (`id`)
+, CONSTRAINT `fk_rails_64907f89bf`
+FOREIGN KEY (`profession_id`)
+  REFERENCES `professions` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180223151850')[0m
+  [1m[35m (49.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLanguages (20180223153108)
+  [1m[35m (345.4ms)[0m  [1m[35mCREATE TABLE `languages` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180223153108')[0m
+  [1m[35m (51.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTrainerLanguages (20180226113658)
+  [1m[35m (373.3ms)[0m  [1m[35mCREATE TABLE `trainer_languages` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `trainer_profile_id` bigint, `language_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_trainer_languages_on_trainer_profile_id`  (`trainer_profile_id`),  INDEX `index_trainer_languages_on_language_id`  (`language_id`), CONSTRAINT `fk_rails_3a6d0b0d28`
+FOREIGN KEY (`trainer_profile_id`)
+  REFERENCES `trainer_profiles` (`id`)
+, CONSTRAINT `fk_rails_b5f4fa0a94`
+FOREIGN KEY (`language_id`)
+  REFERENCES `languages` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (16.8ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateRegions (20190515131339)
+  [1m[35m (364.3ms)[0m  [1m[35mCREATE TABLE `regions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515131339')[0m
+  [1m[35m (56.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGovernmentBodyTypes (20190515131518)
+  [1m[35m (334.7ms)[0m  [1m[35mCREATE TABLE `government_body_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515131518')[0m
+  [1m[35m (52.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGovernmentBodies (20190515132533)
+  [1m[35m (428.6ms)[0m  [1m[35mCREATE TABLE `government_bodies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_type_id` bigint, `name` varchar(255), `region_id` bigint, `city` varchar(255), `url` varchar(255), `email` varchar(255), `phone` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_government_bodies_on_government_body_type_id`  (`government_body_type_id`),  INDEX `index_government_bodies_on_region_id`  (`region_id`), CONSTRAINT `fk_rails_94c4ef7c12`
+FOREIGN KEY (`government_body_type_id`)
+  REFERENCES `government_body_types` (`id`)
+, CONSTRAINT `fk_rails_492a387cc7`
+FOREIGN KEY (`region_id`)
+  REFERENCES `regions` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515132533')[0m
+  [1m[35m (106.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSectors (20190515132746)
+  [1m[35m (400.3ms)[0m  [1m[35mCREATE TABLE `sectors` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515132746')[0m
+  [1m[35m (51.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePetitionReviewingCommittees (20190515132825)
+  [1m[35m (397.1ms)[0m  [1m[35mCREATE TABLE `petition_reviewing_committees` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_id` bigint, `sector_id` bigint, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_petition_reviewing_committees_on_government_body_id`  (`government_body_id`),  INDEX `index_petition_reviewing_committees_on_sector_id`  (`sector_id`), CONSTRAINT `fk_rails_8df6896df7`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+, CONSTRAINT `fk_rails_d768b98eb4`
+FOREIGN KEY (`sector_id`)
+  REFERENCES `sectors` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515132825')[0m
+  [1m[35m (51.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePetitionReviewingCommitteeMembers (20190515133250)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreatePrCommittees (20190515134052)
+  [1m[35m (409.3ms)[0m  [1m[35mCREATE TABLE `pr_committees` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_id` bigint, `sector_id` bigint, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_pr_committees_on_government_body_id`  (`government_body_id`),  INDEX `index_pr_committees_on_sector_id`  (`sector_id`), CONSTRAINT `fk_rails_3d2c99a156`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+, CONSTRAINT `fk_rails_1fd8d786db`
+FOREIGN KEY (`sector_id`)
+  REFERENCES `sectors` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515134052')[0m
+  [1m[35m (88.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrCommitteeMembers (20190515134248)
+  [1m[35m (434.0ms)[0m  [1m[35mCREATE TABLE `pr_committee_members` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `pr_committee_id` bigint, `title` varchar(255), `first_name` varchar(255), `last_name` varchar(255), `email` varchar(255), `phone` varchar(255), `profession` varchar(255), `organization` varchar(255), `about_the_member` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_pr_committee_members_on_pr_committee_id`  (`pr_committee_id`), CONSTRAINT `fk_rails_71f1b66adb`
+FOREIGN KEY (`pr_committee_id`)
+  REFERENCES `pr_committees` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515134248')[0m
+  [1m[35m (51.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2019-05-15 13:42:57', '2019-05-15 13:42:57')[0m
+  [1m[35m (53.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `created_at`, `updated_at`) VALUES ('Admin', '2019-05-15 13:43:07', '2019-05-15 13:43:07')[0m
+  [1m[35m (83.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `organization_types` (`name`, `created_at`, `updated_at`) VALUES ('Top Org Type', '2019-05-15 13:43:07', '2019-05-15 13:43:07')[0m
+  [1m[35m (57.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrganizationType Load (0.4ms)[0m  [1m[34mSELECT  `organization_types`.* FROM `organization_types` WHERE `organization_types`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.5ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `organization_units` (`name`, `short_name`, `organization_type_id`, `created_at`, `updated_at`) VALUES ('Top Org Unit', 'TOU', 1, '2019-05-15 13:43:07', '2019-05-15 13:43:07')[0m
+  [1m[35m (65.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (40.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@openhtms.com' LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO `users` (`role_id`, `organization_unit_id`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES (1, 1, 'admin@openhtms.com', '$2a$11$VteR.SELVwFqQdEkUr1tFOgyGzvwomBJ0RZkjQj8cD83i205NhuM6', '2019-05-15 13:43:07', '2019-05-15 13:43:07')[0m
+  [1m[35m (59.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/regions" for 127.0.0.1 at 2019-05-15 16:43:25 +0300
+  [1m[35m (1.1ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by RegionsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering regions/index.html.erb within layouts/application
+  [1m[36mRegion Load (0.3ms)[0m  [1m[34mSELECT `regions`.* FROM `regions`[0m
+  Rendered regions/index.html.erb within layouts/application (56.6ms)
+Completed 500 Internal Server Error in 3771ms (ActiveRecord: 1.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `email' for nil:NilClass):
+    68: 
+    69:             <li class="dropdown user-menu">
+    70:               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+    71:                 <span class="hidden-xs"><%= current_user.email %></span>
+    72:               </a>
+    73:               <ul class="dropdown-menu">
+    74:                 <li class="header">
+  
+app/views/layouts/application.html.erb:71:in `_app_views_layouts_application_html_erb__1542351349239839490_69973810179400'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:43:37 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 401 Unauthorized in 26ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-15 16:43:37 +0300
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/users
+  Rendered users/sessions/new.html.erb within layouts/users (111.1ms)
+Completed 200 OK in 225ms (Views: 221.0ms | ActiveRecord: 0.0ms)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/assets/images/signin-bg.jpg"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:11:in `block in call'
+activesupport (5.1.6) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.1.6) lib/active_support/logger.rb:63:in `block (3 levels) in broadcast'
+activesupport (5.1.6) lib/active_support/logger_silence.rb:20:in `silence'
+activesupport (5.1.6) lib/active_support/logger.rb:61:in `block (2 levels) in broadcast'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:11:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+Processing by OrganizationUnitsController#load_tree as */*
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mOrganizationUnit Load (0.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (1.1ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (16.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (1.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.4ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.7ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 151ms (Views: 0.8ms | ActiveRecord: 19.2ms)
+
+
+  [1m[36mOrganizationUnit Load (7.7ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  [1m[36mOrganizationUnit Load (10.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 165ms (Views: 0.6ms | ActiveRecord: 28.8ms)
+
+
+  [1m[36mOrganizationUnit Load (11.5ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 184ms (Views: 0.7ms | ActiveRecord: 14.1ms)
+
+
+  [1m[36mOrganizationUnit Load (4.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 183ms (Views: 0.6ms | ActiveRecord: 7.1ms)
+
+
+Completed 200 OK in 160ms (Views: 0.6ms | ActiveRecord: 9.8ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:42 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mOrganizationUnit Load (2.4ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (3.6ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:43:43 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mOrganizationUnit Load (1.0ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (1.2ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-15 16:43:50 +0300
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OMgOH6R9B8yGnWrK79tLKbSk3qGzTAXe3w4WfwjRdgrrlwQ5y4s38+P0wYGdg3aZtryNEcdR5o90myL7toA/3g==", "user"=>{"email"=>"admin@openhtms.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"SIGN IN"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'admin@openhtms.com' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (17.5ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2019-05-15 13:43:50', `last_sign_in_at` = '2019-05-15 13:43:50', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2019-05-15 13:43:50' WHERE `users`.`id` = 1[0m
+  [1m[35m (104.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 409ms (ActiveRecord: 123.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:43:50 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.4ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.7ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 500 Internal Server Error in 72ms (ActiveRecord: 2.6ms)
+
+
+  
+NameError (uninitialized constant HomeController::Training):
+  
+app/controllers/home_controller.rb:10:in `index'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:44:58 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered dashboards/_admin.html.erb (2.8ms)
+  Rendered home/index.html.erb within layouts/application (21.8ms)
+Completed 500 Internal Server Error in 73ms (ActiveRecord: 1.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `count' for nil:NilClass):
+    12:           </div>
+    13:           <div class="content" style="min-height: 1486px;">
+    14:             <div class="text">Health Workers</div>
+    15:             <div class="number"><%= @people.count %></div>
+    16:           </div>
+    17:         </div>
+    18:       </div>
+  
+app/views/dashboards/_admin.html.erb:15:in `block (2 levels) in _app_views_dashboards__admin_html_erb__466229938552592861_69973814398160'
+app/views/dashboards/_admin.html.erb:7:in `block in _app_views_dashboards__admin_html_erb__466229938552592861_69973814398160'
+app/views/dashboards/_admin.html.erb:1:in `_app_views_dashboards__admin_html_erb__466229938552592861_69973814398160'
+app/views/home/index.html.erb:2:in `_app_views_home_index_html_erb___1302018658305564353_69973818716640'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:45:01 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered dashboards/_admin.html.erb (3.5ms)
+  Rendered home/index.html.erb within layouts/application (6.4ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionView::Template::Error (undefined method `count' for nil:NilClass):
+    12:           </div>
+    13:           <div class="content" style="min-height: 1486px;">
+    14:             <div class="text">Health Workers</div>
+    15:             <div class="number"><%= @people.count %></div>
+    16:           </div>
+    17:         </div>
+    18:       </div>
+  
+app/views/dashboards/_admin.html.erb:15:in `block (2 levels) in _app_views_dashboards__admin_html_erb__466229938552592861_69973821488880'
+app/views/dashboards/_admin.html.erb:7:in `block in _app_views_dashboards__admin_html_erb__466229938552592861_69973821488880'
+app/views/dashboards/_admin.html.erb:1:in `_app_views_dashboards__admin_html_erb__466229938552592861_69973821488880'
+app/views/home/index.html.erb:2:in `_app_views_home_index_html_erb___1302018658305564353_69973821511000'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:47:56 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered dashboards/_admin.html.erb (3.7ms)
+  Rendered home/index.html.erb within layouts/application (19.8ms)
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 0.7ms)
+
+
+  
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::TrainingTitle):
+    26:         </div>
+    27:         <div class="content" style="min-height: 1486px;">
+    28:           <div class="text">Training Topics</div>
+    29:           <div class="number"><%= TrainingTitle.count %></div>
+    30:         </div>
+    31:       </div>
+    32:         </div>
+  
+app/views/dashboards/_admin.html.erb:29:in `block (2 levels) in _app_views_dashboards__admin_html_erb__466229938552592861_69973834994300'
+app/views/dashboards/_admin.html.erb:21:in `block in _app_views_dashboards__admin_html_erb__466229938552592861_69973834994300'
+app/views/dashboards/_admin.html.erb:1:in `_app_views_dashboards__admin_html_erb__466229938552592861_69973834994300'
+app/views/home/index.html.erb:2:in `_app_views_home_index_html_erb___1302018658305564353_47411191950860'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:49:01 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered dashboards/_admin.html.erb (3.4ms)
+  Rendered home/index.html.erb within layouts/application (5.7ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    81:           </thead>
+    82: 
+    83:           <tbody>
+    84:           <% @upcoming_trainings.each do |training| %>
+    85:             <tr>
+    86:               <td><%= training.training_title %></td>
+    87:               <td><%= training.category %></td>
+  
+app/views/dashboards/_admin.html.erb:84:in `block in _app_views_dashboards__admin_html_erb__466229938552592861_69973834581580'
+app/views/dashboards/_admin.html.erb:1:in `_app_views_dashboards__admin_html_erb__466229938552592861_69973834581580'
+app/views/home/index.html.erb:2:in `_app_views_home_index_html_erb___1302018658305564353_69973835018940'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:49:41 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered dashboards/_admin.html.erb (2.9ms)
+  Rendered home/index.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    81:           </thead>
+    82: 
+    83:           <tbody>
+    84:        <!--   <% @upcoming_trainings.each do |training| %>
+    85:             <tr>
+    86:               <td><%= training.training_title %></td>
+    87:               <td><%= training.category %></td>
+  
+app/views/dashboards/_admin.html.erb:84:in `block in _app_views_dashboards__admin_html_erb__466229938552592861_47411198886000'
+app/views/dashboards/_admin.html.erb:1:in `_app_views_dashboards__admin_html_erb__466229938552592861_47411198886000'
+app/views/home/index.html.erb:2:in `_app_views_home_index_html_erb___1302018658305564353_47411199568740'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:50:08 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.6ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  Rendered dashboards/_admin.html.erb (27.8ms)
+  Rendered home/index.html.erb within layouts/application (30.6ms)
+  Rendered menus/_admin.html.erb (261.4ms)
+Completed 500 Internal Server Error in 404ms (ActiveRecord: 2.8ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `budget_years_path' for #<#<Class:0x0000563d8e81c488>:0x00007f4834137c60>):
+    16:       <span class="nav-label">System Settings</span>
+    17:     </a>
+    18:     <ul>
+    19:       <li><%= link_to 'Budget Years', budget_years_path %></li>
+    20:       <li><%= link_to 'Profession Categories', profession_categories_path %></li>
+    21:       <li><%= link_to 'Professions', professions_path %></li>
+    22:       <li><%= link_to 'Languages', languages_path %></li>
+  
+app/views/menus/_admin.html.erb:19:in `_app_views_menus__admin_html_erb___3366313542497607665_69973809172980'
+app/views/layouts/application.html.erb:112:in `_app_views_layouts_application_html_erb__1542351349239839490_69974043992260'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:51:26 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  Rendered dashboards/_admin.html.erb (5.2ms)
+  Rendered home/index.html.erb within layouts/application (8.2ms)
+  Rendered menus/_admin.html.erb (283.1ms)
+Completed 500 Internal Server Error in 428ms (ActiveRecord: 1.4ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `program_areas_path' for #<#<Class:0x0000563d8e81c488>:0x00007f48198aa788>):
+    55:       <span class="nav-label">Trainings</span>
+    56:     </a>
+    57:     <ul>
+    58:       <li><%= link_to 'Program Areas', program_areas_path %></li>
+    59:       <li><%= link_to 'Training Methods', training_methods_path %></li>
+    60:       <li><%= link_to 'Training Topics', training_titles_path %></li>
+    61:       <li><%= link_to 'Trainings', trainings_path %></li>
+  
+app/views/menus/_admin.html.erb:58:in `_app_views_menus__admin_html_erb___3366313542497607665_69973828161180'
+app/views/layouts/application.html.erb:112:in `_app_views_layouts_application_html_erb__1542351349239839490_69973821216700'
+Started GET "/" for 127.0.0.1 at 2019-05-15 16:52:26 +0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.4ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.5ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  Rendered dashboards/_admin.html.erb (9.8ms)
+  Rendered home/index.html.erb within layouts/application (12.4ms)
+  Rendered menus/_admin.html.erb (0.7ms)
+  Rendered menus/_institution.html.erb (1.3ms)
+  Rendered shared/_flash_messages.html.erb (1.0ms)
+Completed 200 OK in 184ms (Views: 179.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/organization_units/org_unit_facilities" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Started GET "/trainees/org_unit_trainees_by_category" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Started GET "/trainees/org_unit_trainees_by_area" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+  
+ActionController::RoutingError (uninitialized constant TraineesController):
+  
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  
+ActionController::RoutingError (uninitialized constant TraineesController):
+  
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Processing by OrganizationUnitsController#org_unit_facilities as JSON
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Started GET "/trainees/org_unit_trainees_by_year" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Processing by OrganizationUnitsController#load_tree as */*
+Processing by OrganizationUnitsController#load_tree as */*
+  
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (5.1ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+ActionController::RoutingError (uninitialized constant TraineesController):
+  [1m[36mOrganizationUnit Load (3.3ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mOrganizationUnit Load (3.9ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  [1m[36mOrganizationUnit Load (10.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (7.5ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  
+Completed 200 OK in 27ms (Views: 0.2ms | ActiveRecord: 10.8ms)
+
+
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `const_get'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:269:in `block in constantize'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `each'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `inject'
+activesupport (5.1.6) lib/active_support/inflector/methods.rb:267:in `constantize'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:85:in `controller_class_for'
+actionpack (5.1.6) lib/action_dispatch/http/request.rb:78:in `controller_class'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:43:in `controller'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:29:in `serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `each'
+actionpack (5.1.6) lib/action_dispatch/journey/router.rb:33:in `serve'
+actionpack (5.1.6) lib/action_dispatch/routing/route_set.rb:844:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+activerecord (5.1.6) lib/active_record/migration.rb:556:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:26:in `block in call'
+activesupport (5.1.6) lib/active_support/callbacks.rb:97:in `run_callbacks'
+actionpack (5.1.6) lib/action_dispatch/middleware/callbacks.rb:24:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:59:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+  [1m[36mOrganizationUnit Load (1.4ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Processing by OrganizationUnitsController#load_tree as */*
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 13.3ms)
+
+
+  [1m[36mOrganizationUnit Load (2.8ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (20.1ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 43ms (Views: 0.2ms | ActiveRecord: 25.1ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+  [1m[36mOrganizationUnit Load (21.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mOrganizationUnit Load (1.5ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 33ms (Views: 0.1ms | ActiveRecord: 24.7ms)
+
+
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.5ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.1ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:52:27 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (20.9ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.4ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 22.1ms)
+
+
+  [1m[35m (304.5ms)[0m  [1m[34mSELECT COUNT(*) AS count_all, facilities.name AS facilities_name FROM `people` INNER JOIN `facilities` ON `facilities`.`id` = `people`.`facility_id` WHERE `people`.`organization_unit_id` = 1 GROUP BY facilities.name[0m
+Completed 200 OK in 627ms (Views: 0.7ms | ActiveRecord: 318.3ms)
+
+

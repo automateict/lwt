@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pr committee:</strong>
+  <%= @pr_committee_member.pr_committee %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pr_committee_member.title %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @pr_committee_member.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @pr_committee_member.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @pr_committee_member.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @pr_committee_member.phone %>
+</p>
+
+<p>
+  <strong>Profession:</strong>
+  <%= @pr_committee_member.profession %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @pr_committee_member.organization %>
+</p>
+
+<p>
+  <strong>About the member:</strong>
+  <%= @pr_committee_member.about_the_member %>
+</p>
+
+<%= link_to 'Edit', edit_pr_committee_member_path(@pr_committee_member) %> |
+<%= link_to 'Back', pr_committee_members_path %>
