@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :petitions
   resources :pr_committee_members
   resources :pr_committees
   resources :sectors

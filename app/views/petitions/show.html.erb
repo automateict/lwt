@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Government body type:</strong>
+  <%= @petition.government_body_type %>
+</p>
+
+<p>
+  <strong>Government body:</strong>
+  <%= @petition.government_body %>
+</p>
+
+<p>
+  <strong>Sector:</strong>
+  <%= @petition.sector %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @petition.title %>
+</p>
+
+<p>
+  <strong>Petition details:</strong>
+  <%= @petition.petition_details %>
+</p>
+
+<p>
+  <strong>Target of signatures:</strong>
+  <%= @petition.target_of_signatures %>
+</p>
+
+<p>
+  <strong>Need for email notification:</strong>
+  <%= @petition.need_for_email_notification %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @petition.status %>
+</p>
+
+<%= link_to 'Edit', edit_petition_path(@petition) %> |
+<%= link_to 'Back', petitions_path %>

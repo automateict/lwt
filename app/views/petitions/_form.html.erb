@@ -1,0 +1,18 @@
+<%= simple_form_for(@petition) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :government_body_type %>
+    <%= f.association :government_body %>
+    <%= f.association :sector %>
+    <%= f.input :title %>
+    <%= f.input :petition_details %>
+    <%= f.input :target_of_signatures %>
+    <%= f.input :need_for_email_notification %>
+    <%= f.input :status %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

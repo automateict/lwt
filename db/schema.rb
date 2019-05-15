@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190515134248) do
+ActiveRecord::Schema.define(version: 20190515140802) do
 
   create_table "facilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -151,6 +151,22 @@ ActiveRecord::Schema.define(version: 20190515134248) do
     t.index ["sector_id"], name: "index_petition_reviewing_committees_on_sector_id"
   end
 
+  create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "government_body_type_id"
+    t.bigint "government_body_id"
+    t.bigint "sector_id"
+    t.string "title"
+    t.text "petition_details"
+    t.integer "target_of_signatures"
+    t.boolean "need_for_email_notification"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["government_body_id"], name: "index_petitions_on_government_body_id"
+    t.index ["government_body_type_id"], name: "index_petitions_on_government_body_type_id"
+    t.index ["sector_id"], name: "index_petitions_on_sector_id"
+  end
+
   create_table "pr_committee_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "pr_committee_id"
     t.string "title"
@@ -249,6 +265,9 @@ ActiveRecord::Schema.define(version: 20190515134248) do
   add_foreign_key "people", "users"
   add_foreign_key "petition_reviewing_committees", "government_bodies"
   add_foreign_key "petition_reviewing_committees", "sectors"
+  add_foreign_key "petitions", "government_bodies"
+  add_foreign_key "petitions", "government_body_types"
+  add_foreign_key "petitions", "sectors"
   add_foreign_key "pr_committee_members", "pr_committees"
   add_foreign_key "pr_committees", "government_bodies"
   add_foreign_key "pr_committees", "sectors"

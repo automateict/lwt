@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Petitions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Government body type</th>
+      <th>Government body</th>
+      <th>Sector</th>
+      <th>Title</th>
+      <th>Petition details</th>
+      <th>Target of signatures</th>
+      <th>Need for email notification</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @petitions.each do |petition| %>
+      <tr>
+        <td><%= petition.government_body_type %></td>
+        <td><%= petition.government_body %></td>
+        <td><%= petition.sector %></td>
+        <td><%= petition.title %></td>
+        <td><%= petition.petition_details %></td>
+        <td><%= petition.target_of_signatures %></td>
+        <td><%= petition.need_for_email_notification %></td>
+        <td><%= petition.status %></td>
+        <td><%= link_to 'Show', petition %></td>
+        <td><%= link_to 'Edit', edit_petition_path(petition) %></td>
+        <td><%= link_to 'Destroy', petition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Petition', new_petition_path %>

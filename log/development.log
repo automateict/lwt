@@ -762,3 +762,124 @@ Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 22.1ms)
 Completed 200 OK in 627ms (Views: 0.7ms | ActiveRecord: 318.3ms)
 
 
+Started GET "/sectors/new" for 127.0.0.1 at 2019-05-15 16:55:24 +0300
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by SectorsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering sectors/new.html.erb within layouts/application
+  Rendered sectors/_form.html.erb (44.4ms)
+  Rendered sectors/new.html.erb within layouts/application (45.5ms)
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  `roles`.* FROM `roles` WHERE `roles`.`id` = 1 LIMIT 1[0m
+  Rendered menus/_admin.html.erb (10.6ms)
+  Rendered menus/_institution.html.erb (0.3ms)
+  Rendered shared/_flash_messages.html.erb (0.3ms)
+Completed 200 OK in 479ms (Views: 434.0ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mUser Load (5.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mUser Load (17.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (1.0ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+  [1m[36mOrganizationUnit Load (3.7ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (3.0ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mOrganizationUnit Load (1.1ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 105ms (Views: 0.5ms | ActiveRecord: 12.0ms)
+
+
+  [1m[36mUser Load (20.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (18.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+  [1m[36mOrganizationUnit Load (1.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Processing by OrganizationUnitsController#load_tree as */*
+Completed 200 OK in 130ms (Views: 0.2ms | ActiveRecord: 22.4ms)
+
+
+  [1m[36mOrganizationUnit Load (1.2ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mUser Load (6.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (27.0ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.6ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  [1m[36mUser Load (9.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 200 OK in 83ms (Views: 0.2ms | ActiveRecord: 23.0ms)
+
+
+  [1m[36mOrganizationUnit Load (1.3ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (2.8ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (6.6ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 91ms (Views: 0.3ms | ActiveRecord: 53.6ms)
+
+
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+  [1m[36mOrganizationUnit Load (1.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 37ms (Views: 0.2ms | ActiveRecord: 12.3ms)
+
+
+Completed 200 OK in 90ms (Views: 0.2ms | ActiveRecord: 12.4ms)
+
+
+Started GET "/sectors/favicon.ico" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Processing by SectorsController#show as 
+  Parameters: {"id"=>"favicon"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSector Load (0.7ms)[0m  [1m[34mSELECT  `sectors`.* FROM `sectors` WHERE `sectors`.`id` = 0 LIMIT 1[0m
+Completed 404 Not Found in 9ms (ActiveRecord: 1.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Sector with 'id'=favicon):
+  
+app/controllers/sectors_controller.rb:67:in `set_sector'
+Started GET "/organization_units/load_tree" for 127.0.0.1 at 2019-05-15 16:55:26 +0300
+Processing by OrganizationUnitsController#load_tree as */*
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.6ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE `organization_units`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.3ms)[0m  [1m[34mSELECT `organization_units`.* FROM `organization_units` WHERE `organization_units`.`parent_organization_unit_id` = 1[0m
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.6ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreatePetitions (20190515140528)
+  [1m[35m (442.7ms)[0m  [1m[35mCREATE TABLE `petitions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `govenment_body_type_id` bigint, `government_body_id` bigint, `sector` varchar(255), `title` varchar(255), `petition_details` text, `target_of_signatures` int, `need_for_email_notification` tinyint(1), `status` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_petitions_on_govenment_body_type_id`  (`govenment_body_type_id`),  INDEX `index_petitions_on_government_body_id`  (`government_body_id`), CONSTRAINT `fk_rails_16f02fb684`
+FOREIGN KEY (`govenment_body_type_id`)
+  REFERENCES `govenment_body_types` (`id`)
+, CONSTRAINT `fk_rails_3e95a25097`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreatePetitions (20190515140802)
+  [1m[35m (482.4ms)[0m  [1m[35mCREATE TABLE `petitions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_type_id` bigint, `government_body_id` bigint, `sector_id` bigint, `title` varchar(255), `petition_details` text, `target_of_signatures` int, `need_for_email_notification` tinyint(1), `status` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_petitions_on_government_body_type_id`  (`government_body_type_id`),  INDEX `index_petitions_on_government_body_id`  (`government_body_id`),  INDEX `index_petitions_on_sector_id`  (`sector_id`), CONSTRAINT `fk_rails_06c31aa1ff`
+FOREIGN KEY (`government_body_type_id`)
+  REFERENCES `government_body_types` (`id`)
+, CONSTRAINT `fk_rails_3e95a25097`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+, CONSTRAINT `fk_rails_cf93669cac`
+FOREIGN KEY (`sector_id`)
+  REFERENCES `sectors` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515140802')[0m
+  [1m[35m (56.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m

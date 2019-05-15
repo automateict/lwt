@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  government_body_type: one
+  government_body: one
+  sector: one
+  title: MyString
+  petition_details: MyText
+  target_of_signatures: 1
+  need_for_email_notification: false
+  status: MyString
+
+two:
+  government_body_type: two
+  government_body: two
+  sector: two
+  title: MyString
+  petition_details: MyText
+  target_of_signatures: 1
+  need_for_email_notification: false
+  status: MyString
