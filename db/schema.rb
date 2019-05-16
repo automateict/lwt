@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190516080623) do
+ActiveRecord::Schema.define(version: 2019_05_16_120413) do
 
-  create_table "facilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.bigint "facility_type_id"
     t.string "code"
@@ -31,14 +52,14 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["organization_unit_id"], name: "index_facilities_on_organization_unit_id"
   end
 
-  create_table "facility_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "facility_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "government_bodies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "government_bodies", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "government_body_type_id"
     t.string "name"
     t.bigint "region_id"
@@ -53,21 +74,21 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["region_id"], name: "index_government_bodies_on_region_id"
   end
 
-  create_table "government_body_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "government_body_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "institution_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "institution_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "institutions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.bigint "institution_type_id"
     t.string "address"
@@ -81,20 +102,20 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
   end
 
-  create_table "languages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "languages", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "organization_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "organization_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "organization_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "organization_units", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.string "code"
@@ -104,15 +125,15 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.string "contact_person"
     t.string "contact_phone"
     t.string "contact_email"
-    t.float "latitude", limit: 24
-    t.float "longitude", limit: 24
+    t.float "latitude"
+    t.float "longitude"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_type_id"], name: "index_organization_units_on_organization_type_id"
   end
 
-  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title"
     t.string "first_name"
     t.string "middle_name"
@@ -140,7 +161,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
-  create_table "petition_reviewing_committees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "petition_reviewing_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "government_body_id"
     t.bigint "sector_id"
     t.string "name"
@@ -151,7 +172,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["sector_id"], name: "index_petition_reviewing_committees_on_sector_id"
   end
 
-  create_table "petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "government_body_type_id"
     t.bigint "government_body_id"
     t.bigint "sector_id"
@@ -167,7 +188,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["sector_id"], name: "index_petitions_on_sector_id"
   end
 
-  create_table "pr_committee_members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "pr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "pr_committee_id"
     t.string "title"
     t.string "first_name"
@@ -182,7 +203,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["pr_committee_id"], name: "index_pr_committee_members_on_pr_committee_id"
   end
 
-  create_table "pr_committees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "pr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "government_body_id"
     t.bigint "sector_id"
     t.string "name"
@@ -193,13 +214,13 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["sector_id"], name: "index_pr_committees_on_sector_id"
   end
 
-  create_table "profession_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "profession_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "professions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "professions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "profession_category_id"
     t.string "name"
     t.datetime "created_at", null: false
@@ -207,28 +228,28 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["profession_category_id"], name: "index_professions_on_profession_category_id"
   end
 
-  create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "regions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "sectors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "sectors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "sign_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "sign_petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "petition_id"
     t.string "full_name"
     t.string "email"
@@ -238,7 +259,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["petition_id"], name: "index_sign_petitions_on_petition_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "role_id"
     t.string "user_name"
     t.integer "organization_unit_id"
@@ -261,6 +282,7 @@ ActiveRecord::Schema.define(version: 20190516080623) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "facilities", "facility_types"
   add_foreign_key "facilities", "organization_units"
   add_foreign_key "government_bodies", "government_body_types"

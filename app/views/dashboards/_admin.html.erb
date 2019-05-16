@@ -11,44 +11,44 @@
             <i class="material-icons col-success">people</i>
           </div>
           <div class="content" style="min-height: 1486px;">
-            <div class="text">Health Workers</div>
+            <div class="text">Workers</div>
             <div class="number"></div>
           </div>
         </div>
       </div>
     <% end %>
 
-      <%= link_to trainings_path(type: 'upcoming') do %>
+      <%= link_to root_path(type: 'upcoming') do %>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="info-box infobox-type-5 hover-zoom-effect">
         <div class="icon">
           <i class="material-icons col-success">library_books</i>
         </div>
         <div class="content" style="min-height: 1486px;">
-          <div class="text">Training Topics</div>
+          <div class="text">Total Petitions</div>
           <div class="number"></div>
         </div>
       </div>
         </div>
       <% end %>
-      <%= link_to trainees_path do %>
+      <%= link_to root_path do %>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="icon">
                 <i class="material-icons col-success">list</i>
               </div>
               <div class="content" style="min-height: 1486px;">
-                <div class="text">Total Trainees</div>
+                <div class="text">Total Complaints</div>
                 <div class="number"></div>
               </div>
             </div>
           </div>
       <% end %>
-      <%= link_to trainings_path(type: 'progress') do %>
+      <%= link_to root_path(type: 'progress') do %>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="info-box infobox-type-5 hover-zoom-effect">
               <div class="content" style="min-height: 1486px;">
-                <div class="text">Training Sessions Currently in Progress</div>
+                <div class="text">Petitions Being Reviewed</div>
                 <div class="number"></div>
               </div>
               <div class="icon">
@@ -62,13 +62,13 @@
   <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Upcoming Trainings
+        Upcoming Petitions to be reviewed
       </div>
       <div class="panel-body">
         <table class="table">
           <thead>
           <tr>
-            <th>Training title</th>
+            <th>Petition title</th>
             <th>Category</th>
             <th>Type</th>
             <th>Organized By</th>
@@ -93,10 +93,10 @@
     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Total Health Workers by <%= current_user.try(:parent_org_unit).try(:sub_unit_name).try(:to_sentence) %>
+          Number of Petitions by Region
         </div>
         <div class="panel-body">
-          <%= line_chart org_unit_facilities_organization_units_path, curve: false, code: true %>
+          
         </div>
       </div>
     </div>
@@ -104,10 +104,10 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Number of Trainees by Program Area and Category
+          Number of Petition Resolved by region
         </div>
         <div class="panel-body">
-          <%= column_chart org_unit_trainees_by_category_trainees_path %>
+          
         </div>
       </div>
     </div>
@@ -115,10 +115,10 @@
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Number of Trainees by Program Area and Training Type
+        Number of Petition not resolved by region
       </div>
       <div class="panel-body">
-        <%= column_chart org_unit_trainees_by_area_trainees_path %>
+        
       </div>
     </div>
   </div>
@@ -126,10 +126,10 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Number of Trainees by Year
+        Number of petitions ready for review
       </div>
       <div class="panel-body">
-        <%= column_chart org_unit_trainees_by_year_trainees_path %>
+        
       </div>
     </div>
   </div>

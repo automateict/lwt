@@ -11,14 +11,13 @@ gem 'country_select'
 gem "nested_form"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem "paperclip", "~> 5.2.1"
 gem "chartkick"
 gem "highcharts-rails"
 gem 'best_in_place'
 gem 'jquery-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
