@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sign_petitions
   resources :petitions
   resources :pr_committee_members
   resources :pr_committees

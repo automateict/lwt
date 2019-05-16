@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sign Petitions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Petition</th>
+      <th>Full name</th>
+      <th>Email</th>
+      <th>Remark</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sign_petitions.each do |sign_petition| %>
+      <tr>
+        <td><%= sign_petition.petition %></td>
+        <td><%= sign_petition.full_name %></td>
+        <td><%= sign_petition.email %></td>
+        <td><%= sign_petition.remark %></td>
+        <td><%= link_to 'Show', sign_petition %></td>
+        <td><%= link_to 'Edit', edit_sign_petition_path(sign_petition) %></td>
+        <td><%= link_to 'Destroy', sign_petition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sign Petition', new_sign_petition_path %>

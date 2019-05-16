@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190515140802) do
+ActiveRecord::Schema.define(version: 20190516080623) do
 
   create_table "facilities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -228,6 +228,16 @@ ActiveRecord::Schema.define(version: 20190515140802) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sign_petitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "petition_id"
+    t.string "full_name"
+    t.string "email"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petition_id"], name: "index_sign_petitions_on_petition_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "role_id"
     t.string "user_name"
@@ -272,4 +282,5 @@ ActiveRecord::Schema.define(version: 20190515140802) do
   add_foreign_key "pr_committees", "government_bodies"
   add_foreign_key "pr_committees", "sectors"
   add_foreign_key "professions", "profession_categories"
+  add_foreign_key "sign_petitions", "petitions"
 end
