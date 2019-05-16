@@ -1,0 +1,17 @@
+<%= simple_form_for(@cr_committee_member) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :organization_unit %>
+    <%= f.association :cr_committee %>
+    <%= f.input :title %>
+    <%= f.input :full_name %>
+    <%= f.input :email %>
+    <%= f.input :phone %>
+    <%= f.input :about_me %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

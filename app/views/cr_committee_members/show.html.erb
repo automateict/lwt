@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Organization unit:</strong>
+  <%= @cr_committee_member.organization_unit %>
+</p>
+
+<p>
+  <strong>Cr committee:</strong>
+  <%= @cr_committee_member.cr_committee %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @cr_committee_member.title %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @cr_committee_member.full_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @cr_committee_member.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @cr_committee_member.phone %>
+</p>
+
+<p>
+  <strong>About me:</strong>
+  <%= @cr_committee_member.about_me %>
+</p>
+
+<%= link_to 'Edit', edit_cr_committee_member_path(@cr_committee_member) %> |
+<%= link_to 'Back', cr_committee_members_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @complaint.user %>
+</p>
+
+<p>
+  <strong>Organization unit:</strong>
+  <%= @complaint.organization_unit %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @complaint.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @complaint.body %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @complaint.status %>
+</p>
+
+<%= link_to 'Edit', edit_complaint_path(@complaint) %> |
+<%= link_to 'Back', complaints_path %>

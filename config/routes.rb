@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :cr_committee_members
+  resources :cr_committees
+  resources :complaints
   resources :budget_years
   resources :training_materials
   resources :training_methods
@@ -45,7 +48,6 @@ Rails.application.routes.draw do
       get 'load_facilities'
     end
   end
-  resources :facility_types
   resources :trainings do
     collection do
       get 'load_distribution'

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cr Committees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization unit</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cr_committees.each do |cr_committee| %>
+      <tr>
+        <td><%= cr_committee.organization_unit %></td>
+        <td><%= cr_committee.name %></td>
+        <td><%= cr_committee.description %></td>
+        <td><%= link_to 'Show', cr_committee %></td>
+        <td><%= link_to 'Edit', edit_cr_committee_path(cr_committee) %></td>
+        <td><%= link_to 'Destroy', cr_committee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cr Committee', new_cr_committee_path %>

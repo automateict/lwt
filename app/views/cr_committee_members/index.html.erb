@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cr Committee Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization unit</th>
+      <th>Cr committee</th>
+      <th>Title</th>
+      <th>Full name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>About me</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cr_committee_members.each do |cr_committee_member| %>
+      <tr>
+        <td><%= cr_committee_member.organization_unit %></td>
+        <td><%= cr_committee_member.cr_committee %></td>
+        <td><%= cr_committee_member.title %></td>
+        <td><%= cr_committee_member.full_name %></td>
+        <td><%= cr_committee_member.email %></td>
+        <td><%= cr_committee_member.phone %></td>
+        <td><%= cr_committee_member.about_me %></td>
+        <td><%= link_to 'Show', cr_committee_member %></td>
+        <td><%= link_to 'Edit', edit_cr_committee_member_path(cr_committee_member) %></td>
+        <td><%= link_to 'Destroy', cr_committee_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cr Committee Member', new_cr_committee_member_path %>

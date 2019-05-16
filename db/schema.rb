@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_120413) do
+ActiveRecord::Schema.define(version: 2019_05_16_125906) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,41 @@ ActiveRecord::Schema.define(version: 2019_05_16_120413) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organization_unit_id"
+    t.string "title"
+    t.text "body"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_unit_id"], name: "index_complaints_on_organization_unit_id"
+    t.index ["user_id"], name: "index_complaints_on_user_id"
+  end
+
+  create_table "cr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "organization_unit_id"
+    t.bigint "cr_committee_id"
+    t.string "title"
+    t.string "full_name"
+    t.string "email"
+    t.string "phone"
+    t.text "about_me"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cr_committee_id"], name: "index_cr_committee_members_on_cr_committee_id"
+    t.index ["organization_unit_id"], name: "index_cr_committee_members_on_organization_unit_id"
+  end
+
+  create_table "cr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "organization_unit_id"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_unit_id"], name: "index_cr_committees_on_organization_unit_id"
   end
 
   create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -283,6 +318,11 @@ ActiveRecord::Schema.define(version: 2019_05_16_120413) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "complaints", "organization_units"
+  add_foreign_key "complaints", "users"
+  add_foreign_key "cr_committee_members", "cr_committees"
+  add_foreign_key "cr_committee_members", "organization_units"
+  add_foreign_key "cr_committees", "organization_units"
   add_foreign_key "facilities", "facility_types"
   add_foreign_key "facilities", "organization_units"
   add_foreign_key "government_bodies", "government_body_types"
