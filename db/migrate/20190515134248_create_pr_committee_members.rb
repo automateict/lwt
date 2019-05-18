@@ -1,6 +1,7 @@
 class CreatePrCommitteeMembers < ActiveRecord::Migration[5.1]
   def change
     create_table :pr_committee_members do |t|
+      t.references :user, foreign_key: true
       t.references :pr_committee, foreign_key: true
       t.string :title
       t.string :first_name

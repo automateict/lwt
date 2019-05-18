@@ -2400,3 +2400,285 @@ FOREIGN KEY (`cr_committee_id`)
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (19.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (151.0ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (21.9ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (18.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.`value` FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment'[0m
+  [1m[35m (17.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (10383.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS `ethiolewt`[0m
+Started GET "/" for 127.0.0.1 at 2019-05-18 10:57:20 +0300
+  
+ActiveRecord::NoDatabaseError (Unknown database 'ethiolewt'):
+  
+activerecord (5.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:26:in `rescue in mysql2_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:12:in `mysql2_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:811:in `new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:855:in `checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:834:in `try_to_checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:795:in `acquire_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:523:in `checkout'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:1014:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.3) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-05-18 10:57:26 +0300
+  
+ActiveRecord::NoDatabaseError (Unknown database 'ethiolewt'):
+  
+activerecord (5.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:26:in `rescue in mysql2_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/mysql2_adapter.rb:12:in `mysql2_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:811:in `new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:855:in `checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:834:in `try_to_checkout_new_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:795:in `acquire_connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:523:in `checkout'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:382:in `connection'
+activerecord (5.2.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:1014:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:118:in `retrieve_connection'
+activerecord (5.2.3) lib/active_record/connection_handling.rb:90:in `connection'
+activerecord (5.2.3) lib/active_record/migration.rb:554:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (151.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (717.2ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (615.6ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  [1m[35m (16.8ms)[0m  [1m[34mSELECT GET_LOCK('3199391458933224555', 0)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateRoles (20180105122837)
+  [1m[35m (527.4ms)[0m  [1m[35mCREATE TABLE `roles` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105122837')[0m
+  [1m[35m (78.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrganizationTypes (20180105122938)
+  [1m[35m (408.9ms)[0m  [1m[35mCREATE TABLE `organization_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105122938')[0m
+  [1m[35m (115.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrganizationUnits (20180105123025)
+  [1m[35m (558.1ms)[0m  [1m[35mCREATE TABLE `organization_units` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `short_name` varchar(255), `code` varchar(255), `organization_type_id` bigint, `parent_organization_unit_id` int, `url` varchar(255), `contact_person` varchar(255), `contact_phone` varchar(255), `contact_email` varchar(255), `latitude` float(24), `longitude` float(24), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_organization_units_on_organization_type_id`  (`organization_type_id`), CONSTRAINT `fk_rails_e0dc785afc`
+FOREIGN KEY (`organization_type_id`)
+  REFERENCES `organization_types` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105123025')[0m
+  [1m[35m (50.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateUsers (20180105123026)
+  [1m[35m (394.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `role_id` int, `user_name` varchar(255), `organization_unit_id` int, `facility_id` int, `institution_id` int, `user_type` varchar(255), `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (595.5ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (333.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20180105123026')[0m
+  [1m[35m (56.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRegions (20190515131339)
+  [1m[35m (455.5ms)[0m  [1m[35mCREATE TABLE `regions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515131339')[0m
+  [1m[35m (51.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGovernmentBodyTypes (20190515131518)
+  [1m[35m (387.0ms)[0m  [1m[35mCREATE TABLE `government_body_types` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515131518')[0m
+  [1m[35m (50.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGovernmentBodies (20190515132533)
+  [1m[35m (567.1ms)[0m  [1m[35mCREATE TABLE `government_bodies` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_type_id` bigint, `name` varchar(255), `region_id` bigint, `city` varchar(255), `url` varchar(255), `email` varchar(255), `phone` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_government_bodies_on_government_body_type_id`  (`government_body_type_id`),  INDEX `index_government_bodies_on_region_id`  (`region_id`), CONSTRAINT `fk_rails_94c4ef7c12`
+FOREIGN KEY (`government_body_type_id`)
+  REFERENCES `government_body_types` (`id`)
+, CONSTRAINT `fk_rails_492a387cc7`
+FOREIGN KEY (`region_id`)
+  REFERENCES `regions` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515132533')[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSectors (20190515132746)
+  [1m[35m (376.2ms)[0m  [1m[35mCREATE TABLE `sectors` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515132746')[0m
+  [1m[35m (50.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrCommittees (20190515134052)
+  [1m[35m (882.6ms)[0m  [1m[35mCREATE TABLE `pr_committees` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `government_body_id` bigint, `sector_id` bigint, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_pr_committees_on_government_body_id`  (`government_body_id`),  INDEX `index_pr_committees_on_sector_id`  (`sector_id`), CONSTRAINT `fk_rails_3d2c99a156`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+, CONSTRAINT `fk_rails_1fd8d786db`
+FOREIGN KEY (`sector_id`)
+  REFERENCES `sectors` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515134052')[0m
+  [1m[35m (51.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrCommitteeMembers (20190515134248)
+  [1m[35m (581.7ms)[0m  [1m[35mCREATE TABLE `pr_committee_members` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `pr_committee_id` bigint, `title` varchar(255), `first_name` varchar(255), `last_name` varchar(255), `email` varchar(255), `phone` varchar(255), `profession` varchar(255), `organization` varchar(255), `about_the_member` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_pr_committee_members_on_user_id`  (`user_id`),  INDEX `index_pr_committee_members_on_pr_committee_id`  (`pr_committee_id`), CONSTRAINT `fk_rails_bbb961876a`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_71f1b66adb`
+FOREIGN KEY (`pr_committee_id`)
+  REFERENCES `pr_committees` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (12.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515134248')[0m
+  [1m[35m (50.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePetitions (20190515140802)
+  [1m[35m (610.2ms)[0m  [1m[35mCREATE TABLE `petitions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `government_body_type_id` bigint, `government_body_id` bigint, `sector_id` bigint, `title` varchar(255), `petition_details` text, `target_of_signatures` int, `need_for_email_notification` tinyint(1), `status` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_petitions_on_user_id`  (`user_id`),  INDEX `index_petitions_on_government_body_type_id`  (`government_body_type_id`),  INDEX `index_petitions_on_government_body_id`  (`government_body_id`),  INDEX `index_petitions_on_sector_id`  (`sector_id`), CONSTRAINT `fk_rails_148f563e25`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_06c31aa1ff`
+FOREIGN KEY (`government_body_type_id`)
+  REFERENCES `government_body_types` (`id`)
+, CONSTRAINT `fk_rails_3e95a25097`
+FOREIGN KEY (`government_body_id`)
+  REFERENCES `government_bodies` (`id`)
+, CONSTRAINT `fk_rails_cf93669cac`
+FOREIGN KEY (`sector_id`)
+  REFERENCES `sectors` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190515140802')[0m
+  [1m[35m (48.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSignPetitions (20190516080623)
+  [1m[35m (483.4ms)[0m  [1m[35mCREATE TABLE `sign_petitions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `petition_id` bigint, `full_name` varchar(255), `email` varchar(255), `remark` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_sign_petitions_on_user_id`  (`user_id`),  INDEX `index_sign_petitions_on_petition_id`  (`petition_id`), CONSTRAINT `fk_rails_30ea9c4e39`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_f6033929f5`
+FOREIGN KEY (`petition_id`)
+  REFERENCES `petitions` (`id`)
+) ENGINE=InnoDB[0m
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190516080623')[0m
+  [1m[35m (50.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveStorageTables (20190516120413)
+  [1m[35m (559.7ms)[0m  [1m[35mCREATE TABLE `active_storage_blobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `key` varchar(255) NOT NULL, `filename` varchar(255) NOT NULL, `content_type` varchar(255), `metadata` text, `byte_size` bigint NOT NULL, `checksum` varchar(255) NOT NULL, `created_at` datetime NOT NULL, UNIQUE INDEX `index_active_storage_blobs_on_key`  (`key`))[0m
+  [1m[35m (539.8ms)[0m  [1m[35mCREATE TABLE `active_storage_attachments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `record_type` varchar(255) NOT NULL, `record_id` bigint NOT NULL, `blob_id` bigint NOT NULL, `created_at` datetime NOT NULL,  INDEX `index_active_storage_attachments_on_blob_id`  (`blob_id`), UNIQUE INDEX `index_active_storage_attachments_uniqueness`  (`record_type`, `record_id`, `name`, `blob_id`), CONSTRAINT `fk_rails_c3b3935057`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190516120413')[0m
+  [1m[35m (49.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComplaints (20190516125543)
+  [1m[35m (547.3ms)[0m  [1m[35mCREATE TABLE `complaints` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `organization_unit_id` bigint, `title` varchar(255), `body` text, `status` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_complaints_on_user_id`  (`user_id`),  INDEX `index_complaints_on_organization_unit_id`  (`organization_unit_id`), CONSTRAINT `fk_rails_3d83173382`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_11a5d741f2`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190516125543')[0m
+  [1m[35m (50.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCrCommittees (20190516125652)
+  [1m[35m (608.1ms)[0m  [1m[35mCREATE TABLE `cr_committees` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `organization_unit_id` bigint, `name` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_cr_committees_on_organization_unit_id`  (`organization_unit_id`), CONSTRAINT `fk_rails_340bc47169`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190516125652')[0m
+  [1m[35m (62.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCrCommitteeMembers (20190516125906)
+  [1m[35m (482.0ms)[0m  [1m[35mCREATE TABLE `cr_committee_members` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint, `organization_unit_id` bigint, `cr_committee_id` bigint, `title` varchar(255), `full_name` varchar(255), `email` varchar(255), `phone` varchar(255), `about_me` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_cr_committee_members_on_user_id`  (`user_id`),  INDEX `index_cr_committee_members_on_organization_unit_id`  (`organization_unit_id`),  INDEX `index_cr_committee_members_on_cr_committee_id`  (`cr_committee_id`), CONSTRAINT `fk_rails_16ee9e308a`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_ae6bab8e6d`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+, CONSTRAINT `fk_rails_9676925acc`
+FOREIGN KEY (`cr_committee_id`)
+  REFERENCES `cr_committees` (`id`)
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190516125906')[0m
+  [1m[35m (51.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDepartments (20190518081008)
+  [1m[35m (485.2ms)[0m  [1m[35mCREATE TABLE `departments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `organization_unit_id` bigint, `name` varchar(255), `phone` varchar(255), `email` varchar(255), `description` text, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_departments_on_organization_unit_id`  (`organization_unit_id`), CONSTRAINT `fk_rails_b1faa53812`
+FOREIGN KEY (`organization_unit_id`)
+  REFERENCES `organization_units` (`id`)
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190518081008')[0m
+  [1m[35m (51.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2019-05-18 08:10:32', '2019-05-18 08:10:32')[0m
+  [1m[35m (58.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('3199391458933224555')[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (38.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.4ms)[0m  [1m[32mINSERT INTO `roles` (`name`, `created_at`, `updated_at`) VALUES ('Admin', '2019-05-18 08:10:48', '2019-05-18 08:10:48')[0m
+  [1m[35m (58.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrganizationType Create (0.7ms)[0m  [1m[32mINSERT INTO `organization_types` (`name`, `created_at`, `updated_at`) VALUES ('Top Org Type', '2019-05-18 08:10:48', '2019-05-18 08:10:48')[0m
+  [1m[35m (50.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrganizationType Load (0.3ms)[0m  [1m[34mSELECT  `organization_types`.* FROM `organization_types` WHERE `organization_types`.`id` = 1 LIMIT 1[0m
+  [1m[36mOrganizationUnit Load (0.5ms)[0m  [1m[34mSELECT  `organization_units`.* FROM `organization_units` WHERE (parent_organization_unit_id is null) ORDER BY `organization_units`.`id` ASC LIMIT 1[0m
+  [1m[36mOrganizationUnit Create (0.5ms)[0m  [1m[32mINSERT INTO `organization_units` (`name`, `short_name`, `organization_type_id`, `created_at`, `updated_at`) VALUES ('Top Org Unit', 'TOU', 1, '2019-05-18 08:10:48', '2019-05-18 08:10:48')[0m
+  [1m[35m (58.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admin@openhtms.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`role_id`, `organization_unit_id`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES (1, 1, 'admin@openhtms.com', '$2a$11$xl3yhzp.YVo3cMTXy9LZw.EYXk5CYfc5TecQL/3rzu.JhAoJHjWtG', '2019-05-18 08:10:49', '2019-05-18 08:10:49')[0m
+  [1m[35m (57.2ms)[0m  [1m[35mCOMMIT[0m

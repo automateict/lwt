@@ -1,6 +1,7 @@
 class CreatePetitions < ActiveRecord::Migration[5.1]
   def change
     create_table :petitions do |t|
+      t.references :user, foreign_key: true
       t.references :government_body_type, foreign_key: true
       t.references :government_body, foreign_key: true
       t.references :sector, foreign_key: true

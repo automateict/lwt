@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_125906) do
+ActiveRecord::Schema.define(version: 2019_05_18_081008) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
   end
 
   create_table "cr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "organization_unit_id"
     t.bigint "cr_committee_id"
     t.string "title"
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.datetime "updated_at", null: false
     t.index ["cr_committee_id"], name: "index_cr_committee_members_on_cr_committee_id"
     t.index ["organization_unit_id"], name: "index_cr_committee_members_on_organization_unit_id"
+    t.index ["user_id"], name: "index_cr_committee_members_on_user_id"
   end
 
   create_table "cr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -68,30 +70,15 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.index ["organization_unit_id"], name: "index_cr_committees_on_organization_unit_id"
   end
 
-  create_table "facilities", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
-    t.bigint "facility_type_id"
-    t.string "code"
+  create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "organization_unit_id"
-    t.string "ownership"
-    t.string "contact_person"
-    t.string "contact_phone"
-    t.string "contact_email"
-    t.string "url"
-    t.integer "latitude"
-    t.integer "longitude"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["facility_type_id"], name: "index_facilities_on_facility_type_id"
-    t.index ["organization_unit_id"], name: "index_facilities_on_organization_unit_id"
-  end
-
-  create_table "facility_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
+    t.string "phone"
+    t.string "email"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["organization_unit_id"], name: "index_departments_on_organization_unit_id"
   end
 
   create_table "government_bodies", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -112,33 +99,6 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
   create_table "government_body_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "institution_types", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "institutions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
-    t.bigint "institution_type_id"
-    t.string "address"
-    t.string "url"
-    t.string "contact_person"
-    t.string "email"
-    t.string "phone"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["institution_type_id"], name: "index_institutions_on_institution_type_id"
-  end
-
-  create_table "languages", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -168,46 +128,8 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.index ["organization_type_id"], name: "index_organization_units_on_organization_type_id"
   end
 
-  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "title"
-    t.string "first_name"
-    t.string "middle_name"
-    t.string "last_name"
-    t.date "date_of_birth"
-    t.string "gender"
-    t.string "email"
-    t.string "phone_number"
-    t.string "address"
-    t.string "country"
-    t.bigint "institution_id"
-    t.bigint "organization_unit_id"
-    t.bigint "facility_id"
-    t.bigint "user_id"
-    t.string "job_title"
-    t.bigint "profession_category_id"
-    t.bigint "profession_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["facility_id"], name: "index_people_on_facility_id"
-    t.index ["institution_id"], name: "index_people_on_institution_id"
-    t.index ["organization_unit_id"], name: "index_people_on_organization_unit_id"
-    t.index ["profession_category_id"], name: "index_people_on_profession_category_id"
-    t.index ["profession_id"], name: "index_people_on_profession_id"
-    t.index ["user_id"], name: "index_people_on_user_id"
-  end
-
-  create_table "petition_reviewing_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "government_body_id"
-    t.bigint "sector_id"
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["government_body_id"], name: "index_petition_reviewing_committees_on_government_body_id"
-    t.index ["sector_id"], name: "index_petition_reviewing_committees_on_sector_id"
-  end
-
   create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "government_body_type_id"
     t.bigint "government_body_id"
     t.bigint "sector_id"
@@ -221,9 +143,11 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.index ["government_body_id"], name: "index_petitions_on_government_body_id"
     t.index ["government_body_type_id"], name: "index_petitions_on_government_body_type_id"
     t.index ["sector_id"], name: "index_petitions_on_sector_id"
+    t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 
   create_table "pr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "pr_committee_id"
     t.string "title"
     t.string "first_name"
@@ -236,6 +160,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pr_committee_id"], name: "index_pr_committee_members_on_pr_committee_id"
+    t.index ["user_id"], name: "index_pr_committee_members_on_user_id"
   end
 
   create_table "pr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -247,20 +172,6 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.datetime "updated_at", null: false
     t.index ["government_body_id"], name: "index_pr_committees_on_government_body_id"
     t.index ["sector_id"], name: "index_pr_committees_on_sector_id"
-  end
-
-  create_table "profession_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "professions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "profession_category_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["profession_category_id"], name: "index_professions_on_profession_category_id"
   end
 
   create_table "regions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -285,6 +196,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
   end
 
   create_table "sign_petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "petition_id"
     t.string "full_name"
     t.string "email"
@@ -292,6 +204,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["petition_id"], name: "index_sign_petitions_on_petition_id"
+    t.index ["user_id"], name: "index_sign_petitions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -322,27 +235,20 @@ ActiveRecord::Schema.define(version: 2019_05_16_125906) do
   add_foreign_key "complaints", "users"
   add_foreign_key "cr_committee_members", "cr_committees"
   add_foreign_key "cr_committee_members", "organization_units"
+  add_foreign_key "cr_committee_members", "users"
   add_foreign_key "cr_committees", "organization_units"
-  add_foreign_key "facilities", "facility_types"
-  add_foreign_key "facilities", "organization_units"
+  add_foreign_key "departments", "organization_units"
   add_foreign_key "government_bodies", "government_body_types"
   add_foreign_key "government_bodies", "regions"
-  add_foreign_key "institutions", "institution_types"
   add_foreign_key "organization_units", "organization_types"
-  add_foreign_key "people", "facilities"
-  add_foreign_key "people", "institutions"
-  add_foreign_key "people", "organization_units"
-  add_foreign_key "people", "profession_categories"
-  add_foreign_key "people", "professions"
-  add_foreign_key "people", "users"
-  add_foreign_key "petition_reviewing_committees", "government_bodies"
-  add_foreign_key "petition_reviewing_committees", "sectors"
   add_foreign_key "petitions", "government_bodies"
   add_foreign_key "petitions", "government_body_types"
   add_foreign_key "petitions", "sectors"
+  add_foreign_key "petitions", "users"
   add_foreign_key "pr_committee_members", "pr_committees"
+  add_foreign_key "pr_committee_members", "users"
   add_foreign_key "pr_committees", "government_bodies"
   add_foreign_key "pr_committees", "sectors"
-  add_foreign_key "professions", "profession_categories"
   add_foreign_key "sign_petitions", "petitions"
+  add_foreign_key "sign_petitions", "users"
 end
