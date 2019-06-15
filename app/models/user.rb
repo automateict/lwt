@@ -1,15 +1,30 @@
 class User < ApplicationRecord
-  belongs_to :organization_unit, optional: true
+  belongs_to :government_body, optional: true
   belongs_to :role, optional: true
   belongs_to :institution, optional: true
   belongs_to :facility, optional: true
+  has_many :petitions
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def super_admin?
-    organization_unit == OrganizationUnit.top_organization_unit
+
+  def load_petitions
+    petitions = []
+    unless government_body.blank?
+      petitions = Petition.where('government_body_id = ?', government_body_id)
+    else
+      petitions = self.petitions
+    end
+    return petitions
+  end
+
+  def signed(petition)
+    !petition.signatures.where('user_id = ?', id).blank?
+  end
+  def has_role(role_name)
+    role.name == role_name
   end
 
   def admin?
@@ -35,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    person
+    email
   end
 
 end

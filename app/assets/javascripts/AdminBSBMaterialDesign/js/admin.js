@@ -440,7 +440,6 @@ $.AdminBSB.browser = {
 //==========================================================================================================================
 
 $(function () {
-
     $.AdminBSB.browser.activate();
     $.AdminBSB.leftSideBar.activate();
     $.AdminBSB.rightSideBar.activate();

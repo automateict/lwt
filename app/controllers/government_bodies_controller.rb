@@ -28,7 +28,7 @@ class GovernmentBodiesController < ApplicationController
 
     respond_to do |format|
       if @government_body.save
-        format.html { redirect_to @government_body, notice: 'Government body was successfully created.' }
+        format.html { redirect_to government_bodies_path, notice: 'Government body was successfully created.' }
         format.json { render :show, status: :created, location: @government_body }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class GovernmentBodiesController < ApplicationController
   def update
     respond_to do |format|
       if @government_body.update(government_body_params)
-        format.html { redirect_to @government_body, notice: 'Government body was successfully updated.' }
+        format.html { redirect_to government_bodies_path, notice: 'Government body was successfully updated.' }
         format.json { render :show, status: :ok, location: @government_body }
       else
         format.html { render :edit }

@@ -1,10 +1,17 @@
 class PetitionsController < ApplicationController
-  before_action :set_petition, only: [:show, :edit, :update, :destroy]
+  #before_action :authenticate_user!, except: [:show]
+  before_action :set_petition, only: [:show, :edit, :update, :destroy, :sign]
 
   # GET /petitions
   # GET /petitions.json
   def index
-    @petitions = Petition.all
+    @petitions = current_user.load_petitions
+  end
+
+  def sign
+    signature = @petition.signatures.build(user_id: current_user.id)
+    signature.save
+    redirect_to @petition
   end
 
   # GET /petitions/1
@@ -25,7 +32,7 @@ class PetitionsController < ApplicationController
   # POST /petitions.json
   def create
     @petition = Petition.new(petition_params)
-
+    params[:petition][:status] = 'Pending'
     respond_to do |format|
       if @petition.save
         format.html { redirect_to @petition, notice: 'Petition was successfully created.' }
@@ -69,6 +76,6 @@ class PetitionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petition_params
-      params.require(:petition).permit(:government_body_type_id, :government_body_id, :sector_id, :title, :petition_details, :target_of_signatures, :need_for_email_notification, :status)
+      params.require(:petition).permit(:user_id, :government_body_id, :sector_id, :title, :petition_details, :target_of_signatures, :need_for_email_notification, :status, :logo)
     end
 end

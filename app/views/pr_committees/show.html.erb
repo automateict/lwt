@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Government body:</strong>
-  <%= @pr_committee.government_body %>
-</p>
-
-<p>
-  <strong>Sector:</strong>
-  <%= @pr_committee.sector %>
+  <strong>Petition:</strong>
+  <%= @pr_committee.petition %>
 </p>
 
 <p>
@@ -16,8 +11,8 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @pr_committee.description %>
+  <strong>Deadline:</strong>
+  <%= @pr_committee.deadline %>
 </p>
 
 <%= link_to 'Edit', edit_pr_committee_path(@pr_committee) %> |

@@ -1,62 +1,43 @@
-<% if current_user.admin? %>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">group</i>
-      <span class="nav-label">Users</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Org Unit Users', users_path(type: 'org unit') %></li>
-      <li><%= link_to 'Institution Users', users_path(type: 'institution') %></li>
-    </ul>
-  </li>
+<% if user_signed_in? and current_user.has_role('Admin') %>
+    <li>
+      <%= link_to root_path do %>
+          <i class="material-icons">dashboard</i>
+          <span>Dashboard</span>
+      <% end %>
+    </li>
 
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">build</i>
-      <span class="nav-label">System Settings</span>
-    </a>
+    <li>
+      <%= link_to petitions_path do %>
+          <i class="material-icons">category</i>
+          <span>Petitions</span>
+      <% end %>
+    </li>
 
-  </li>
+    <li>
+      <%= link_to users_path do %>
+          <i class="material-icons">people</i>
+          <span>Users</span>
+      <% end %>
+    </li>
 
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">build</i>
-      <span class="nav-label">Organization Structure</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Organization Types', organization_types_path %></li>
-      <li><%= link_to 'Organization Units', organization_units_path %></li>
-    </ul>
-  </li>
+    <li>
+      <%= link_to government_body_types_path do %>
+          <i class="material-icons">category</i>
+          <span>Government Body Levels</span>
+      <% end %>
+    </li>
 
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">school</i>
-      <span class="nav-label">Institutions</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Institution Types', institution_types_path %></li>
-      <li><%= link_to 'Institutions', institutions_path %></li>
-    </ul>
-  </li>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">local_hospital</i>
-      <span class="nav-label">Facilities</span>
-    </a>
-    <ul>
-      <li><%= link_to 'Facility Types',facility_types_path %></li>
-      <li><%= link_to 'Facilities', facilities_path %></li>
-    </ul>
-  </li>
-  <li>
-    <a href="javascript:void(0);" class="menu-toggle">
-      <i class="material-icons">library_books</i>
-      <span class="nav-label">Trainings</span>
-    </a>
+    <li>
+      <%= link_to government_bodies_path do %>
+          <i class="material-icons">store</i>
+          <span>Government Bodies</span>
+      <% end %>
+    </li>
 
-  </li>
-
-
-
+    <li>
+      <%= link_to sectors_path do %>
+          <i class="material-icons">store</i>
+          <span>Sectors</span>
+      <% end %>
+    </li>
 <% end %>

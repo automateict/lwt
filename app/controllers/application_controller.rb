@@ -2,12 +2,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
   respond_to :html, :js, :json
 
-  before_action :set_institution
+  layout :set_layout
 
   private
 
-  def set_institution
-    @institution = current_user.institution rescue nil
+  def set_layout
+    if !user_signed_in? or (user_signed_in? and current_user.has_role('User'))
+      'application'
+    else
+      'application'
+    end
   end
 
 end

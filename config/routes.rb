@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+  resources :signatures
+  resources :pr_committees
+  resources :petitions do
+    member do
+      get 'sign'
+    end
+  end
   resources :departments
   resources :cr_committee_members
   resources :cr_committees
   resources :complaints
-  resources :sign_petitions
-  resources :petitions
   resources :pr_committee_members
-  resources :pr_committees
   resources :sectors
   resources :government_bodies
   resources :government_body_types

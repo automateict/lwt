@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :government_body_type %>
     <%= f.input :name %>
-    <%= f.association :region %>
+    <%= f.association :government_body_type %>
+    <%= f.input :parent_government_body_id, collection: [@parent], class: "form-control show-tick" %>
     <%= f.input :city %>
     <%= f.input :url %>
     <%= f.input :email %>

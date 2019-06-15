@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  government_body: one
-  sector: one
+  petition: one
   name: MyString
-  description: MyText
+  deadline: 2019-05-19
 
 two:
-  government_body: two
-  sector: two
+  petition: two
   name: MyString
-  description: MyText
+  deadline: 2019-05-19

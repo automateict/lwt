@@ -1,0 +1,16 @@
+<% if user_signed_in? and current_user.has_role('User') %>
+    <li>
+      <%= link_to petitions_path do %>
+          <i class="material-icons">dashboard</i>
+          <span>My Petitions</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to new_petition_path do %>
+          <i class="material-icons">category</i>
+          <span>Start Petition</span>
+      <% end %>
+    </li>
+
+<% end %>

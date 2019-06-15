@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <title>Jumbotron Template · Bootstrap</title>
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" />
+  <%= javascript_include_tag 'guest', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'guest', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-info">
+  <%= link_to root_path do %>
+      <%= image_tag 'logo.png' %>
+  <% end %>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
+    <%= render 'menus/user'  %>
+    <%= render 'menus/guest'  %>
+  </div>
+</nav>
+
+<main role="main">
+
+  <%= yield :header %>
+
+  <div class="container">
+    <%= yield %>
+  </div> <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>© Company 2017-2019</p>
+</footer>
+
+</body>
+</html>

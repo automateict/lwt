@@ -2,11 +2,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
       t.integer :role_id
-      t.string :user_name
-      t.integer :organization_unit_id
-      t.integer :facility_id
-      t.integer :institution_id
-      t.string :user_type
+      t.string :first_name
+      t.string :father_name
+      t.string :grand_father_name
+      t.references :government_body, foreign_key: true
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

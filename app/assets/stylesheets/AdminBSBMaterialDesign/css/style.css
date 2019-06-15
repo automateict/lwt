@@ -1,8 +1,5 @@
-﻿/* Navbar ====================================== */
+/* Navbar ====================================== */
 @import url(materialize.css);
-.dropdown-menu{
-    min-width: 200px;
-}
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;
@@ -5050,13 +5047,11 @@ section.content {
   margin-bottom: 25px; }
   .form-group .form-control {
     width: 100%;
-    border: none;
-    box-shadow: none;
-    -webkit-border-radsius: 0;
+    -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
     border-radius: 0;
-    padding-left: 0; }
+    }
   .form-group .help-info {
     float: right;
     font-size: 12px;

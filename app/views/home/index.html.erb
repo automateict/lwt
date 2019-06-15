@@ -1,5 +1,7 @@
-<% if current_user.admin? or current_user.super_admin? %>
+<% if current_user.try(:admin?) or current_user.try(:super_admin?) %>
   <%= render 'dashboards/admin' %>
 <% elsif @institution %>
     <%= render 'dashboards/institution' %>
+<% else %>
+    <%= render 'dashboards/guest' %>
 <% end %>

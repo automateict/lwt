@@ -1,13 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Government Body Types</h1>
-
-<table>
-  <thead>
+<div class="panel-heading">
+  Government Body Types
+</div>
+<div class="panel-body">
+  <table class="table dataTable">
+  <thead class="thead-light">
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -16,14 +16,17 @@
       <tr>
         <td><%= government_body_type.name %></td>
         <td><%= government_body_type.description %></td>
-        <td><%= link_to 'Show', government_body_type %></td>
-        <td><%= link_to 'Edit', edit_government_body_type_path(government_body_type) %></td>
-        <td><%= link_to 'Destroy', government_body_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to edit_government_body_type_path(government_body_type) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Government Body Type', new_government_body_type_path %>
+  <hr/>
+  <%= link_to new_government_body_type_path do %>
+      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Government Body Level</button>
+  <% end %>
+</div>

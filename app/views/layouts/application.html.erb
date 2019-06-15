@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Welcome To OPENHTIS</title>
+  <title>Lewt</title>
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -20,16 +20,6 @@
   <header>
     <nav class="navbar navbar-default">
 
-      <div class="search-bar">
-        <div class="search-icon">
-          <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="Start typing...">
-        <div class="close-search js-close-search">
-          <i class="material-icons">close</i>
-        </div>
-      </div>
-
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -40,8 +30,8 @@
           </a>
 
           <%= link_to root_path, class: 'navbar-brand' do %>
-              <span class="logo-minimized">OH</span>
-              <span class="logo">OPENHTIS</span>
+              <span class="logo-minimized">M</span>
+              <span class="logo">Lewt</span>
           <% end %>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -58,6 +48,15 @@
                 <i class="material-icons">search</i>
               </a>
             </li>
+            <div class="search-bar">
+              <div class="search-icon">
+                <i class="material-icons">search</i>
+              </div>
+              <input type="text" placeholder="Start typing...">
+              <div class="close-search js-close-search">
+                <i class="material-icons">close</i>
+              </div>
+            </div>
 
 
             <li>
@@ -65,8 +64,10 @@
                 <i class="material-icons">fullscreen</i>
               </a>
             </li>
-
-            <li class="dropdown user-menu">
+            <% unless current_user %>
+                <li><%= link_to 'Sign in', new_user_session_path %></li>
+            <% else %>
+              <li class="dropdown user-menu">
               <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="hidden-xs"><%= current_user.email %></span>
               </a>
@@ -80,12 +81,12 @@
                   <ul>
                     <li>
                       <%= link_to user_path(current_user) do %>
-                        <i class="material-icons">account_circle</i> Profile
+                          <i class="material-icons">account_circle</i> Profile
                       <% end %>
                     </li>
                     <li>
                       <%= link_to edit_user_registration_path do %>
-                        <i class="material-icons">lock_open</i> Change Password
+                          <i class="material-icons">lock_open</i> Change Password
                       <% end %>
                     </li>
                   </ul>
@@ -95,6 +96,7 @@
                 </li>
               </ul>
             </li>
+            <% end %>
           </ul>
         </div>
 
@@ -109,8 +111,9 @@
         <li class="title">
           MAIN MENU
         </li>
-        <%= render partial: 'menus/admin' %>
-        <%= render partial: 'menus/institution' %>
+        <%= render 'menus/admin' %>
+        <%= render 'menus/user'  %>
+        <%= render 'menus/guest'  %>
       </ul>
     </nav>
   </aside>
@@ -129,10 +132,10 @@
     <div class="container-fluid">
       <div class="row clearfix">
         <div class="col-sm-6">
-          Copyright &copy; 2017, <b>AdminBSB - Sensitive</b>
+          Copyright &copy; 2019, <b>Lewt</b>
         </div>
         <div class="col-sm-6 align-right">
-          Hand-crafted & Made with love :)
+          Automate Technologies
         </div>
       </div>
     </div>

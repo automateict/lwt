@@ -1,5 +1,1 @@
-<h1>New Government Body</h1>
-
-<%= render 'form', government_body: @government_body %>
-
-<%= link_to 'Back', government_bodies_path %>
+<%= render partial: 'form', layout: 'layouts/form_layout', locals: { title: "New Governemt Body" } %>

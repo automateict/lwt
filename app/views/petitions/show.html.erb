@@ -1,44 +1,54 @@
-<p id="notice"><%= notice %></p>
+<% content_for :header do %>
+<div class="row clearfix">
+  <div class="col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Petition Details
+      </div>
+      <div class="panel-body">
+        <p><%= image_tag @petition.logo %></p>
+        <h2><%= @petition.title %></h2>
+        <p><%= raw @petition.petition_details %></p>
+        <hr/>
+        <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Government body type:</strong>
-  <%= @petition.government_body_type %>
-</p>
+  <div class="col-sm-4">
+    <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Sign Petition
+      </div>
+      <div class="panel-body">
+        <label><%= @petition.signatures.count.to_s << ' have signed.' %> Let's get to <%= @petition.target_of_signatures %></label>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+               style="width: <%= (@petition.signatures.count.to_f/@petition.target_of_signatures)*100 %>%" aria-valuenow="<%= @petition.signatures.count %>"
+               aria-valuemin="0" aria-valuemax="<%= @petition.target_of_signatures %>"></div>
+        </div>
+        <br/><br/><br/>
+        <% if user_signed_in?  and current_user.signed(@petition) %>
+            <label class="alert-success">You have signed this petition. Thank you !!!!</label>
+        <% else %>
+            <%= link_to 'Sign this petition', sign_petition_path, class: "btn btn-lg btn-primary btn-block"  %>
+        <% end %>
+      </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Government body:</strong>
-  <%= @petition.government_body %>
-</p>
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Recent Signers
+        </div>
+        <div class="panel-body">
+          #TODO
+        </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Sector:</strong>
-  <%= @petition.sector %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @petition.title %>
-</p>
-
-<p>
-  <strong>Petition details:</strong>
-  <%= @petition.petition_details %>
-</p>
-
-<p>
-  <strong>Target of signatures:</strong>
-  <%= @petition.target_of_signatures %>
-</p>
-
-<p>
-  <strong>Need for email notification:</strong>
-  <%= @petition.need_for_email_notification %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @petition.status %>
-</p>
-
-<%= link_to 'Edit', edit_petition_path(@petition) %> |
-<%= link_to 'Back', petitions_path %>
+  </div>
+  </div>
+<% end %>

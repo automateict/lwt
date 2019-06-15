@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 role = Role.create(name: 'Admin')
 
-top_org_type = OrganizationType.create(name: 'Top Org Type')
+top_gov_type = GovernmentBodyType.create(name: 'Top Gov Type')
 
-top_org_unit = OrganizationUnit.create(name: 'Top Org Unit', short_name: 'TOU', organization_type_id: top_org_type.id)
+top_gov_body = GovernmentBody.create(name: 'Top Gov Body', government_body_type_id: top_gov_type.id)
 
-admin_user = User.create(role_id: role.id, organization_unit_id: top_org_unit.id,email: 'admin@openhtms.com', password: 'admin123')
+admin_user = User.create(role_id: role.id, government_body_id: top_gov_body.id, email: 'admin@lwt.com', password: 'admin123')

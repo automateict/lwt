@@ -1,0 +1,37 @@
+<% content_for :header do %>
+    <div class="block-header">
+      <h2></h2>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-sm-6">
+        <h1 class="display-3"><%= link_to 'Start a Petition', new_petition_path %></h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+      </div>
+      <div class="col-sm-6">
+        <h1 class="display-3">File a Complaint</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+      </div>
+
+    </div>
+<% end %>
+
+  <!-- Example row of columns -->
+  <div class="card-deck">
+    <div class="row">
+    <% Petition.all.each do |p| %>
+          <div class="col-sm-4">
+          <div class="card">
+            <%= image_tag p.logo, width: '100%', class: "card-img-top" %></p>
+            <h5 class="card-title"><%= p.title %></h5>
+            <p class="card-text"><%= raw p.petition_details %></p>
+            <div class="card-footer">
+              <%= link_to 'View Detials', p %>
+            </div>
+          </div>
+          </div>
+    <% end %>
+    </div>
+  </div>

@@ -1,5 +1,9 @@
 class Petition < ApplicationRecord
-  belongs_to :government_body_type
+  belongs_to :user
   belongs_to :government_body
   belongs_to :sector
+  has_many :signatures
+
+  has_one_attached :logo
+
 end

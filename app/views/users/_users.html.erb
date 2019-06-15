@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped table-hover dataTable js-exportable">
+<table class="table table-hover dataTable js-exportable">
   <thead>
   <tr>
     <th>Email</th>
@@ -21,8 +21,7 @@
   <% end %>
   </tbody>
 </table>
-  <% unless (@type == 'institution' or @organization_unit.blank?)  %>
-    <%= link_to new_user_path(type: 'org unit', organization_unit: @organization_unit.try(:id)) do %>
-    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New Organization Unit User</button>
-  <% end %>
+<hr/>
+<%= link_to new_user_path do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New User</button>
 <% end %>

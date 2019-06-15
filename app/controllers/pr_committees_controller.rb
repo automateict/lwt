@@ -69,6 +69,6 @@ class PrCommitteesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pr_committee_params
-      params.require(:pr_committee).permit(:government_body_id, :sector_id, :name, :description)
+      params.require(:pr_committee).permit(:petition_id, :name, :deadline)
     end
 end

@@ -5,10 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Government body</th>
-      <th>Sector</th>
+      <th>Petition</th>
       <th>Name</th>
-      <th>Description</th>
+      <th>Deadline</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +15,9 @@
   <tbody>
     <% @pr_committees.each do |pr_committee| %>
       <tr>
-        <td><%= pr_committee.government_body %></td>
-        <td><%= pr_committee.sector %></td>
+        <td><%= pr_committee.petition %></td>
         <td><%= pr_committee.name %></td>
-        <td><%= pr_committee.description %></td>
+        <td><%= pr_committee.deadline %></td>
         <td><%= link_to 'Show', pr_committee %></td>
         <td><%= link_to 'Edit', edit_pr_committee_path(pr_committee) %></td>
         <td><%= link_to 'Destroy', pr_committee, method: :delete, data: { confirm: 'Are you sure?' } %></td>

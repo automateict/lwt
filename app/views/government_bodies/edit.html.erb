@@ -1,6 +1,1 @@
-<h1>Editing Government Body</h1>
-
-<%= render 'form', government_body: @government_body %>
-
-<%= link_to 'Show', @government_body %> |
-<%= link_to 'Back', government_bodies_path %>
+<%= render partial: 'form', layout: 'layouts/form_layout', locals: { title: "Edit Governemt Body" } %>

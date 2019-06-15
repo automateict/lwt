@@ -17,7 +17,7 @@ class PrCommitteesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pr_committee" do
     assert_difference('PrCommittee.count') do
-      post pr_committees_url, params: { pr_committee: { description: @pr_committee.description, government_body_id: @pr_committee.government_body_id, name: @pr_committee.name, sector_id: @pr_committee.sector_id } }
+      post pr_committees_url, params: { pr_committee: { deadline: @pr_committee.deadline, name: @pr_committee.name, petition_id: @pr_committee.petition_id } }
     end
 
     assert_redirected_to pr_committee_url(PrCommittee.last)
@@ -34,7 +34,7 @@ class PrCommitteesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update pr_committee" do
-    patch pr_committee_url(@pr_committee), params: { pr_committee: { description: @pr_committee.description, government_body_id: @pr_committee.government_body_id, name: @pr_committee.name, sector_id: @pr_committee.sector_id } }
+    patch pr_committee_url(@pr_committee), params: { pr_committee: { deadline: @pr_committee.deadline, name: @pr_committee.name, petition_id: @pr_committee.petition_id } }
     assert_redirected_to pr_committee_url(@pr_committee)
   end
 

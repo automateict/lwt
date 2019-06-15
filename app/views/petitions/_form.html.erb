@@ -1,18 +1,18 @@
-<%= simple_form_for(@petition) do |f| %>
+<%= simple_form_for(@petition, remote: true) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :government_body_type %>
-    <%= f.association :government_body %>
-    <%= f.association :sector %>
+    <%= f.association :user, as: :hidden, input_html: {value: current_user.try(:id)} %>
     <%= f.input :title %>
-    <%= f.input :petition_details %>
-    <%= f.input :target_of_signatures %>
-    <%= f.input :need_for_email_notification %>
-    <%= f.input :status %>
-  </div>
+    <%= f.input :logo, label: 'Cover Image', as: :file %>
+        <%= f.association :government_body %>
+        <%= f.association :sector %>
+        <%= f.input :target_of_signatures, label: 'Target Number of Signatures' %>
+        <%= f.input :petition_details, placeholder: 'Paste detail content here', input_html: {class: 'wysihtml5'} %>
 
+  </div>
+  <hr/>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <% end %>

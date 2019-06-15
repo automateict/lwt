@@ -17,7 +17,7 @@ class PetitionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create petition" do
     assert_difference('Petition.count') do
-      post petitions_url, params: { petition: { government_body_id: @petition.government_body_id, government_body_type_id: @petition.government_body_type_id, need_for_email_notification: @petition.need_for_email_notification, petition_details: @petition.petition_details, sector_id: @petition.sector_id, status: @petition.status, target_of_signatures: @petition.target_of_signatures, title: @petition.title } }
+      post petitions_url, params: { petition: { government_body_id: @petition.government_body_id, need_for_email_notification: @petition.need_for_email_notification, petition_details: @petition.petition_details, sector_id: @petition.sector_id, status: @petition.status, target_of_signatures: @petition.target_of_signatures, title: @petition.title, user_id: @petition.user_id } }
     end
 
     assert_redirected_to petition_url(Petition.last)
@@ -34,7 +34,7 @@ class PetitionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update petition" do
-    patch petition_url(@petition), params: { petition: { government_body_id: @petition.government_body_id, government_body_type_id: @petition.government_body_type_id, need_for_email_notification: @petition.need_for_email_notification, petition_details: @petition.petition_details, sector_id: @petition.sector_id, status: @petition.status, target_of_signatures: @petition.target_of_signatures, title: @petition.title } }
+    patch petition_url(@petition), params: { petition: { government_body_id: @petition.government_body_id, need_for_email_notification: @petition.need_for_email_notification, petition_details: @petition.petition_details, sector_id: @petition.sector_id, status: @petition.status, target_of_signatures: @petition.target_of_signatures, title: @petition.title, user_id: @petition.user_id } }
     assert_redirected_to petition_url(@petition)
   end
 
