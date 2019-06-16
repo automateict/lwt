@@ -2,19 +2,40 @@
 <div class="row clearfix">
   <div class="col-sm-8">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        Petition Details
-      </div>
-      <div class="panel-body">
+  <div class="panel-heading">
+  Petition Profile
+</div>
+<div class="panel-body">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs tab-nav-right" role="tablist">
+    <li role="presentation" class="active"><a href="#petition_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Petition Details</a></li>
+    <li role="presentation"><a href="#pr_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Petition Review Commitee</a></li>
+    <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="petition_details">
         <p><%= image_tag @petition.logo %></p>
         <h2><%= @petition.title %></h2>
         <p><%= raw @petition.petition_details %></p>
         <hr/>
         <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
-      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade" id="pr_commitee">
+      <% unless @petition.pr_committee %>
+        <%= link_to 'Assign Review Commitee', new_pr_committee_path(petition: @petition.id), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane fade" id="review_report">
+      #TODO
     </div>
   </div>
-
+</div>
+</div>
+</div>
   <div class="col-sm-4">
     <div class="row">
     <div class="panel panel-default">
@@ -48,7 +69,6 @@
         </div>
       </div>
     </div>
-
   </div>
-  </div>
+</div>
 <% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :petition_reports
+  resources :petition_review_members
   resources :signatures
   resources :pr_committees
   resources :petitions do

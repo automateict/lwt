@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Petition Reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Petition</th>
+      <th>Pr committee</th>
+      <th>Decision made</th>
+      <th>Report date</th>
+      <th>Remark</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @petition_reports.each do |petition_report| %>
+      <tr>
+        <td><%= petition_report.title %></td>
+        <td><%= petition_report.petition %></td>
+        <td><%= petition_report.pr_committee %></td>
+        <td><%= petition_report.decision_made %></td>
+        <td><%= petition_report.report_date %></td>
+        <td><%= petition_report.remark %></td>
+        <td><%= link_to 'Show', petition_report %></td>
+        <td><%= link_to 'Edit', edit_petition_report_path(petition_report) %></td>
+        <td><%= link_to 'Destroy', petition_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Petition Report', new_petition_report_path %>

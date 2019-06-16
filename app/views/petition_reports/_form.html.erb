@@ -1,0 +1,16 @@
+<%= simple_form_for(@petition_report) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.association :petition %>
+    <%= f.association :pr_committee %>
+    <%= f.input :decision_made %>
+    <%= f.input :report_date %>
+    <%= f.input :remark %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

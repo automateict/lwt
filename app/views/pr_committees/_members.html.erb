@@ -1,0 +1,19 @@
+<%= f.simple_fields_for :pr_commitee_members, :wrapper => false do |cf| %>
+	<div class="fields row">
+		<div class='col-sm-5'>
+			<%= cf.input :petition_review_member_id, collection: @organization_members.all, label: 'Memeber' %>
+    	</div>
+    	<div class="col-sm-5">
+	    	<%= cf.input :role, collection: ['Chair Man', 'Secretary', 'Member'] %>
+    	</div>
+    	<div class="col-sm-2">
+    	<%= cf.link_to_remove do %>
+	    	<button type="button" class="btn btn-rounded btn-outline btn-default"><i class="fa fa-close"></i> Remove</button>
+	    <% end %>
+		</div>
+	</div>
+	<hr/>
+<% end %>
+      <%= f.link_to_add :pr_commitee_members do %>
+        <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Member</button>
+      <% end %>

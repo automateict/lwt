@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  government_body: one
+  name: MyString
+  profession: MyString
+  phone: MyString
+  email: MyString
+
+two:
+  government_body: two
+  name: MyString
+  profession: MyString
+  phone: MyString
+  email: MyString

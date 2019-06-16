@@ -6,6 +6,7 @@ class OrganizationUnit < ApplicationRecord
   has_many :users
   has_many :people
   has_many :petitions
+  has_many :petition_review_members
 
   validates :name, :short_name, :organization_type_id, presence: true
   validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?

@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_125845) do
+ActiveRecord::Schema.define(version: 2019_06_16_125511) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -36,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "complaints", force: :cascade do |t|
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organization_unit_id"
     t.string "title"
@@ -48,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["user_id"], name: "index_complaints_on_user_id"
   end
 
-  create_table "cr_committee_members", force: :cascade do |t|
+  create_table "cr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organization_unit_id"
     t.bigint "cr_committee_id"
@@ -64,7 +61,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["user_id"], name: "index_cr_committee_members_on_user_id"
   end
 
-  create_table "cr_committees", force: :cascade do |t|
+  create_table "cr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "organization_unit_id"
     t.string "name"
     t.text "description"
@@ -73,7 +70,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["organization_unit_id"], name: "index_cr_committees_on_organization_unit_id"
   end
 
-  create_table "departments", force: :cascade do |t|
+  create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "organization_unit_id"
     t.string "name"
     t.string "phone"
@@ -84,7 +81,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["organization_unit_id"], name: "index_departments_on_organization_unit_id"
   end
 
-  create_table "government_bodies", force: :cascade do |t|
+  create_table "government_bodies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "government_body_type_id"
     t.string "name"
     t.integer "parent_government_body_id"
@@ -98,21 +95,21 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["government_body_type_id"], name: "index_government_bodies_on_government_body_type_id"
   end
 
-  create_table "government_body_types", force: :cascade do |t|
+  create_table "government_body_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "organization_types", force: :cascade do |t|
+  create_table "organization_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "organization_units", force: :cascade do |t|
+  create_table "organization_units", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.string "code"
@@ -130,7 +127,31 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["organization_type_id"], name: "index_organization_units_on_organization_type_id"
   end
 
-  create_table "petitions", force: :cascade do |t|
+  create_table "petition_reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.bigint "petition_id"
+    t.bigint "pr_committee_id"
+    t.string "decision_made"
+    t.date "report_date"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petition_id"], name: "index_petition_reports_on_petition_id"
+    t.index ["pr_committee_id"], name: "index_petition_reports_on_pr_committee_id"
+  end
+
+  create_table "petition_review_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "government_body_id"
+    t.string "name"
+    t.string "profession"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["government_body_id"], name: "index_petition_review_members_on_government_body_id"
+  end
+
+  create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "government_body_id"
     t.bigint "sector_id"
@@ -146,19 +167,17 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 
-  create_table "pr_commitee_members", force: :cascade do |t|
+  create_table "pr_commitee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "pr_committee_id"
-    t.bigint "organization_unit_id"
-    t.string "name"
-    t.string "email"
+    t.bigint "petition_review_member_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organization_unit_id"], name: "index_pr_commitee_members_on_organization_unit_id"
+    t.index ["petition_review_member_id"], name: "index_pr_commitee_members_on_petition_review_member_id"
     t.index ["pr_committee_id"], name: "index_pr_commitee_members_on_pr_committee_id"
   end
 
-  create_table "pr_committees", force: :cascade do |t|
+  create_table "pr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "petition_id"
     t.string "name"
     t.date "deadline"
@@ -167,28 +186,28 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["petition_id"], name: "index_pr_committees_on_petition_id"
   end
 
-  create_table "regions", force: :cascade do |t|
+  create_table "regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "sectors", force: :cascade do |t|
+  create_table "sectors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "signatures", force: :cascade do |t|
+  create_table "signatures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "petition_id"
     t.datetime "created_at", null: false
@@ -197,7 +216,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
     t.index ["user_id"], name: "index_signatures_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "role_id"
     t.string "first_name"
     t.string "father_name"
@@ -230,10 +249,13 @@ ActiveRecord::Schema.define(version: 2019_06_04_125845) do
   add_foreign_key "departments", "organization_units"
   add_foreign_key "government_bodies", "government_body_types"
   add_foreign_key "organization_units", "organization_types"
+  add_foreign_key "petition_reports", "petitions"
+  add_foreign_key "petition_reports", "pr_committees"
+  add_foreign_key "petition_review_members", "government_bodies"
   add_foreign_key "petitions", "government_bodies"
   add_foreign_key "petitions", "sectors"
   add_foreign_key "petitions", "users"
-  add_foreign_key "pr_commitee_members", "organization_units"
+  add_foreign_key "pr_commitee_members", "petition_review_members"
   add_foreign_key "pr_commitee_members", "pr_committees"
   add_foreign_key "pr_committees", "petitions"
   add_foreign_key "signatures", "petitions"

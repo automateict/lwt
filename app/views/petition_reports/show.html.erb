@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @petition_report.title %>
+</p>
+
+<p>
+  <strong>Petition:</strong>
+  <%= @petition_report.petition %>
+</p>
+
+<p>
+  <strong>Pr committee:</strong>
+  <%= @petition_report.pr_committee %>
+</p>
+
+<p>
+  <strong>Decision made:</strong>
+  <%= @petition_report.decision_made %>
+</p>
+
+<p>
+  <strong>Report date:</strong>
+  <%= @petition_report.report_date %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @petition_report.remark %>
+</p>
+
+<%= link_to 'Edit', edit_petition_report_path(@petition_report) %> |
+<%= link_to 'Back', petition_reports_path %>

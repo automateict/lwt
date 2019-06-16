@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  petition: one
+  pr_committee: one
+  decision_made: MyString
+  report_date: 2019-06-16
+  remark: MyText
+
+two:
+  title: MyString
+  petition: two
+  pr_committee: two
+  decision_made: MyString
+  report_date: 2019-06-16
+  remark: MyText

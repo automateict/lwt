@@ -15,6 +15,8 @@ class PrCommitteesController < ApplicationController
   # GET /pr_committees/new
   def new
     @pr_committee = PrCommittee.new
+    @pr_committee.petition_id = params[:petition]
+    @organization_members = PetitionReviewMember.where(government_body_id: current_user.government_body_id)
   end
 
   # GET /pr_committees/1/edit

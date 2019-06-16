@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Government body:</strong>
+  <%= @petition_review_member.government_body %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @petition_review_member.name %>
+</p>
+
+<p>
+  <strong>Profession:</strong>
+  <%= @petition_review_member.profession %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @petition_review_member.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @petition_review_member.email %>
+</p>
+
+<%= link_to 'Edit', edit_petition_review_member_path(@petition_review_member) %> |
+<%= link_to 'Back', petition_review_members_path %>
