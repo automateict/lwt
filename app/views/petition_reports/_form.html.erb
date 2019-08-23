@@ -2,15 +2,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.association :petition %>
-    <%= f.association :pr_committee %>
-    <%= f.input :decision_made %>
-    <%= f.input :report_date %>
+    <%= f.input :title, label: 'Report Title' %>
+    <%= f.association :petition, as: :hidden %>
+    <%= f.association :pr_committee, as: :hidden %>
+    <%= f.input :decision_made, collection: Constants::PETITTION_STATUSES, prompt: true %>
+    <%= f.input :report_date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
     <%= f.input :remark %>
+    <%= f.input :document, label: 'Attach Document', as: :file %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Save' %>
   </div>
 <% end %>

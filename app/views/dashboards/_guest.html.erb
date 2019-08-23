@@ -1,37 +1,28 @@
-<% content_for :header do %>
-    <div class="block-header">
-      <h2></h2>
-    </div>
-
-    <div class="row clearfix">
       <div class="col-sm-6">
-        <h1 class="display-3"><%= link_to 'Start a Petition', new_petition_path %></h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+          <h1 class="display-3"><%= link_to 'cjbcjkhbvjkcbh', new_petition_path %></h1>
+          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
       </div>
-      <div class="col-sm-6">
-        <h1 class="display-3">File a Complaint</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+        <div class="col-sm-6">
+          <h1 class="display-3"><%= link_to 'dnjkfdkj', new_complaint_path %></h1>
+          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
       </div>
-
-    </div>
-<% end %>
-
-  <!-- Example row of columns -->
-  <div class="card-deck">
-    <div class="row">
-    <% Petition.all.each do |p| %>
-          <div class="col-sm-4">
-          <div class="card">
-            <%= image_tag p.logo, width: '100%', class: "card-img-top" %></p>
-            <h5 class="card-title"><%= p.title %></h5>
-            <p class="card-text"><%= raw p.petition_details %></p>
-            <div class="card-footer">
-              <%= link_to 'View Detials', p %>
+    <% Petition.ongoing_petitions.each do |p| %>
+        <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="col-sm-4">
+                <p><%= image_tag p.cover_image, width: '100%', class: "img-rounded" %></p>
+              </div>
+              <div class="col-sm-8">
+                <h4><%= link_to p.title, p %></h4>
+                <p><%=  raw p.petition_details.truncate_words(15) %></p>
+                <p><h4><i class="material-icons">settings</i> <%= p.target_of_signatures %> signatures needed.
+                <i class="material-icons">group</i> <%= p.signatures.count %> people signed</h4></p>
+                <p style="float: right"><%= link_to 'Read more »', p, class: 'btn btn-primary' %></p>
+              </div>
             </div>
           </div>
-          </div>
+        </div>
     <% end %>
-    </div>
-  </div>

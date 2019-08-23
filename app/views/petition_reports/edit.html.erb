@@ -1,6 +1,1 @@
-<h1>Editing Petition Report</h1>
-
-<%= render 'form', petition_report: @petition_report %>
-
-<%= link_to 'Show', @petition_report %> |
-<%= link_to 'Back', petition_reports_path %>
+<%= render partial: 'form', layout: 'layouts/form_layout', locals: {image: "user_profile_logo.jpg", title: "Add Petition Review Report" } %>

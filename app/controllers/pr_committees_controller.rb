@@ -1,6 +1,10 @@
 class PrCommitteesController < ApplicationController
   before_action :set_pr_committee, only: [:show, :edit, :update, :destroy]
+  before_action :load, only: [:new, :create, :edit, :update]
 
+  def load
+    @organization_members = Person.where(organization_unit_id: current_user.organization_unit_id)
+  end
   # GET /pr_committees
   # GET /pr_committees.json
   def index
@@ -16,7 +20,6 @@ class PrCommitteesController < ApplicationController
   def new
     @pr_committee = PrCommittee.new
     @pr_committee.petition_id = params[:petition]
-    @organization_members = PetitionReviewMember.where(government_body_id: current_user.government_body_id)
   end
 
   # GET /pr_committees/1/edit
@@ -27,10 +30,9 @@ class PrCommitteesController < ApplicationController
   # POST /pr_committees.json
   def create
     @pr_committee = PrCommittee.new(pr_committee_params)
-
     respond_to do |format|
       if @pr_committee.save
-        format.html { redirect_to @pr_committee, notice: 'Pr committee was successfully created.' }
+        format.html { redirect_to @pr_committee.petition, notice: 'Petition Review committee was successfully created.' }
         format.json { render :show, status: :created, location: @pr_committee }
       else
         format.html { render :new }
@@ -44,7 +46,7 @@ class PrCommitteesController < ApplicationController
   def update
     respond_to do |format|
       if @pr_committee.update(pr_committee_params)
-        format.html { redirect_to @pr_committee, notice: 'Pr committee was successfully updated.' }
+        format.html { redirect_to @pr_committee.petition, notice: 'Petition Review committee was successfully updated.' }
         format.json { render :show, status: :ok, location: @pr_committee }
       else
         format.html { render :edit }
@@ -58,7 +60,7 @@ class PrCommitteesController < ApplicationController
   def destroy
     @pr_committee.destroy
     respond_to do |format|
-      format.html { redirect_to pr_committees_url, notice: 'Pr committee was successfully destroyed.' }
+      format.html { redirect_to pr_committees_url, notice: 'Petition Review committee was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +73,6 @@ class PrCommitteesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pr_committee_params
-      params.require(:pr_committee).permit(:petition_id, :name, :deadline)
+      params.require(:pr_committee).permit(:petition_id, :name, :deadline, pr_commitee_members_attributes: [:id, :person_id, :role, :_destroy])
     end
 end

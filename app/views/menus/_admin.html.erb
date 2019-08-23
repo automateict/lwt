@@ -2,42 +2,56 @@
     <li>
       <%= link_to root_path do %>
           <i class="material-icons">dashboard</i>
-          <span>Dashboard</span>
+          <span class="nav-label">Dashboard</span>
       <% end %>
     </li>
 
     <li>
       <%= link_to petitions_path do %>
           <i class="material-icons">category</i>
-          <span>Petitions</span>
+          <span class="nav-label">Petitions</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to complaints_path do %>
+          <i class="material-icons">category</i>
+          <span class="nav-label">Complaints</span>
       <% end %>
     </li>
 
     <li>
       <%= link_to users_path do %>
           <i class="material-icons">people</i>
-          <span>Users</span>
+          <span class="nav-label">Users</span>
       <% end %>
     </li>
 
     <li>
-      <%= link_to government_body_types_path do %>
+      <%= link_to organization_types_path do %>
           <i class="material-icons">category</i>
-          <span>Government Body Levels</span>
+          <span class="nav-label">Organization Types</span>
       <% end %>
     </li>
 
     <li>
-      <%= link_to government_bodies_path do %>
+      <%= link_to people_path do %>
+          <i class="material-icons">group</i>
+          <span class="nav-label">People</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to organization_units_path do %>
           <i class="material-icons">store</i>
-          <span>Government Bodies</span>
+          <span class="nav-label">Organization Units</span>
       <% end %>
     </li>
 
     <li>
       <%= link_to sectors_path do %>
           <i class="material-icons">store</i>
-          <span>Sectors</span>
+          <span class="nav-label">Sectors</span>
       <% end %>
     </li>
 <% end %>

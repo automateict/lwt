@@ -15,6 +15,7 @@ class PetitionReportsController < ApplicationController
   # GET /petition_reports/new
   def new
     @petition_report = PetitionReport.new
+    @petition_report.petition_id = params[:petition]
   end
 
   # GET /petition_reports/1/edit
@@ -28,7 +29,7 @@ class PetitionReportsController < ApplicationController
 
     respond_to do |format|
       if @petition_report.save
-        format.html { redirect_to @petition_report, notice: 'Petition report was successfully created.' }
+        format.html { redirect_to @petition_report.petition, notice: 'Petition report was successfully created.' }
         format.json { render :show, status: :created, location: @petition_report }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class PetitionReportsController < ApplicationController
   def update
     respond_to do |format|
       if @petition_report.update(petition_report_params)
-        format.html { redirect_to @petition_report, notice: 'Petition report was successfully updated.' }
+        format.html { redirect_to @petition_report.petition, notice: 'Petition report was successfully updated.' }
         format.json { render :show, status: :ok, location: @petition_report }
       else
         format.html { render :edit }
@@ -69,6 +70,6 @@ class PetitionReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petition_report_params
-      params.require(:petition_report).permit(:title, :petition_id, :pr_committee_id, :decision_made, :report_date, :remark)
+      params.require(:petition_report).permit(:title, :petition_id, :pr_committee_id, :decision_made, :report_date, :remark, :document)
     end
 end

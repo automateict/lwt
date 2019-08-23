@@ -1,13 +1,15 @@
 <center>
-  <%= simple_form_for(@user) do |f| %>
-      <%= f.input :first_name %>
-      <%= f.input :father_name %>
-      <%= f.input :grand_father_name %>
+  <%= simple_nested_form_for(@user) do |f| %>
+      <%= f.simple_fields_for :person do |pf| %>
+        <%= pf.input :first_name %>
+        <%= pf.input :father_name %>
+        <%= pf.input :grand_father_name %>
+      <% end %>
       <%= f.input :email %>
       <%= f.input :password %>
       <%= f.input :password_confirmation, label: 'Confirm Password' %>
       <%= f.association :role %>
       <hr/>
-      <%= f.submit "Sign up",class: "btn btn-lg btn-primary"  %>
+      <%= f.submit "Save",class: "btn btn-lg btn-primary"  %>
   <% end %>
 </center>

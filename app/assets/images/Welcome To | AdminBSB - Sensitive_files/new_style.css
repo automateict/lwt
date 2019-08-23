@@ -1,0 +1,92 @@
+.js-exportable{
+    background: #ffffff;
+}
+.tab-pane{
+    background: #f9f9f9;
+}
+
+.icheckbox_square-blue, .iradio_square-blue {
+    margin-right: 2px;
+}
+.form-check{
+    margin-right: 10px;
+}
+.columned_list > .form-check{
+    float: left;
+    width: 33%;
+}
+.form-control{
+    width: inherit;
+    border: 1px solid #2992a7;
+}
+.wizard .content{
+    overflow: -moz-hidden-unscrollable;
+    overflow: visible;
+    min-height: auto;
+}
+fieldset{
+    background: #ffffff;
+}
+.tab-pane {
+    background: #fff;
+}
+.panel-body{
+    min-height: 600px;
+}
+.panel-close{
+    display: none;
+}
+.fc-title{
+    white-space: initial;
+}
+.transparent_label{
+    color: transparent;
+}
+.invalid-feedback{
+    color: red;
+}
+
+.left_form{
+    border-right: 1px solid silver;
+}
+form > label{
+    font-size: 12px;
+}
+.card{
+    min-height: auto;
+}
+
+.details-label{
+    font-weight: bold;
+}
+.help-block{
+    color: red;
+}
+
+/*flash*/
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+}
+
+.alert-alert {
+    background-color: darksalmon;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+}
+
+.alert-notice {
+    background-color: darkcyan;
+    border-color: #00b0e4;
+    text-align: left;
+}

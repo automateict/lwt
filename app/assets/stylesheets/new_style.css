@@ -1,16 +1,23 @@
-.sidebar{
-    top: auto;
-}
-.sidebar .menu .list a span{
-    width: 100%;
-    border-bottom: 1px solid skyblue;
-}
-.card-deck .card {
-    margin-bottom: 10px;
+ul.wysihtml5-toolbar > li {
+    margin: 0;
 }
 
-.transparent_label{
-    display: none;
+.sidebar{
+    background: #fff;
+}
+
+.span.nav-label {
+    border-bottom: 1px solid skyblue;
+}
+legend.underlined{
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+.treeview{
+    margin-bottom: 10px;
+}
+.treeview .list-group-item{
+    padding: 5px 10px;
 }
 form label{
     text-align: right;
@@ -19,19 +26,22 @@ form label{
     border-top: 1px solid #eee;
     text-align: center;
     padding: 10px;
+    margin-top: 40px;
 }
 
-.details-label{
-    font-weight: bold;
-}
-.help-block{
-    color: red;
+.sub_form legend{
+    border: none;
+    width: auto;
 }
 
+legend.underlined{
+    border-bottom: inherit;
+}
 .js-exportable{
     background: #ffffff;
 }
 .tab-pane{
+    background: #f9f9f9;
 }
 
 .icheckbox_square-blue, .iradio_square-blue {
@@ -39,27 +49,50 @@ form label{
 }
 .form-check{
     margin-right: 10px;
-}
-.columned_list > .form-check{
     float: left;
-    width: 33%;
+    width: 45%;
+}
+.single_columned_list .form-check{
+    float: left;
+    width: 100%;
+}
+.form-group{
+    margin-bottom: 30px;
+}
+.form-group .form-control{
+    width: inherit;
+    font-size: large;
 }
 
-.form-control{
-    width: inherit;
-}
-#new_user .form-control{
+.signin-form-area .form-control{
     width: -moz-available;
 }
+
 .wizard .content{
-    overflow: -moz-hidden-unscrollable;
+    overflow: visible;
+}
+.wizard, .tabcontrol{
     overflow: visible;
 }
 fieldset{
+    background: #ffffff;
+    overflow: visible;
+}
+label.error{
+    margin-left: 30px;
+}
+legend.empty{
+    margin-bottom: 0px;
+}
+fieldset.sub_form{
+    padding: 5px 20px;
+    border: 1px solid #d4d3f2;
+    margin: 20px 5px;
+}
+.tab-pane {
+    background: #fff;
 }
 
-.panel-body{
-}
 .panel-close{
     display: none;
 }
@@ -74,7 +107,7 @@ fieldset{
 }
 
 .left_form{
-    border-right: 1px solid silver;
+    border-right: 1px solid skyblue;
 }
 form > label{
     font-size: 12px;

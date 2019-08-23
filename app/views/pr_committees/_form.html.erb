@@ -3,8 +3,7 @@
 
   <div class="form-inputs">
     <%= f.association :petition, as: :hidden %>
-    <%= f.input :name %>
-    <%= f.input :deadline, label: 'Petition Review Deadline',as: :string,  input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :deadline, label: 'Petition Review Deadline', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
     <%= render partial: 'members', locals: {f: f} %>
   </div>
 

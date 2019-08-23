@@ -1,4 +1,3 @@
-//= require AdminBSBMaterialDesign/bootstrap/bootstrap.min
 //= require AdminBSBMaterialDesign/node-waves/waves
 //= require AdminBSBMaterialDesign/jquery-validation/jquery.validate
 //= require AdminBSBMaterialDesign/js/admin
@@ -12,3 +11,4 @@
 //= require AdminBSBMaterialDesign/js/pages/forms/form-wizard
 //= require AdminBSBMaterialDesign/js/pages/forms/basic-form-elements
 //= require AdminBSBMaterialDesign/jquery-datatable/index
+//= require AdminBSBMaterialDesign/js/demo

@@ -2,11 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :government_body %>
+    <%= f.association :organization_unit %>
     <%= f.input :name %>
     <%= f.input :profession %>
     <%= f.input :phone %>
     <%= f.input :email %>
+    <%= f.input :photo, as: :file %>
   </div>
 
   <div class="form-actions">

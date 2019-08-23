@@ -1,10 +1,10 @@
 <% content_for :header do %>
-<div class="row clearfix">
+<div class="row">
   <div class="col-sm-8">
     <div class="panel panel-default">
-  <div class="panel-heading">
-  Petition Profile
-</div>
+    <div class="panel-heading">
+      Petition Details
+    </div>
 <div class="panel-body">
   <!-- Nav tabs -->
   <ul class="nav nav-tabs tab-nav-right" role="tablist">
@@ -16,32 +16,75 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="petition_details">
-        <p><%= image_tag @petition.logo %></p>
-        <h2><%= @petition.title %></h2>
+        <p><%= image_tag @petition.cover_image, width: '500px', class: 'img-responsive' %></p>
+        <h3><%= @petition.title %></h3>
         <p><%= raw @petition.petition_details %></p>
+         <% if @petition.documents %>
+             <h5>Supporting Documents</h5>
+             <% @petition.documents.each do |d| %>
+                 <p><%= link_to d.try(:name), d.try(:attachment) %></p>
+             <% end %>
+          <% end %>
         <hr/>
         <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
     </div>
 
     <div role="tabpanel" class="tab-pane fade" id="pr_commitee">
+      <% if @petition.pr_committee %>
+          <table class="table table-bordered">
+            <li>
+              <label>Review Deadline: </label>
+              <span><%= @petition.pr_committee.deadline.strftime("%B %d, %Y") %></span>
+            </li>
+            <legend>Committee Members</legend>
+            <% @petition.pr_committee.pr_commitee_members.each do |member| %>
+                <li>
+                            <span><%= image_tag member.person.photo, width: '100px', class: 'img-circle' rescue nil %>
+                              <label><span class="font-20"><%= member.person %></span><br/> <%= member.role %></label>
+                            </span>
+                </li><hr/>
+            <% end %>
+          </table>
+          <%= link_to 'Edit', edit_pr_committee_path(@petition.pr_committee), class: 'btn btn-primary' %>
+      <% end %>
       <% unless @petition.pr_committee %>
         <%= link_to 'Assign Review Commitee', new_pr_committee_path(petition: @petition.id), class: 'btn btn-primary' %>
       <% end %>
     </div>
-
     <div role="tabpanel" class="tab-pane fade" id="review_report">
-      #TODO
+      <table class="table">
+        <tr>
+          <th>Report Title</th>
+          <th>Report Date</th>
+          <th>Petition Status</th>
+          <th>Remark</th>
+          <th>Document</th>
+        </tr>
+        <% @petition.petition_reports.each do |pr| %>
+            <tr>
+              <td><%= pr.title %></td>
+              <td><%= pr.report_date.strftime("%B %d, %Y") %></td>
+              <td><%= pr.decision_made %></td>
+              <td><%= pr.remark %></td>
+              <td>
+                <% unless pr.document.blank? %>
+                    <%= link_to pr.document do %>
+                        <button type="button" class="btn btn-outline"><i class="material-icons">file_download</i>download</button>
+                    <% end %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+          <%= link_to 'Add Review Report', new_petition_report_path(petition: @petition.id), class: 'btn btn-primary' %>
     </div>
   </div>
 </div>
-</div>
-</div>
+  </div>
+  </div>
   <div class="col-sm-4">
     <div class="row">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        Sign Petition
-      </div>
       <div class="panel-body">
         <label><%= @petition.signatures.count.to_s << ' have signed.' %> Let's get to <%= @petition.target_of_signatures %></label>
         <div class="progress">
@@ -51,7 +94,7 @@
         </div>
         <br/><br/><br/>
         <% if user_signed_in?  and current_user.signed(@petition) %>
-            <label class="alert-success">You have signed this petition. Thank you !!!!</label>
+            <label class="alert-success">Thank you for signing !!!!</label>
         <% else %>
             <%= link_to 'Sign this petition', sign_petition_path, class: "btn btn-lg btn-primary btn-block"  %>
         <% end %>
@@ -62,10 +105,12 @@
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          Recent Signers
+          Recent signers
         </div>
         <div class="panel-body">
-          #TODO
+          <% @petition.recent_signers.each do |rs| %>
+              <li><%= rs.user %></li>
+          <% end %>
         </div>
       </div>
     </div>

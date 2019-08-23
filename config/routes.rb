@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :complaint_reports
+  resources :people
   resources :petition_reports
   resources :petition_review_members
   resources :signatures
@@ -14,8 +16,6 @@ Rails.application.routes.draw do
   resources :complaints
   resources :pr_committee_members
   resources :sectors
-  resources :government_bodies
-  resources :government_body_types
 
   resources :people do
     collection do
@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get 'load_tree'
       get 'load_sub_units'
       get 'org_unit_facilities'
+      get 'load_petition_tree'
+      get 'load_petition_sub_units'
     end
   end
   resources :organization_types

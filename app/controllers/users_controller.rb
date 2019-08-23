@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.load_users(current_user)
   end
 
   def load_users
@@ -77,6 +77,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:user_type, :email, :first_name, :father_name, :grand_father_name,
-                                   :government_body_id, :role_id, :password, :password_confirmation)
+                                   :organization_unit_id, :role_id, :password, :password_confirmation,
+                                   person_attributes: [:id, :first_name, :father_name, :grand_father_name] )
     end
 end

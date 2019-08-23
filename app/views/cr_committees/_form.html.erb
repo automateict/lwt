@@ -1,13 +1,13 @@
-<%= simple_form_for(@cr_committee) do |f| %>
-  <%= f.error_notification %>
+<%= simple_nested_form_for(@cr_committee) do |f| %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.association :organization_unit %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-  </div>
+    <div class="form-inputs">
+      <%= f.association :complaint, as: :hidden %>
+      <%= f.input :deadline, label: 'Complaint Review Deadline', as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+      <%= render partial: 'members', locals: {f: f} %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
 <% end %>

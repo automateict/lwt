@@ -1,18 +1,23 @@
-<%= simple_form_for(@petition, remote: true) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
+<%= simple_nested_form_for(@petition) do |f| %>
     <%= f.association :user, as: :hidden, input_html: {value: current_user.try(:id)} %>
+    <%= f.error_notification %>
+    <%= f.input :cover_image, as: :file %>
+    <%= f.association :organization_unit, label: 'Petition Recipient', prompt: true %>
     <%= f.input :title %>
-    <%= f.input :logo, label: 'Cover Image', as: :file %>
-        <%= f.association :government_body %>
-        <%= f.association :sector %>
-        <%= f.input :target_of_signatures, label: 'Target Number of Signatures' %>
-        <%= f.input :petition_details, placeholder: 'Paste detail content here', input_html: {class: 'wysihtml5'} %>
+    <%= f.association :sector, prompt: true %>
+    <%= f.input :target_of_signatures, label: 'Target Number of Signatures' %>
+    <%= f.input :petition_details, label: 'Details', placeholder: 'Detail description', input_html: {class: 'wysihtml5'} %>
+    <div class="row">
+      <label class="col-sm-3 col-form-label">
+        Supporting Documents (optional)
+      </label>
+      <div class="col-sm-9">
+        <%= render partial: 'documents', locals: {f: f} %>
+      </div>
+    </div>
 
-  </div>
-  <hr/>
-  <div class="form-actions">
-    <%= f.button :submit, class: 'btn btn-primary' %>
-  </div>
+    <div class="form-actions">
+      <%= f.button :submit, 'Submit Petition', class: 'btn btn-primary' %>
+    </div>
 <% end %>
+

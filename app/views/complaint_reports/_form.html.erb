@@ -1,0 +1,17 @@
+<%= simple_form_for(@complaint_report) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.association :complaint, as: :hidden %>
+    <%= f.association :cr_committee, as: :hidden %>
+    <%= f.input :decision, collection: Constants::PETITTION_STATUSES, prompt: true %>
+    <%= f.input :report_date, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+    <%= f.input :remark %>
+    <%= f.input :document, label: 'Attach Document', as: :file %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

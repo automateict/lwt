@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @complaint_report.title %>
+</p>
+
+<p>
+  <strong>Complaint:</strong>
+  <%= @complaint_report.complaint %>
+</p>
+
+<p>
+  <strong>Cr committee:</strong>
+  <%= @complaint_report.cr_committee %>
+</p>
+
+<p>
+  <strong>Decision:</strong>
+  <%= @complaint_report.decision %>
+</p>
+
+<p>
+  <strong>Report date:</strong>
+  <%= @complaint_report.report_date %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @complaint_report.remark %>
+</p>
+
+<%= link_to 'Edit', edit_complaint_report_path(@complaint_report) %> |
+<%= link_to 'Back', complaint_reports_path %>

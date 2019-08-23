@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Lewt</title>
+  <title>Welcome To OPENHTIS</title>
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
@@ -20,6 +20,16 @@
   <header>
     <nav class="navbar navbar-default">
 
+      <div class="search-bar">
+        <div class="search-icon">
+          <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="Start typing...">
+        <div class="close-search js-close-search">
+          <i class="material-icons">close</i>
+        </div>
+      </div>
+
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
@@ -30,8 +40,8 @@
           </a>
 
           <%= link_to root_path, class: 'navbar-brand' do %>
-              <span class="logo-minimized">M</span>
-              <span class="logo">Lewt</span>
+              <span class="logo-minimized">OH</span>
+              <span class="logo">OPENHTIS</span>
           <% end %>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -43,60 +53,54 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+                <li class="dropdown user-menu">
+                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="hidden-xs"><%= current_user.try(:email) %></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="header">
+                      <div class="user">
+                        <%= current_user.try(:email) %>
+                      </div>
+                    </li>
+                    <li class="body">
+                      <ul>
+                        <li>
+                          <%= link_to user_path(current_user) do %>
+                              <i class="material-icons">account_circle</i> Profile
+                          <% end %>
+                        </li>
+                        <li>
+                          <%= link_to edit_user_registration_path do %>
+                              <i class="material-icons">lock_open</i> Change Password
+                          <% end %>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="footer">
+                      <%= link_to 'Log Out', destroy_user_session_path,class: "btn btn-default btn-sm btn-block" %>
+                    </li>
+                  </ul>
+                </li>
+            <% else %>
+                <li>
+                  <%= link_to new_user_session_path do %>
+                      <i class="material-icons">account_circle</i> Sign in
+                  <% end %>
+                </li>
+            <% end %>
             <li>
               <a href="javascript:void(0);" class="js-search" data-close="true">
                 <i class="material-icons">search</i>
               </a>
             </li>
-            <div class="search-bar">
-              <div class="search-icon">
-                <i class="material-icons">search</i>
-              </div>
-              <input type="text" placeholder="Start typing...">
-              <div class="close-search js-close-search">
-                <i class="material-icons">close</i>
-              </div>
-            </div>
-
 
             <li>
               <a href="javascript:void(0);" class="fullscreen js-fullscreen">
                 <i class="material-icons">fullscreen</i>
               </a>
             </li>
-            <% unless current_user %>
-                <li><%= link_to 'Sign in', new_user_session_path %></li>
-            <% else %>
-              <li class="dropdown user-menu">
-              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="hidden-xs"><%= current_user.email %></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="header">
-                  <div class="user">
-                    <%= current_user.email %>
-                  </div>
-                </li>
-                <li class="body">
-                  <ul>
-                    <li>
-                      <%= link_to user_path(current_user) do %>
-                          <i class="material-icons">account_circle</i> Profile
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to edit_user_registration_path do %>
-                          <i class="material-icons">lock_open</i> Change Password
-                      <% end %>
-                    </li>
-                  </ul>
-                </li>
-                <li class="footer">
-                  <%= link_to 'Log Out', destroy_user_session_path,class: "btn btn-default btn-sm btn-block" %>
-                </li>
-              </ul>
-            </li>
-            <% end %>
           </ul>
         </div>
 
@@ -111,9 +115,9 @@
         <li class="title">
           MAIN MENU
         </li>
-        <%= render 'menus/admin' %>
-        <%= render 'menus/user'  %>
-        <%= render 'menus/guest'  %>
+        <%= render partial: 'menus/admin' %>
+        <%= render partial: 'menus/user' %>
+        <%= render partial: 'menus/guest' %>
       </ul>
     </nav>
   </aside>
@@ -132,10 +136,10 @@
     <div class="container-fluid">
       <div class="row clearfix">
         <div class="col-sm-6">
-          Copyright &copy; 2019, <b>Lewt</b>
+          Copyright &copy; 2017, <b>AdminBSB - Sensitive</b>
         </div>
         <div class="col-sm-6 align-right">
-          Automate Technologies
+          Hand-crafted & Made with love :)
         </div>
       </div>
     </div>

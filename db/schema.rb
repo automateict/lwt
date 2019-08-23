@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_16_125511) do
+ActiveRecord::Schema.define(version: 2019_08_22_131113) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "complaint_reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.bigint "complaint_id"
+    t.bigint "cr_committee_id"
+    t.string "decision"
+    t.date "report_date"
+    t.text "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["complaint_id"], name: "index_complaint_reports_on_complaint_id"
+    t.index ["cr_committee_id"], name: "index_complaint_reports_on_cr_committee_id"
+  end
+
   create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "organization_unit_id"
@@ -46,28 +59,21 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
   end
 
   create_table "cr_committee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "organization_unit_id"
     t.bigint "cr_committee_id"
-    t.string "title"
-    t.string "full_name"
-    t.string "email"
-    t.string "phone"
-    t.text "about_me"
+    t.bigint "person_id"
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cr_committee_id"], name: "index_cr_committee_members_on_cr_committee_id"
-    t.index ["organization_unit_id"], name: "index_cr_committee_members_on_organization_unit_id"
-    t.index ["user_id"], name: "index_cr_committee_members_on_user_id"
+    t.index ["person_id"], name: "index_cr_committee_members_on_person_id"
   end
 
   create_table "cr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "organization_unit_id"
-    t.string "name"
-    t.text "description"
+    t.bigint "complaint_id"
+    t.date "deadline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organization_unit_id"], name: "index_cr_committees_on_organization_unit_id"
+    t.index ["complaint_id"], name: "index_cr_committees_on_complaint_id"
   end
 
   create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -81,25 +87,13 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.index ["organization_unit_id"], name: "index_departments_on_organization_unit_id"
   end
 
-  create_table "government_bodies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "government_body_type_id"
+  create_table "documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "parent_government_body_id"
-    t.string "city"
-    t.string "url"
-    t.string "email"
-    t.string "phone"
-    t.text "description"
+    t.string "documentable_type"
+    t.bigint "documentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["government_body_type_id"], name: "index_government_bodies_on_government_body_type_id"
-  end
-
-  create_table "government_body_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id"
   end
 
   create_table "organization_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -113,6 +107,7 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.string "name"
     t.string "short_name"
     t.string "code"
+    t.boolean "accept_petition"
     t.bigint "organization_type_id"
     t.integer "parent_organization_unit_id"
     t.string "url"
@@ -125,6 +120,22 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_type_id"], name: "index_organization_units_on_organization_type_id"
+  end
+
+  create_table "people", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organization_unit_id"
+    t.string "title"
+    t.string "first_name"
+    t.string "father_name"
+    t.string "grand_father_name"
+    t.string "profession"
+    t.string "phone"
+    t.text "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_unit_id"], name: "index_people_on_organization_unit_id"
+    t.index ["user_id"], name: "index_people_on_user_id"
   end
 
   create_table "petition_reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -141,19 +152,19 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
   end
 
   create_table "petition_review_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "government_body_id"
+    t.bigint "organization_unit_id"
     t.string "name"
     t.string "profession"
     t.string "phone"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["government_body_id"], name: "index_petition_review_members_on_government_body_id"
+    t.index ["organization_unit_id"], name: "index_petition_review_members_on_organization_unit_id"
   end
 
   create_table "petitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "government_body_id"
+    t.bigint "organization_unit_id"
     t.bigint "sector_id"
     t.string "title"
     t.text "petition_details"
@@ -162,24 +173,23 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["government_body_id"], name: "index_petitions_on_government_body_id"
+    t.index ["organization_unit_id"], name: "index_petitions_on_organization_unit_id"
     t.index ["sector_id"], name: "index_petitions_on_sector_id"
     t.index ["user_id"], name: "index_petitions_on_user_id"
   end
 
   create_table "pr_commitee_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "pr_committee_id"
-    t.bigint "petition_review_member_id"
+    t.bigint "person_id"
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["petition_review_member_id"], name: "index_pr_commitee_members_on_petition_review_member_id"
+    t.index ["person_id"], name: "index_pr_commitee_members_on_person_id"
     t.index ["pr_committee_id"], name: "index_pr_commitee_members_on_pr_committee_id"
   end
 
   create_table "pr_committees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "petition_id"
-    t.string "name"
     t.date "deadline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -217,11 +227,8 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "role_id"
-    t.string "first_name"
-    t.string "father_name"
-    t.string "grand_father_name"
-    t.bigint "government_body_id"
+    t.string "role"
+    t.bigint "organization_unit_id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -235,30 +242,31 @@ ActiveRecord::Schema.define(version: 2019_06_16_125511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["government_body_id"], name: "index_users_on_government_body_id"
+    t.index ["organization_unit_id"], name: "index_users_on_organization_unit_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "complaint_reports", "complaints"
+  add_foreign_key "complaint_reports", "cr_committees"
   add_foreign_key "complaints", "organization_units"
   add_foreign_key "complaints", "users"
   add_foreign_key "cr_committee_members", "cr_committees"
-  add_foreign_key "cr_committee_members", "organization_units"
-  add_foreign_key "cr_committee_members", "users"
-  add_foreign_key "cr_committees", "organization_units"
+  add_foreign_key "cr_committee_members", "people"
+  add_foreign_key "cr_committees", "complaints"
   add_foreign_key "departments", "organization_units"
-  add_foreign_key "government_bodies", "government_body_types"
   add_foreign_key "organization_units", "organization_types"
+  add_foreign_key "people", "organization_units"
   add_foreign_key "petition_reports", "petitions"
   add_foreign_key "petition_reports", "pr_committees"
-  add_foreign_key "petition_review_members", "government_bodies"
-  add_foreign_key "petitions", "government_bodies"
+  add_foreign_key "petition_review_members", "organization_units"
+  add_foreign_key "petitions", "organization_units"
   add_foreign_key "petitions", "sectors"
   add_foreign_key "petitions", "users"
-  add_foreign_key "pr_commitee_members", "petition_review_members"
+  add_foreign_key "pr_commitee_members", "people"
   add_foreign_key "pr_commitee_members", "pr_committees"
   add_foreign_key "pr_committees", "petitions"
   add_foreign_key "signatures", "petitions"
   add_foreign_key "signatures", "users"
-  add_foreign_key "users", "government_bodies"
+  add_foreign_key "users", "organization_units"
 end

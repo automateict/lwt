@@ -1,0 +1,41 @@
+<div class="panel-heading">
+  People
+</div>
+<div class="panel-body">
+  <table class="table table-striped dataTable js-exportable">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Organization unit</th>
+      <th>First name</th>
+      <th>Father name</th>
+      <th>Grand father name</th>
+      <th>Profession</th>
+      <th>Phone</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.user %></td>
+        <td><%= person.organization_unit %></td>
+        <td><%= person.first_name %></td>
+        <td><%= person.father_name %></td>
+        <td><%= person.grand_father_name %></td>
+        <td><%= person.profession %></td>
+        <td><%= person.phone %></td>
+        <td><%= link_to 'Details', person %> |
+          <%= link_to 'Edit', edit_person_path(person) %> |
+          <%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <br/><br/>
+<%= link_to new_person_path  do %>
+    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add Person </button>
+<% end %>
+</div>

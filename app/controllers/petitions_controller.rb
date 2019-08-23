@@ -1,7 +1,11 @@
 class PetitionsController < ApplicationController
-  #before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show]
   before_action :set_petition, only: [:show, :edit, :update, :destroy, :sign]
+  before_action :load_org_units, only: [:new, :create, :edit, :update]
 
+  def load_org_units
+    @org_units = OrganizationUnit.petition_org_units
+  end
   # GET /petitions
   # GET /petitions.json
   def index
@@ -76,6 +80,7 @@ class PetitionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petition_params
-      params.require(:petition).permit(:user_id, :government_body_id, :sector_id, :title, :petition_details, :target_of_signatures, :need_for_email_notification, :status, :logo)
+      params.require(:petition).permit(:user_id, :organization_unit_id, :sector_id, :title, :petition_details, :target_of_signatures,
+                                       :need_for_email_notification, :status, :cover_image, documents_attributes: [:id, :name, :attachment, :_destroy])
     end
 end

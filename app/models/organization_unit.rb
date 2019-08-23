@@ -11,6 +11,8 @@ class OrganizationUnit < ApplicationRecord
   validates :name, :short_name, :organization_type_id, presence: true
   validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?
 
+  scope :petition_org_units, -> {where(accept_petition: true)}
+
   def trainee_distribution(training)
     trainee_distributions.where('training_id = ?', training).first
   end
@@ -51,7 +53,12 @@ class OrganizationUnit < ApplicationRecord
   def top_organization_unit_exists?
     ![OrganizationUnit.top_organization_unit].reject{|x| x == self || x.blank?}.blank?
   end
-  
+
+  def self.petition_org_tree
+    parent = OrganizationUnit.top_organization_unit
+    [self.petition_children(parent)]
+  end
+
   def self.top_organization_unit
     where('parent_organization_unit_id is null').first
   end
@@ -61,8 +68,19 @@ class OrganizationUnit < ApplicationRecord
     [self.children(parent)]
   end
 
+  def self.petition_children(parent)
+    {
+        icon: "glyphicon glyphicon-stop",
+        text: parent.name,
+        id: parent.id,
+        nodes: parent.sub_organization_units.where(accept_petition: true).blank? ? nil : parent.sub_organization_units.where(accept_petition: true).collect{|x| self.petition_children(x) }
+    }
+  end
+
   def self.children(parent)
     {
+        icon: "glyphicon glyphicon-stop",
+        selectedIcon: "glyphicon glyphicon-stop",
         text: parent.name,
         id: parent.id,
       nodes: parent.sub_organization_units.blank? ? nil : parent.sub_organization_units.collect{|x| self.children(x) }

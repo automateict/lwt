@@ -28,7 +28,7 @@ class PetitionReviewMembersController < ApplicationController
 
     respond_to do |format|
       if @petition_review_member.save
-        format.html { redirect_to @petition_review_member, notice: 'Petition review member was successfully created.' }
+        format.html { redirect_to petition_review_members_path, notice: 'Petition review member was successfully created.' }
         format.json { render :show, status: :created, location: @petition_review_member }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PetitionReviewMembersController < ApplicationController
   def update
     respond_to do |format|
       if @petition_review_member.update(petition_review_member_params)
-        format.html { redirect_to @petition_review_member, notice: 'Petition review member was successfully updated.' }
+        format.html { redirect_to petition_review_members_path, notice: 'Petition review member was successfully updated.' }
         format.json { render :show, status: :ok, location: @petition_review_member }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class PetitionReviewMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petition_review_member_params
-      params.require(:petition_review_member).permit(:government_body_id, :name, :profession, :phone, :email)
+      params.require(:petition_review_member).permit(:organization_unit_id, :name, :profession, :phone, :email, :photo)
     end
 end

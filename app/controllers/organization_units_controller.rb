@@ -12,6 +12,16 @@ class OrganizationUnitsController < ApplicationController
     render json: OrganizationUnit.organization_tree(current_user)
   end
 
+  def load_petition_tree
+    render json: OrganizationUnit.petition_org_tree
+  end
+
+  def load_petition_sub_units
+    @parent  = OrganizationUnit.find(params[:node])
+    @organization_units = @parent.sub_units.where(accept_petition: true)
+    render partial: 'organization_units'
+  end
+
   def org_unit_facilities
     unless current_user.parent_org_unit.sub_organization_units.blank?
       health_workres = current_user.parent_org_unit.sub_organization_units.
@@ -93,6 +103,6 @@ class OrganizationUnitsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def organization_unit_params
       params.require(:organization_unit).permit(:name, :short_name, :code, :url, :organization_type_id, :parent_organization_unit_id,
-                                                :contact_person, :contact_phone, :contact_email, :latitude, :longitude, :description)
+                                                :contact_person, :contact_phone, :contact_email, :latitude, :longitude, :description, :accept_petition)
     end
 end

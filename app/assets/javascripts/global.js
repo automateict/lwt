@@ -20,13 +20,16 @@
 
         $('.js-exportable').DataTable({
             responsive: true,
+            retrieve: true,
             dom: '<"html5buttons"B>lTfgtip',
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
         });
 
-        $('#mainTable').editableTableWidget()
-        $('.best_in_place').best_in_place();
+        $('.wysihtml5').wysihtml5({'toolbar': {'blockquote': true, 'html': true}})
 
+        $( "#accordion" ).accordion({
+            collapsible: true
+        });
 
     });
 }(jQuery))
