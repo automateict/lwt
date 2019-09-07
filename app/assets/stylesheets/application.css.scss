@@ -16,6 +16,13 @@
   src: font-url('2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2') format('woff2');
 }
 
+
+.card{
+  border: 1px solid silver;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: font-url('assets/glyphicons-halflings-regular.woff') format('woff'),

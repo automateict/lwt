@@ -2,10 +2,9 @@
 
     <div class="row clearfix">
       <div class="col-sm-6">
-        <div class="block-header">
-          <h2>PETITIONS</h2>
-        </div>
-        <%= link_to nil do %>
+        <fieldset class="sub_form">
+          <legend>PETITIONS</legend>
+        <%= link_to petitions_path(type: 'all') do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
                 <div class="icon">
@@ -13,13 +12,13 @@
                 </div>
                 <div class="content" style="min-height: 1486px;">
                   <div class="text">Total Petitions</div>
-                  <div class="number">0</div>
+                  <div class="number"><%= Petition.all_petitions(current_user).count %></div>
                 </div>
               </div>
             </div>
         <% end %>
 
-        <%= link_to nil do %>
+        <%= link_to petitions_path(type: 'active') do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
                 <div class="icon">
@@ -27,12 +26,12 @@
                 </div>
                 <div class="content" style="min-height: 1486px;">
                   <div class="text">Active Petitions</div>
-                  <div class="number">0</div>
+                  <div class="number"><%= Petition.ongoing_petitions(current_user).count %></div>
                 </div>
               </div>
             </div>
         <% end %>
-        <%= link_to nil do %>
+        <%= link_to petitions_path(type: Constants::UNDER_REVIEW) do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
                 <div class="icon">
@@ -40,17 +39,17 @@
                 </div>
                 <div class="content" style="min-height: 1486px;">
                   <div class="text">Petitions Under Review</div>
-                  <div class="number">0</div>
+                  <div class="number"><%= Petition.under_review_petitions(current_user).count %></div>
                 </div>
               </div>
             </div>
         <% end %>
-        <%= link_to nil do %>
+          <%= link_to petitions_path(type: Constants::RESOLVED) do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
                 <div class="content" style="min-height: 1486px;">
                   <div class="text">Resolved Petitions</div>
-                  <div class="number">0</div>
+                  <div class="number"><%= Petition.resolved_petitions(current_user).count %></div>
                 </div>
                 <div class="icon">
                   <i class="material-icons col-success">playlist_add_check</i>
@@ -65,6 +64,7 @@
               Petitions by Status
             </div>
             <div class="panel-body">
+              <%= column_chart petitions_by_status_petitions_path %>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
               Petitions by Organization Unit and Status
             </div>
             <div class="panel-body">
-
+              <%= column_chart petitions_by_org_unit_by_status_petitions_path %>
             </div>
           </div>
         </div>
@@ -83,77 +83,78 @@
         <div class="col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              Petitions by Sector and Oganization Unit
+              Petitions by Sector and Status
             </div>
             <div class="panel-body">
-
+              <%= column_chart petitions_by_sector_by_status_petitions_path %>
             </div>
           </div>
         </div>
+      </fieldset>
       </div>
       <div class="col-sm-6">
-        <div class="block-header">
-          <h2>COMPLAINTS</h2>
-        </div>
-      <%= link_to nil do %>
-          <div class="col-sm-6">
-            <div class="info-box infobox-type-5 hover-zoom-effect">
-              <div class="icon">
-                <i class="material-icons col-success">people</i>
-              </div>
-              <div class="content" style="min-height: 1486px;">
-                <div class="text">Total Complaints</div>
-                <div class="number">0</div>
+        <fieldset class="sub_form">
+          <legend>COMPLAINTS</legend>
+        <%= link_to complaints_path(type: 'all') do %>
+            <div class="col-sm-6">
+              <div class="info-box infobox-type-5 hover-zoom-effect">
+                <div class="icon">
+                  <i class="material-icons col-success">people</i>
+                </div>
+                <div class="content" style="min-height: 1486px;">
+                  <div class="text">Total Complaints</div>
+                  <div class="number"><%= Complaint.all_complaints(current_user).count %></div>
+                </div>
               </div>
             </div>
-          </div>
-      <% end %>
+        <% end %>
 
-      <%= link_to nil do %>
-          <div class="col-sm-6">
-            <div class="info-box infobox-type-5 hover-zoom-effect">
-              <div class="icon">
-                <i class="material-icons col-success">library_books</i>
-              </div>
-              <div class="content" style="min-height: 1486px;">
-                <div class="text">Pending Complaints</div>
-                <div class="number">0</div>
-              </div>
-            </div>
-          </div>
-      <% end %>
-      <%= link_to nil do %>
-          <div class="col-sm-6">
-            <div class="info-box infobox-type-5 hover-zoom-effect">
-              <div class="icon">
-                <i class="material-icons col-success">list</i>
-              </div>
-              <div class="content" style="min-height: 1486px;">
-                <div class="text">Complaints Under Review</div>
-                <div class="number">0</div>
+        <%= link_to complaints_path(type: 'all') do %>
+            <div class="col-sm-6">
+              <div class="info-box infobox-type-5 hover-zoom-effect">
+                <div class="icon">
+                  <i class="material-icons col-success">library_books</i>
+                </div>
+                <div class="content" style="min-height: 1486px;">
+                  <div class="text">Pending Complaints</div>
+                  <div class="number"><%= Complaint.pending_complaints(current_user).count %></div>
+                </div>
               </div>
             </div>
-          </div>
-      <% end %>
-      <%= link_to nil do %>
-          <div class="col-sm-6">
-            <div class="info-box infobox-type-5 hover-zoom-effect">
-              <div class="content" style="min-height: 1486px;">
-                <div class="text">Resolved Complaints</div>
-                <div class="number">0</div>
-              </div>
-              <div class="icon">
-                <i class="material-icons col-success">playlist_add_check</i>
+        <% end %>
+        <%= link_to complaints_path(type: Constants::UNDER_REVIEW) do %>
+            <div class="col-sm-6">
+              <div class="info-box infobox-type-5 hover-zoom-effect">
+                <div class="icon">
+                  <i class="material-icons col-success">list</i>
+                </div>
+                <div class="content" style="min-height: 1486px;">
+                  <div class="text">Complaints Under Review</div>
+                  <div class="number"><%= Complaint.under_review_complaints(current_user).count %></div>
+                </div>
               </div>
             </div>
-          </div>
-      <% end %>
+        <% end %>
+        <%= link_to complaints_path(type: Constants::RESOLVED) do %>
+            <div class="col-sm-6">
+              <div class="info-box infobox-type-5 hover-zoom-effect">
+                <div class="content" style="min-height: 1486px;">
+                  <div class="text">Resolved Complaints</div>
+                  <div class="number"><%= Complaint.resolved_complaints(current_user).count %></div>
+                </div>
+                <div class="icon">
+                  <i class="material-icons col-success">playlist_add_check</i>
+                </div>
+              </div>
+            </div>
+        <% end %>
         <div class="col-sm-12">
           <div class="panel panel-default">
             <div class="panel-heading">
               Complaints by Status
             </div>
             <div class="panel-body">
+              <%= column_chart complaints_by_status_complaints_path %>
             </div>
           </div>
         </div>
@@ -164,10 +165,11 @@
               Complaints by Organization Unit and Status
             </div>
             <div class="panel-body">
-
+              <%= column_chart complaints_by_org_unit_by_status_complaints_path %>
             </div>
           </div>
         </div>
+        </fieldset>
       </div>
     </div>
 <% end  %>

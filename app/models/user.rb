@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
   has_many :petitions
+  has_many :complaints
   has_one :person
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -12,11 +13,21 @@ class User < ApplicationRecord
   def load_petitions
     petitions = []
     unless organization_unit.blank?
-      petitions = Petition.where('organization_unit_id = ?', organization_unit_id)
+      petitions = Petition.where('organization_unit_id in (?)', organization_unit.sub_units.pluck(:id) << organization_unit_id)
     else
       petitions = self.petitions
     end
     return petitions
+  end
+
+  def load_complaints
+    complaints = []
+    unless organization_unit.blank?
+      complaints = Complaint.where('organization_unit_id in (?)', organization_unit.sub_units.pluck(:id) << organization_unit_id)
+    else
+      complaints = self.complaints
+    end
+    return complaints
   end
 
   def signed(petition)

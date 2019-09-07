@@ -1,0 +1,25 @@
+/*
+  *= require AdminBSBSenstive/plugins/bootstrap/dist/css/bootstrap
+  *= require landing_page/all.min
+  *= require landing_page/simple-line-icons
+  *= require landing_page/landing-page.min
+*/
+
+header.masthead{
+  position:relative;
+  background-color:#343a40;
+  background: image-url('bg-masthead.jpg') no-repeat center center;
+}
+
+.card{
+  border: 1px solid silver;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: font-url('webfonts/fa-brands-400.woff2') format('woff2');
+}

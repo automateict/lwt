@@ -18,13 +18,6 @@
             });
         });
 
-        $('.js-exportable').DataTable({
-            responsive: true,
-            retrieve: true,
-            dom: '<"html5buttons"B>lTfgtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-        });
-
         $('.wysihtml5').wysihtml5({'toolbar': {'blockquote': true, 'html': true}})
 
         $( "#accordion" ).accordion({

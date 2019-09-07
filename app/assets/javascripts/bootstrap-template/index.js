@@ -1,0 +1,12 @@
+//= require bootstrap-template/jquery-3.3.1.min
+//= require jquery_nested_form
+//= require bootstrap-sprockets
+//= require bootstrap-template/jquery.lazy.min
+//= require bootstrap-template/jquery.lazy.plugins.min
+//= require bootstrap-template/scripts
+//= require bootstrap-treeview
+//= require bootstrap-wysihtml5
+//= require chartkick
+//= require highcharts
+//= require select2
+//= require global

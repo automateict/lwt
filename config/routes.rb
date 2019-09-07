@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :complaint_reports
   resources :people
   resources :petition_reports
@@ -8,12 +9,23 @@ Rails.application.routes.draw do
   resources :petitions do
     member do
       get 'sign'
+      patch 'add_comment'
+    end
+    collection do
+      get 'petitions_by_status'
+      get 'petitions_by_org_unit_by_status'
+      get 'petitions_by_sector_by_status'
     end
   end
   resources :departments
   resources :cr_committee_members
   resources :cr_committees
-  resources :complaints
+  resources :complaints do
+    collection do
+      get 'complaints_by_status'
+      get 'complaints_by_org_unit_by_status'
+    end
+  end
   resources :pr_committee_members
   resources :sectors
 

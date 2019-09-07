@@ -7,6 +7,20 @@ class ComplaintsController < ApplicationController
     @complaints = Complaint.all
   end
 
+  def complaints_by_status
+    complaints = Complaint.all_complaints(current_user).group('status').count
+    render json: complaints
+  end
+
+  def complaints_by_org_unit_by_status
+    complaints = []
+    Constants::COMPLAINT_STATUSES.each do |c|
+      complaints << {name: c, data: (current_user.organization_unit.sub_units << current_user.organization_unit).
+          map{|ou| [ou.to_s, Complaint.org_unit_complaints_by_status(current_user, ou, c).count]} }
+    end
+    render json: complaints
+  end
+
   # GET /complaints/1
   # GET /complaints/1.json
   def show

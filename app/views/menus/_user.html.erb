@@ -7,9 +7,23 @@
     </li>
 
     <li>
+      <%= link_to complaints_path do %>
+          <i class="material-icons">dashboard</i>
+          <span>My Complaints</span>
+      <% end %>
+    </li>
+
+    <li>
       <%= link_to new_petition_path do %>
           <i class="material-icons">category</i>
           <span>Start Petition</span>
+      <% end %>
+    </li>
+
+    <li>
+      <%= link_to new_petition_path do %>
+          <i class="material-icons">category</i>
+          <span>Send Complaint</span>
       <% end %>
     </li>
 

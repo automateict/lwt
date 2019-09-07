@@ -1,119 +1,317 @@
-<% content_for :header do %>
-<div class="row">
-  <div class="col-sm-8">
-    <div class="panel panel-default">
-    <div class="panel-heading">
-      Petition Details
-    </div>
-<div class="panel-body">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs tab-nav-right" role="tablist">
-    <li role="presentation" class="active"><a href="#petition_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Petition Details</a></li>
-    <li role="presentation"><a href="#pr_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Petition Review Commitee</a></li>
-    <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
-  </ul>
+<% if current_user %>
+  <% content_for :header do %>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Petition Details
+          </div>
+          <div class="panel-body">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+              <li role="presentation" class="active"><a href="#petition_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Petition Details</a></li>
+              <li role="presentation"><a href="#pr_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Petition Review Commitee</a></li>
+              <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
+            </ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane fade in active" id="petition_details">
-        <p><%= image_tag @petition.cover_image, width: '500px', class: 'img-responsive' %></p>
-        <h3><%= @petition.title %></h3>
-        <p><%= raw @petition.petition_details %></p>
-         <% if @petition.documents %>
-             <h5>Supporting Documents</h5>
-             <% @petition.documents.each do |d| %>
-                 <p><%= link_to d.try(:name), d.try(:attachment) %></p>
-             <% end %>
-          <% end %>
-        <hr/>
-        <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
-    </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="petition_details">
+                <p><%= image_tag @petition.cover_image, height: '350px' %></p><br/>
+                <h3><%= @petition.title %></h3>
+                <p><%= raw @petition.petition_details %></p>
+                <% if @petition.documents %>
+                    <h5>Supporting Documents</h5>
+                    <% @petition.documents.each do |d| %>
+                        <p><%= link_to d.try(:name), d.try(:attachment) %></p>
+                    <% end %>
+                <% end %>
+                <hr/>
+                <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
+              </div>
 
-    <div role="tabpanel" class="tab-pane fade" id="pr_commitee">
-      <% if @petition.pr_committee %>
-          <table class="table table-bordered">
-            <li>
-              <label>Review Deadline: </label>
-              <span><%= @petition.pr_committee.deadline.strftime("%B %d, %Y") %></span>
-            </li>
-            <legend>Committee Members</legend>
-            <% @petition.pr_committee.pr_commitee_members.each do |member| %>
-                <li>
+              <div role="tabpanel" class="tab-pane fade" id="pr_commitee">
+                <% if @petition.pr_committee %>
+                    <table class="table table-bordered">
+                      <li>
+                        <label>Review Deadline: </label>
+                        <span><%= @petition.pr_committee.deadline.strftime("%B %d, %Y") %></span>
+                      </li>
+                      <legend>Committee Members</legend>
+                      <% @petition.pr_committee.pr_commitee_members.each do |member| %>
+                          <li>
                             <span><%= image_tag member.person.photo, width: '100px', class: 'img-circle' rescue nil %>
                               <label><span class="font-20"><%= member.person %></span><br/> <%= member.role %></label>
                             </span>
-                </li><hr/>
-            <% end %>
-          </table>
-          <%= link_to 'Edit', edit_pr_committee_path(@petition.pr_committee), class: 'btn btn-primary' %>
-      <% end %>
-      <% unless @petition.pr_committee %>
-        <%= link_to 'Assign Review Commitee', new_pr_committee_path(petition: @petition.id), class: 'btn btn-primary' %>
-      <% end %>
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="review_report">
-      <table class="table">
-        <tr>
-          <th>Report Title</th>
-          <th>Report Date</th>
-          <th>Petition Status</th>
-          <th>Remark</th>
-          <th>Document</th>
-        </tr>
-        <% @petition.petition_reports.each do |pr| %>
-            <tr>
-              <td><%= pr.title %></td>
-              <td><%= pr.report_date.strftime("%B %d, %Y") %></td>
-              <td><%= pr.decision_made %></td>
-              <td><%= pr.remark %></td>
-              <td>
-                <% unless pr.document.blank? %>
-                    <%= link_to pr.document do %>
-                        <button type="button" class="btn btn-outline"><i class="material-icons">file_download</i>download</button>
-                    <% end %>
+                          </li><hr/>
+                      <% end %>
+                    </table>
+                    <%= link_to 'Edit', edit_pr_committee_path(@petition.pr_committee), class: 'btn btn-primary' %>
                 <% end %>
-              </td>
-            </tr>
-        <% end %>
-      </table>
-          <%= link_to 'Add Review Report', new_petition_report_path(petition: @petition.id), class: 'btn btn-primary' %>
-    </div>
-  </div>
-</div>
-  </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="row">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <label><%= @petition.signatures.count.to_s << ' have signed.' %> Let's get to <%= @petition.target_of_signatures %></label>
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
-               style="width: <%= (@petition.signatures.count.to_f/@petition.target_of_signatures)*100 %>%" aria-valuenow="<%= @petition.signatures.count %>"
-               aria-valuemin="0" aria-valuemax="<%= @petition.target_of_signatures %>"></div>
+                <% unless @petition.pr_committee %>
+                    <%= link_to 'Assign Review Commitee', new_pr_committee_path(petition: @petition.id), class: 'btn btn-primary' %>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="review_report">
+                <table class="table">
+                  <tr>
+                    <th>Report Title</th>
+                    <th>Report Date</th>
+                    <th>Petition Status</th>
+                    <th>Remark</th>
+                    <th>Document</th>
+                  </tr>
+                  <% @petition.petition_reports.each do |pr| %>
+                      <tr>
+                        <td><%= pr.title %></td>
+                        <td><%= pr.report_date.strftime("%B %d, %Y") %></td>
+                        <td><%= pr.decision_made %></td>
+                        <td><%= pr.remark %></td>
+                        <td>
+                          <% unless pr.document.blank? %>
+                              <%= link_to pr.document do %>
+                                  <button type="button" class="btn btn-outline"><i class="material-icons">file_download</i>download</button>
+                              <% end %>
+                          <% end %>
+                        </td>
+                      </tr>
+                  <% end %>
+                </table>
+                <%= link_to 'Add Review Report', new_petition_report_path(petition: @petition.id), class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
         </div>
-        <br/><br/><br/>
-        <% if user_signed_in?  and current_user.signed(@petition) %>
-            <label class="alert-success">Thank you for signing !!!!</label>
-        <% else %>
-            <%= link_to 'Sign this petition', sign_petition_path, class: "btn btn-lg btn-primary btn-block"  %>
-        <% end %>
-      </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Recent signers
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Comments
+          </div>
+          <div class="panel-body">
+              <% @petition.comments.each do |c| %>
+                  <div class="d-flex justify-content-between small" style="width: 100%">
+                    <b><%= c.user.email rescue nil %> <%= c.updated_at.strftime("%B %d, %Y") rescue nil %></b><br/>
+                    <span><%= c.content %></span>
+                  </div>
+                  <hr class="my-2">
+              <% end %>
+            <%= simple_nested_form_for(@petition, url: add_comment_petition_path) do |f| %>
+                <%= f.simple_fields_for :comments, @comment do |cf| %>
+                  <%= cf.error_notification %>
+                    <%= cf.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+                  <%= cf.input :content %>
+                <% end %>
+                <div class="form-actions">
+                  <%= f.button :submit %>
+                </div>
+            <% end %>
+
+          </div>
+          </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <label><%= @petition.signatures.count.to_s << ' have signed.' %> Let's get to <%= @petition.target_of_signatures %></label>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                     style="width: <%= (@petition.signatures.count.to_f/@petition.target_of_signatures)*100 %>%" aria-valuenow="<%= @petition.signatures.count %>"
+                     aria-valuemin="0" aria-valuemax="<%= @petition.target_of_signatures %>"></div>
+              </div>
+              <br/><br/><br/>
+              <% if user_signed_in?  and current_user.signed(@petition) %>
+                  <label class="alert-success">Thank you for signing !!!!</label>
+              <% else %>
+                  <%= link_to 'Sign this petition', sign_petition_path, class: "btn btn-lg btn-primary btn-block"  %>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <div class="panel-body">
-          <% @petition.recent_signers.each do |rs| %>
-              <li><%= rs.user %></li>
-          <% end %>
+
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Recently Signed
+            </div>
+            <div class="panel-body">
+              <% @petition.recent_signers.each do |rs| %>
+                  <div class="d-flex justify-content-between small" style="width: 100%">
+                    <span class="font-weight-bold"><%= rs.user %></span>
+                    <span style="float: right">Jan 7, 2014</span>
+                  </div>
+                  <hr class="my-2">
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+<% end %>
+<% else %>
+    <%= content_for :header do %>
+        <div class="col-lg-8 py-5">
+          <h1 class="mb-2"><%= @petition.title %></h1>
+          <h2 class="m-0"><%= raw (@petition.petition_details.truncate_words(10)) %></h2>
+        </div>
+        <div class="col-lg-4">
+          <script async="" type="text/javascript" src="./Landing Page - Free Bootstrap 4 Landing Page Theme - Start Bootstrap_files/carbon.js" id="_carbonads_js"></script>
+        </div>
+        <svg style="pointer-events: none" class="wave" width="100%" height="50px" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 75">
+          <defs>
+            <style>
+              .a {
+                fill: none;
+              }
+
+              .b {
+                clip-path: url(#a);
+              }
+
+              .c,
+              .d {
+                fill: #f9f9fc;
+              }
+
+              .d {
+                opacity: 0.5;
+                isolation: isolate;
+              }
+            </style>
+            <clippath id="a">
+              <rect class="a" width="1920" height="75"></rect>
+            </clippath>
+          </defs>
+          <title>wave</title>
+          <g class="b">
+            <path class="c" d="M1963,327H-105V65A2647.49,2647.49,0,0,1,431,19c217.7,3.5,239.6,30.8,470,36,297.3,6.7,367.5-36.2,642-28a2511.41,2511.41,0,0,1,420,48"></path>
+          </g>
+          <g class="b">
+            <path class="d" d="M-127,404H1963V44c-140.1-28-343.3-46.7-566,22-75.5,23.3-118.5,45.9-162,64-48.6,20.2-404.7,128-784,0C355.2,97.7,341.6,78.3,235,50,86.6,10.6-41.8,6.9-127,10"></path>
+          </g>
+          <g class="b">
+            <path class="d" d="M1979,462-155,446V106C251.8,20.2,576.6,15.9,805,30c167.4,10.3,322.3,32.9,680,56,207,13.4,378,20.3,494,24"></path>
+          </g>
+          <g class="b">
+            <path class="d" d="M1998,484H-243V100c445.8,26.8,794.2-4.1,1035-39,141-20.4,231.1-40.1,378-45,349.6-11.6,636.7,73.8,828,150"></path>
+          </g>
+        </svg>
+    <% end %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+
+          <div class="img-preview d-block shadow-lg rounded mb-4">
+            <%= image_tag @petition.cover_image, width: '100%', height: '350px', class: 'img-responsive' %><br/><br/>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                  <div class="features-icons-icon d-flex">
+                    <i class="icon-refresh fa-3x m-auto text-primary"></i>
+                  </div>
+                  <br/>
+                  <h5 class="text-center"><%= @petition.status %></h5>
+                  <p class="lead mb-0"></p>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                  <div class="features-icons-icon d-flex">
+                    <i class="icon-layers fa-3x m-auto text-primary"></i>
+                  </div>
+                  <br/>
+                  <h5 class="text-center"><%= @petition.sector %></h5>
+                  <p class="lead mb-0"></p>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                  <div class="features-icons-icon d-flex">
+                    <i class="icon-calendar fa-3x m-auto text-primary"></i>
+                  </div>
+                  <br/>
+                  <h5 class="text-center">Started <%= @petition.created_at.strftime("%B %d, %Y") %></h5>
+                  <p class="lead mb-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+              <h5 class="m-0">Description</h5>
+              <hr>
+              <%= raw @petition.petition_details %><br/><br/>
+              <% if @petition.documents %>
+                  <h5>Supporting Documents</h5>
+                  <hr/>
+                  <% @petition.documents.each do |d| %>
+                      <p><%= link_to d.try(:name), d.try(:attachment) %></p>
+                  <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+              <h5 class="m-0">Comments</h5>
+              <hr>
+              <ul class="mb-0">
+                <% @petition.comments.each do |c| %>
+                  <li>
+                    <div class="col-sm-3"><%= c.user %></div>
+                    <div class="col-sm-9"><%= c.content %></div>
+                  </li>
+                    <hr/>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-4">
+
+          <div class="card border-0 shadow mb-4 d-none d-lg-block">
+            <div class="card-body">
+              <label><%= @petition.signatures.count.to_s << ' have signed.' %> Let's get to <%= @petition.target_of_signatures %></label>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                     style="width: <%= (@petition.signatures.count.to_f/@petition.target_of_signatures)*100 %>%" aria-valuenow="<%= @petition.signatures.count %>"
+                     aria-valuemin="0" aria-valuemax="<%= @petition.target_of_signatures %>"></div>
+              </div>
+              <br/><br/><br/>
+              <% if user_signed_in?  and current_user.signed(@petition) %>
+                  <label class="alert-success">Thank you for signing !!!!</label>
+              <% else %>
+                  <%= link_to 'Sign this petition', sign_petition_path, class: "btn btn-lg btn-primary btn-block"  %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow mb-4 text-center">
+            <div class="card-body">
+              <div class="small mb-2 font-weight-bold">Share to facebook</div>
+              <a target="_blank" href="javascript:void(0)" onclick="if (!window.__cfRLUnblockHandlers) return false; window.open(&#39;https://twitter.com/intent/user?original_referer=&amp;region=screen_name&amp;screen_name=SBootstrap&amp;source=followbutton&amp;variant=1.1&#39;, &#39;twitter&#39;, &#39;toolbar=no, width=450, height=600&#39;); return false;" class="btn btn-facebook btn-sm btn-block"><i class="fab fa-facebook"></i> Share to facebook</a>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between small">
+                <span class="font-weight-bold">Recently Signed</span>
+              </div>
+              <hr class="my-2">
+              <% @petition.recent_signers.each do |rs| %>
+                  <div class="d-flex justify-content-between small">
+                    <span class="font-weight-bold"><%= rs.user %></span>
+                    <span>Jan 7, 2014</span>
+                  </div>
+                  <hr class="my-2">
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 <% end %>
