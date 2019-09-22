@@ -24,5 +24,9 @@
             collapsible: true
         });
 
+        $( "select" ).select2({
+            theme: "bootstrap"
+        });
+
     });
 }(jQuery))

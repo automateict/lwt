@@ -1,15 +1,26 @@
-<center>
   <%= simple_nested_form_for(@user) do |f| %>
-      <%= f.simple_fields_for :person do |pf| %>
-        <%= pf.input :first_name %>
-        <%= pf.input :father_name %>
-        <%= pf.input :grand_father_name %>
-      <% end %>
-      <%= f.input :email %>
-      <%= f.input :password %>
-      <%= f.input :password_confirmation, label: 'Confirm Password' %>
-      <%= f.association :role %>
-      <hr/>
-      <%= f.submit "Save",class: "btn btn-lg btn-primary"  %>
+      <div class="col-sm-6">
+        <fieldset class="sub_form">
+          <legend>Personal Details</legend>
+          <%= f.association :organization_unit, collection: [f.object.organization_unit], prompt: true %>
+          <%= f.input :title %>
+          <%= f.input :first_name %>
+          <%= f.input :father_name %>
+          <%= f.input :grand_father_name %>
+          <%= f.input :about, input_html: {class: 'wysihtml5'} %>
+          <%= f.input :photo, as: :file %>
+        </fieldset>
+      </div>
+      <div class="col-sm-6">
+        <fieldset class="sub_form">
+          <legend>User Details</legend>
+          <%= f.input :email %>
+          <%= f.input :password %>
+          <%= f.input :password_confirmation, label: 'Confirm Password' %>
+          <%= f.input :role, collection: User::ROLES, as: :radio_buttons, wrapper_html: {class: 'single_columned_list'} %>
+        </fieldset>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Save",class: "btn btn-lg btn-primary"  %>
+      </div>
   <% end %>
-</center>

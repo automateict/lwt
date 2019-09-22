@@ -1,10 +1,10 @@
 <%= simple_form_for(@organization_unit) do |f| %>
   <%= f.error_notification %>
-  <%= f.input :parent_organization_unit_id, collection: [@parent], class: "form-control show-tick" %>
+  <%= f.input :parent_organization_unit_id, prompt: true, collection: [@parent], class: "form-control show-tick" %>
   <%= f.input :name, class: "form-control show-tick" %>
   <%= f.input :short_name, class: "form-control show-tick" %>
     <%= f.input :accept_petition, label_html: {class: 'transparent_label'} %>
-  <%= f.input :organization_type_id, collection: OrganizationType.all, class: "form-control show-tick" %>
+  <%= f.input :organization_type_id, prompt: true, collection: OrganizationType.all, class: "form-control show-tick" %>
   <%= f.input :url, label: 'URL' %>
   <%= f.input :contact_person, class: "form-control show-tick" %>
   <%= f.input :contact_phone, class: "form-control show-tick" %>

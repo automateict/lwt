@@ -1,6 +1,7 @@
 <table class="table table-hover dataTable js-exportable">
   <thead>
   <tr>
+    <th>Name</th>
     <th>Email</th>
     <th>Role</th>
     <th></th>
@@ -10,6 +11,7 @@
   <tbody>
   <% @users.each do |user| %>
       <tr>
+        <td><%= link_to user, user %></td>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
         <td>
@@ -21,7 +23,10 @@
   <% end %>
   </tbody>
 </table>
+<br/><br/>
 <hr/>
-<%= link_to new_user_path do %>
-    <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New User</button>
+<% unless @organization_unit.blank? %>
+  <%= link_to new_user_path(organization_unit: @organization_unit.id) do %>
+      <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-plus"></i> Add New User</button>
+  <% end %>
 <% end %>

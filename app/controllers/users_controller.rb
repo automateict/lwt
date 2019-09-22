@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.organization_unit_id = params[:organization_unit]
   end
 
   # GET /users/1/edit
@@ -34,7 +35,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -76,8 +77,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_type, :email, :first_name, :father_name, :grand_father_name,
-                                   :organization_unit_id, :role_id, :password, :password_confirmation,
-                                   person_attributes: [:id, :first_name, :father_name, :grand_father_name] )
+      params.require(:user).permit(:user_type, :email, :organization_unit_id, :role, :password, :password_confirmation,
+                                   :title, :first_name, :father_name, :grand_father_name, :profession, :phone, :photo, :about )
     end
 end

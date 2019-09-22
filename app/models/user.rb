@@ -2,13 +2,12 @@ class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
   has_many :petitions
   has_many :complaints
-  has_one :person
+  has_one_attached :photo
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   ROLES = [ADMIN='Admin', USER='User', COMMITEE='Committee']
-  accepts_nested_attributes_for :person
 
   def load_petitions
     petitions = []
@@ -53,8 +52,12 @@ class User < ApplicationRecord
     return users
   end
 
+  def full_name
+    [title, first_name, father_name, grand_father_name].join(' ')
+  end
+
   def to_s
-    person
+    full_name
   end
 
 end
