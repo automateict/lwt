@@ -7,6 +7,12 @@ class ComplaintsController < ApplicationController
     @complaints = Complaint.all
   end
 
+  def load_complaints
+    @organization_unit  = OrganizationUnit.find(params[:node])
+    @complaints = @organization_unit.sub_complaints
+    render partial: 'complaints'
+  end
+
   def complaints_by_status
     complaints = Complaint.all_complaints(current_user).group('status').count
     render json: complaints

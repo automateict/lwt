@@ -103,6 +103,14 @@ class OrganizationUnit < ApplicationRecord
     Person.where(organization_unit_id: sub_units.pluck(:id) << self.id)
   end
 
+  def sub_petitions
+    Petition.where(organization_unit_id: sub_units.pluck(:id) << self.id)
+  end
+
+  def sub_complaints
+    Complaint.where(organization_unit_id: sub_units.pluck(:id) << self.id)
+  end
+
   def to_s
     name
   end

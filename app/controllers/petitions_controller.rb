@@ -12,6 +12,12 @@ class PetitionsController < ApplicationController
     @petitions = current_user.load_petitions
   end
 
+  def load_petitions
+    @organization_unit  = OrganizationUnit.find(params[:node])
+    @petitions = @organization_unit.sub_petitions
+    render partial: 'petitions'
+  end
+
   def add_comment
     @petition.update(petition_params)
     flash[:notice] = 'Comment added successfully'

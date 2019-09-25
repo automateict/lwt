@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'petitions_by_status'
       get 'petitions_by_org_unit_by_status'
       get 'petitions_by_sector_by_status'
+      get 'load_petitions'
     end
   end
   resources :departments
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
     collection do
       get 'complaints_by_status'
       get 'complaints_by_org_unit_by_status'
+      get 'load_complaints'
     end
   end
   resources :pr_committee_members

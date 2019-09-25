@@ -1,0 +1,31 @@
+<table class="table table-striped dataTable js-exportable">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Title</th>
+    <th>Created By</th>
+    <th>Petition to</th>
+    <th>Sector</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @petitions.each do |petition| %>
+      <% counter = 1 %>
+      <tr>
+        <td><%= counter %></td>
+        <td><%= petition.title %></td>
+        <td><%= petition.user %></td>
+        <td><%= petition.organization_unit %></td>
+        <td><%= petition.sector %></td>
+        <td><%= petition.status %></td>
+        <td>
+          <%= link_to 'Details', petition %> |
+          <%= link_to 'Edit', edit_petition_path(petition) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

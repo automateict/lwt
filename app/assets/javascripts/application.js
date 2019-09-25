@@ -10,6 +10,7 @@
 //= require organization_units
 //= require users
 //= require petitions
+//= require complaints
 //= require facilities
 //= require people
 //= require reports
