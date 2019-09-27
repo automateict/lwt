@@ -10,7 +10,7 @@
 
   <title>Landing Page - Start Bootstrap Theme</title>
 
-  <%= stylesheet_link_tag 'bootstrap-template/index', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'bootstrap-template/index-guides', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 </head>
 
@@ -90,7 +90,20 @@
 <div class="mailchimp mt-5">
   <div class="contaminer text-center">
     <div class="row justify-content-center">
-      <%= yield :subscribe %>
+      <div class="col-sm-4">
+        <h3 class="mb-0">Want to get new petitions?</h3>
+        <p class="text-white-50">Subscribe to get updated when new petitions are started!</p>
+        <div id="mc_embed_signup">
+          <form role="form" action="https://startbootstrap.us3.list-manage.com/subscribe/post?u=531af730d8629808bd96cf489&amp;id=afb284632f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate="novalidate">
+            <div class="input-group input-group-lg">
+              <input type="email" name="EMAIL" class="form-control border-0" id="mce-EMAIL" placeholder="Email address...">
+              <div class="input-group-append">
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-light">Subscribe!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

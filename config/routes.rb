@@ -64,6 +64,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  get 'home/guides'
+  get 'home/complaints'
   get 'home/index'
   root to: "home#index"
 

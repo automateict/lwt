@@ -10,8 +10,22 @@
  *= require new_style
  */
 
+@font-face{
+  font-family:'Font Awesome 5 Pro';
+  font-weight:normal;
+  font-style:normal;
+  src: font-url('fontawesome-webfont3e6e.woff?v=4.7.0') format('woff'),
+}
+
 @font-face {
   font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: font-url('2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: '';
   font-style: normal;
   font-weight: 400;
   src: font-url('2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2') format('woff2');

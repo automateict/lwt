@@ -13,8 +13,11 @@
         </div>
       </li>
       <% else %>
+      &nbsp;&nbsp;&nbsp;
           <li class="nav-item">
-            <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+            <%= link_to new_user_session_path do %>
+              <span class="nav-link">Sign In <i class="glyphicon glyphicon-log-in"></i></span>
+                <% end %>
           </li>
       <% end %>
     </ul>

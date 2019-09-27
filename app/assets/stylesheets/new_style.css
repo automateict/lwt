@@ -1,3 +1,6 @@
+.panel{
+    border: none;
+}
 .content {
     margin-bottom: 25px!important;
     background: linear-gradient(45deg, darkseagreen, transparent);
