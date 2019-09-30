@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :complaint_client_satisfactions
   resources :comments
   resources :complaint_reports
   resources :people

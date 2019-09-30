@@ -3,7 +3,7 @@ class CrCommitteesController < ApplicationController
   before_action :load, only: [:new, :create, :edit, :update]
 
   def load
-    @organization_members = Person.where(organization_unit_id: current_user.organization_unit_id)
+    @organization_members = User.where(organization_unit_id: current_user.organization_unit_id)
   end
   # GET /cr_committees
   # GET /cr_committees.json
@@ -36,6 +36,7 @@ class CrCommitteesController < ApplicationController
         format.html { redirect_to @cr_committee.complaint, notice: 'Complaint Review committee was successfully created.' }
         format.json { render :show, status: :created, location: @cr_committee }
       else
+        logger.info("--------------______#{@cr_committee.errors.inspect}")
         format.html { render :new }
         format.json { render json: @cr_committee.errors, status: :unprocessable_entity }
       end
@@ -75,7 +76,7 @@ class CrCommitteesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cr_committee_params
       params.require(:cr_committee).permit(:complaint_id, :deadline,
-                                           cr_committee_members_attributes: [:id, :cr_committee_id, :person_id, :role, :_destroy]
+                                           cr_committee_members_attributes: [:id, :cr_committee_id, :user_id, :role, :_destroy]
       )
     end
 end

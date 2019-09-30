@@ -2,6 +2,8 @@
   <%= render 'dashboards/admin' %>
 <% elsif @institution %>
     <%= render 'dashboards/institution' %>
+<% elsif current_user %>
+    <%= render 'dashboards/user' %>
 <% else %>
     <%= render 'dashboards/guest' %>
 <% end %>

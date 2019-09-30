@@ -2,8 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :organization_unit %>
+    <%= f.association :organization_unit, prompt: true %>
     <%= f.input :title %>
     <%= f.input :body, input_html: {class: 'wysihtml5'} %>
     <div class="row">

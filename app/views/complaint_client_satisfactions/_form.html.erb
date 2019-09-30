@@ -1,0 +1,14 @@
+<%= simple_form_for(@complaint_client_satisfaction) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :complaint %>
+    <%= f.association :user %>
+    <%= f.input :rating %>
+    <%= f.input :feedback %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

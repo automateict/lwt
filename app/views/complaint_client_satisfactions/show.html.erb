@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Complaint:</strong>
+  <%= @complaint_client_satisfaction.complaint %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @complaint_client_satisfaction.user %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @complaint_client_satisfaction.rating %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= @complaint_client_satisfaction.feedback %>
+</p>
+
+<%= link_to 'Edit', edit_complaint_client_satisfaction_path(@complaint_client_satisfaction) %> |
+<%= link_to 'Back', complaint_client_satisfactions_path %>

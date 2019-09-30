@@ -26,9 +26,10 @@ class ComplaintReportsController < ApplicationController
   # POST /complaint_reports.json
   def create
     @complaint_report = ComplaintReport.new(complaint_report_params)
-
+    complaint = @complaint_report.complaint
     respond_to do |format|
       if @complaint_report.save
+        complaint.update_attribute('status', @complaint_report.decision)
         format.html { redirect_to @complaint_report.complaint, notice: 'Complaint report was successfully created.' }
         format.json { render :show, status: :created, location: @complaint_report }
       else
@@ -41,8 +42,10 @@ class ComplaintReportsController < ApplicationController
   # PATCH/PUT /complaint_reports/1
   # PATCH/PUT /complaint_reports/1.json
   def update
+    complaint = @complaint_report.complaint
     respond_to do |format|
       if @complaint_report.update(complaint_report_params)
+        complaint.update_attribute('status', @complaint_report.decision)
         format.html { redirect_to @complaint_report.complaint, notice: 'Complaint report was successfully updated.' }
         format.json { render :show, status: :ok, location: @complaint_report }
       else

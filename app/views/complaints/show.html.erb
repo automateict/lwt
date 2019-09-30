@@ -11,6 +11,7 @@
               <li role="presentation" class="active"><a href="#complaint_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Complaint Details</a></li>
               <li role="presentation"><a href="#complaint_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Complaint Review Commitee</a></li>
               <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
+              <li role="presentation"><a href="#client_satisfaction" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Client Satisfaction</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -18,7 +19,7 @@
               <div role="tabpanel" class="tab-pane fade in active" id="complaint_details">
                 <h3><%= @complaint.title %></h3>
                 <p><strong>Complaint by:</strong> <%= @complaint.user %></p>
-                <p><strong>Status:</strong> <%= @complaint.status %></p>
+                <p><strong>Status:</strong> <%= @complaint.complaint_status %></p>
                 <hr/>
                 <p><%= raw @complaint.body %></p>
                 <% if @complaint.documents %>
@@ -39,8 +40,8 @@
                       <legend>Committee Members</legend>
                       <% @complaint.cr_committee.cr_committee_members.each do |member| %>
                           <li>
-                            <span><%= image_tag member.person.photo, width: '100px', class: 'img-circle' rescue nil %>
-                              <label><span class="font-20"><%= member.person %></span><br/> <%= member.role %></label>
+                            <span><%= image_tag member.user.photo, width: '100px', class: 'img-circle' rescue nil %>
+                              <label><span class="font-20"><%= member.user %></span><br/> <%= member.role %></label>
                             </span>
                           </li>
                           <hr/>
@@ -62,14 +63,14 @@
                     <th>Document</th>
                     <th></th>
                   </tr>
-                  <% @complaint.complaint_reports.each do |cr| %>
+                  <% @complaint.complaint_reports.order('created_at DESC').each do |cr| %>
                       <tr>
                         <td><%= cr.title %></td>
                         <td><%= cr.report_date.strftime("%B %d, %Y") %></td>
                         <td><%= cr.decision %></td>
                         <td><%= cr.remark %></td>
                         <td>
-                          <% unless cr.document.blank? %>
+                          <% if cr.document.attached? %>
                               <%= link_to cr.document do %>
                                   <button type="button" class="btn btn-outline"><i class="material-icons">file_download</i>download</button>
                               <% end %>
@@ -80,6 +81,9 @@
                   <% end %>
                 </table>
                 <%= link_to 'Add Review Report', new_complaint_report_path(complaint: @complaint.id), class: 'btn btn-primary' %>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="client_satisfaction">
+                #TODO
               </div>
             </div>
           </div>

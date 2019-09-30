@@ -15,4 +15,9 @@ class Complaint < ApplicationRecord
   scope :under_review_complaints, -> (user){ all_complaints(user).where('status = ?', Constants::UNDER_REVIEW ) }
   scope :resolved_complaints, -> (user){ all_complaints(user).where('status = ?', Constants::RESOLVED ) }
 
+
+  def complaint_status
+    complaint_reports ? complaint_reports.order(:created_at).last.decision : status
+  end
+
 end

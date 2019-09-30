@@ -1,30 +1,38 @@
-<% if user_signed_in? and current_user.has_role('User') %>
+<% if user_signed_in? and current_user.role.blank? %>
     <li>
-      <%= link_to petitions_path do %>
-          <i class="material-icons">dashboard</i>
-          <span>My Petitions</span>
+      <%= link_to root_path do %>
+          <i class="material-icons">home</i>
+          <span>Home</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to current_user do %>
+          <i class="material-icons">person</i>
+          <span>My Profile</span>
       <% end %>
     </li>
 
     <li>
-      <%= link_to complaints_path do %>
-          <i class="material-icons">dashboard</i>
-          <span>My Complaints</span>
-      <% end %>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">dashboard</i>
+        <span class="nav-label">Petitions</span>
+      </a>
+      <ul>
+        <li><%= link_to 'My Petitions', petitions_path %></li>
+        <li><%= link_to 'All Petitions', petitions_path(type: 'all') %></li>
+        <li><%= link_to 'Start Petition', new_petition_path %></li>
+      </ul>
     </li>
 
     <li>
-      <%= link_to new_petition_path do %>
-          <i class="material-icons">category</i>
-          <span>Start Petition</span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to new_petition_path do %>
-          <i class="material-icons">category</i>
-          <span>Send Complaint</span>
-      <% end %>
+      <a href="javascript:void(0);" class="menu-toggle">
+        <i class="material-icons">dashboard</i>
+        <span class="nav-label">Complaints</span>
+      </a>
+      <ul>
+        <li><%= link_to 'My Complaints', complaints_path %></li>
+        <li><%= link_to 'Submit Complaint', new_complaint_path %></li>
+      </ul>
     </li>
 
 <% end %>

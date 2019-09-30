@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Complaint Client Satisfactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Complaint</th>
+      <th>User</th>
+      <th>Rating</th>
+      <th>Feedback</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @complaint_client_satisfactions.each do |complaint_client_satisfaction| %>
+      <tr>
+        <td><%= complaint_client_satisfaction.complaint %></td>
+        <td><%= complaint_client_satisfaction.user %></td>
+        <td><%= complaint_client_satisfaction.rating %></td>
+        <td><%= complaint_client_satisfaction.feedback %></td>
+        <td><%= link_to 'Show', complaint_client_satisfaction %></td>
+        <td><%= link_to 'Edit', edit_complaint_client_satisfaction_path(complaint_client_satisfaction) %></td>
+        <td><%= link_to 'Destroy', complaint_client_satisfaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Complaint Client Satisfaction', new_complaint_client_satisfaction_path %>

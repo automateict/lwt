@@ -2,6 +2,7 @@ class User < ApplicationRecord
   belongs_to :organization_unit, optional: true
   has_many :petitions
   has_many :complaints
+  has_many :cr_committee_members
   has_one_attached :photo
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
