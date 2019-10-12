@@ -1,5 +1,5 @@
 class PetitionsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_petition, only: [:show, :edit, :update, :destroy, :sign, :add_comment]
   before_action :load_org_units, only: [:new, :create, :edit, :update]
 
@@ -9,7 +9,8 @@ class PetitionsController < ApplicationController
   # GET /petitions
   # GET /petitions.json
   def index
-    @petitions = current_user.load_petitions
+    @type = params['type']
+    @petitions = @type.blank? ? Petition.all : Petition.where(status: @type)
   end
 
   def load_petitions

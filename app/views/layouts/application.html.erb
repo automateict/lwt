@@ -53,54 +53,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <% if current_user %>
-                <li class="dropdown user-menu">
-                  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="hidden-xs"><%= current_user.try(:email) %></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="header">
-                      <div class="user">
-                        <%= current_user.try(:email) %>
-                      </div>
-                    </li>
-                    <li class="body">
-                      <ul>
-                        <li>
-                          <%= link_to user_path(current_user) do %>
-                              <i class="material-icons">account_circle</i> Profile
-                          <% end %>
-                        </li>
-                        <li>
-                          <%= link_to edit_user_registration_path do %>
-                              <i class="material-icons">lock_open</i> Change Password
-                          <% end %>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="footer">
-                      <%= link_to 'Log Out', destroy_user_session_path,class: "btn btn-default btn-sm btn-block" %>
-                    </li>
-                  </ul>
-                </li>
-            <% else %>
-                <li>
-                  <%= link_to new_user_session_path do %>
-                      <i class="material-icons">account_circle</i> Sign in
-                  <% end %>
-                </li>
-            <% end %>
-            <li>
-              <a href="javascript:void(0);" class="js-search" data-close="true">
-                <i class="material-icons">search</i>
-              </a>
-            </li>
-
-            <li>
-              <a href="javascript:void(0);" class="fullscreen js-fullscreen">
-                <i class="material-icons">fullscreen</i>
-              </a>
-            </li>
+            <%= render partial: 'menus/top_menu' %>
           </ul>
         </div>
 

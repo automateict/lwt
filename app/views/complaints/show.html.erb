@@ -18,7 +18,7 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="complaint_details">
                 <h3><%= @complaint.title %></h3>
-                <p><strong>Complaint by:</strong> <%= @complaint.user %></p>
+                <p><strong>Complaint by:</strong> <%= link_to @complaint.user, @complaint.user %></p>
                 <p><strong>Status:</strong> <%= @complaint.complaint_status %></p>
                 <hr/>
                 <p><%= raw @complaint.body %></p>
@@ -32,21 +32,19 @@
 
               <div role="tabpanel" class="tab-pane fade" id="complaint_commitee">
                 <% if @complaint.cr_committee %>
-                    <table class="table table-bordered">
-                      <li>
+                      <div>
                         <label>Review Deadline: </label>
                         <span><%= @complaint.cr_committee.deadline.strftime("%B %d, %Y") %></span>
-                      </li>
+                      </div>
                       <legend>Committee Members</legend>
                       <% @complaint.cr_committee.cr_committee_members.each do |member| %>
-                          <li>
+                          <div>
                             <span><%= image_tag member.user.photo, width: '100px', class: 'img-circle' rescue nil %>
                               <label><span class="font-20"><%= member.user %></span><br/> <%= member.role %></label>
                             </span>
-                          </li>
+                          </div>
                           <hr/>
                       <% end %>
-                    </table>
                     <%= link_to 'Edit', edit_cr_committee_path(@complaint.cr_committee), class: 'btn btn-primary' %>
                 <% end %>
                 <% unless @complaint.cr_committee %>

@@ -4,7 +4,7 @@
 	<div class="col-sm-9">
 		<%= f.simple_fields_for :pr_commitee_members do |cf| %>
 				<div class="row fields">
-					<div class="col-sm-5"><%= cf.input :person_id, label: false, prompt: 'Select Member', collection: @organization_members.collect{|x| [x.to_s, x.id]} %></div>
+					<div class="col-sm-5"><%= cf.input :user_id, label: false, prompt: 'Select Member', collection: @organization_members.collect{|x| [x.to_s, x.id]} %></div>
 					<div class="col-sm-5"><%= cf.input :role, label: false, prompt: 'Select Role', collection: ['Chair Person', 'Secretary', 'Member'] %></div>
 					<div class="col-sm-2">
 						<%= cf.link_to_remove do %>

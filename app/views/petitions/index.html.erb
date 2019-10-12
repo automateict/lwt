@@ -1,8 +1,8 @@
+<% if user_signed_in? %>
 <div class="panel-heading">
   Petitions
 </div>
 <div class="panel-body">
-  <% if current_user.admin? %>
   <div class="row">
     <div class="col-sm-4">
       <div id="petition_tree"></div>
@@ -13,7 +13,23 @@
       </div>
     </div>
   </div>
-      <% else %>
-      <%= render partial: '/petitions/petitions' %>
-      <% end %>
 </div>
+<% else %>
+    <h2><%= @type.blank? ? 'All' : @type %> Petitions</h2>
+    <hr/>
+    <div class="row">
+      <% @petitions.each do |p| %>
+          <div class="col-md-4">
+            <div class="item-preview mb-5">
+              <a class="item-preview-img box-shadow-lg d-block mb-3">
+                <%= link_to p do %>
+                    <%= image_tag(p.cover_image, width:'100%', height: '156px', alt: "#{p.title}", class:'lazy image-fluid') %>
+                <% end %>
+              </a>
+              <div class="item-preview-title"><%= p.title %></div>
+              <div class="item-preview-description"><%= p.petition_details.truncate_words(20) %></div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+<% end %>

@@ -1,9 +1,11 @@
+.menu li a .info {
+    width: 100%;
+}
 .panel{
     border: none;
 }
 .content {
     margin-bottom: 25px!important;
-    background: linear-gradient(45deg, darkseagreen, transparent);
 }
 .sidebar .sidebar-nav{
     padding: 0 10px 0 10px;

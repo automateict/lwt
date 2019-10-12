@@ -20,6 +20,25 @@ class Petition < ApplicationRecord
   scope :under_review_petitions, -> (user) { all_petitions(user).where('status = ?', Constants::UNDER_REVIEW)}
   scope :resolved_petitions, -> (user) { all_petitions(user).where('status = ?', Constants::RESOLVED)}
 
+  scope :list_by_org_unit, -> (org_unit, user) {org_unit.blank? ? [] : all_petitions(user).where('organization_unit_id in (?)', org_unit.sub_units.pluck(:id) << org_unit.id)}
+  scope :list_by_sector, -> (sector, user) {all_petitions(user).where('sector_id = ?', sector)}
+  scope :list_by_status, -> (status, user) {all_petitions(user).where('status = ?', status)}
+  scope :list_by_from, -> (from, user) {all_petitions(user).where('date(created_at) >= ?', from)}
+  scope :list_by_to, -> (to, user) {all_petitions(user).where('date(created_at) <= ?', to)}
+
+  def self.search(org_unit, sector, status, from, to, user)
+    petitions = []
+    available_filters = {org_unit => list_by_org_unit(org_unit, user), sector => list_by_sector(sector, user),
+                         status => list_by_status(status,user), from => list_by_from(from, user),
+                         to => list_by_to(to, user)}.select{|k,v| !k.blank?}
+    counter = 0
+    available_filters.each do |k,v|
+      petitions = counter == 0 ? v : petitions.merge(v)
+      counter += 1
+    end
+    return petitions.uniq
+  end
+
   def recent_signers
     signatures.order('created_at').limit(5)
   end

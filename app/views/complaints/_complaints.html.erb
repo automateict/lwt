@@ -15,7 +15,7 @@
   <% @complaints.each do |complaint| %>
       <tr>
         <td><%= counter %></td>
-        <td><%= complaint.user %></td>
+        <td><%= link_to complaint.user, complaint.user %></td>
         <td><%= complaint.organization_unit %></td>
         <td><%= complaint.title %></td>
         <td><%= complaint.status %></td>

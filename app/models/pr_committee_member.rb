@@ -1,3 +1,4 @@
 class PrCommitteeMember < ApplicationRecord
-  belongs_to :pr_committee
+  belongs_to :user
+  belongs_to :pr_commitee
 end

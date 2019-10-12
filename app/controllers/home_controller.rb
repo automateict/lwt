@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @petitions = current_user.load_petitions rescue nil
+    @petitions = Petition.order('created_at DESC').paginate(:page => params[:page],:per_page => 8)
     @complaints = current_user.load_complaints rescue nil
   end
 

@@ -1,0 +1,30 @@
+<div class="panel-heading">
+  Complaints Report
+</div>
+
+<div class="panel-body">
+  <%= simple_form_for :report, url: reports_complaints_path, :remote => true do |f| %>
+      <div class="row">
+        <div class="col-sm-4">
+          <div id="complaint_report_organization_unit_tree"></div>
+          <%=  f.input :organization_unit, as: :hidden, required: false %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.input :status, collection: Constants::COMPLAINT_STATUSES, prompt: true %>
+          <%= f.input :from, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+          <%= f.input :to, as: :string, input_html: {"data-format": "YYYY-MM-DD",class: "js-dtp"} %>
+        </div>
+      </div>
+      <div class="row form-actions">
+          <%= f.button :submit, 'Reset Form', type: :reset %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= f.button :submit, 'Search' %>
+      </div>
+
+  <% end %>
+  <hr/>
+
+  <div id="complaints_report">
+    <%= render partial: '/complaints/complaints' %>
+  </div>
+
+</div>

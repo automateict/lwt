@@ -25,4 +25,36 @@ $(function () {
         }
     });
 
+    $(function () {
+        $.ajax({
+            url: '/organization_units/load_tree',
+            success: function(response){
+                $('#petition_report_organization_unit_tree').treeview({
+                    data: response,
+                    levels: 2,
+                    onNodeSelected: function (event, data) {
+                        $('#report_organization_unit').val(data.id)
+                    }
+                });
+            }
+        });
+
+    });
+
+    $(function () {
+        $.ajax({
+            url: '/organization_units/load_tree',
+            success: function(response){
+                $('#complaint_report_organization_unit_tree').treeview({
+                    data: response,
+                    levels: 2,
+                    onNodeSelected: function (event, data) {
+                        $('#report_organization_unit').val(data.id)
+                    }
+                });
+            }
+        });
+
+    });
+
 });

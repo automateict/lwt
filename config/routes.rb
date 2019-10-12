@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'reports/petitions'
+  post 'reports/petitions'
+  get 'reports/complaints'
+  post 'reports/complaints'
+
   resources :complaint_client_satisfactions
   resources :comments
   resources :complaint_reports
