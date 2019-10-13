@@ -2,14 +2,14 @@
     <li class="dropdown email-menu">
       <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
         <span class="btn btn-default">NEW PETITIONS <i class="material-icons">notifications</i></span>
-        <span class="label-count"><%= current_user.load_petitions.count %></span>
+        <span class="label-count"><%= current_user.all_unread_petitions.count %></span>
       </a>
       <ul class="dropdown-menu">
         <li class="header">New Petitions</li>
         <li class="body">
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 255px;"><ul class="menu" style="overflow: hidden; width: auto; height: 255px;">
             <li>
-              <% current_user.load_petitions.each do |p| %>
+              <% current_user.all_unread_petitions.each do |p| %>
                 <li>
                   <%= link_to p do %>
                       <div class="info">
@@ -28,14 +28,14 @@
     <li class="dropdown email-menu">
       <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
         <span class="btn btn-default">NEW COMPLAINTS<i class="material-icons">notifications</i></span>
-        <span class="label-count"><%= current_user.load_complaints.count %></span>
+        <span class="label-count"><%= current_user.all_unread_complaints.count %></span>
       </a>
       <ul class="dropdown-menu">
         <li class="header">New Complaints</li>
         <li class="body">
           <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 255px;"><ul class="menu" style="overflow: hidden; width: auto; height: 255px;">
             <li>
-              <% current_user.load_complaints.each do |c| %>
+              <% current_user.all_unread_complaints.each do |c| %>
                 <li>
                   <%= link_to c do %>
                       <div class="info">
@@ -53,12 +53,12 @@
 
     <li class="dropdown user-menu">
       <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-        <%= image_tag current_user.photo rescue nil %>
+        <%= image_tag current_user.photo.attached? ? current_user.photo : 'missing.png' %>
         <span class="hidden-xs"><%= current_user.full_name %></span>
       </a>
       <ul class="dropdown-menu">
         <li class="header">
-          <%= image_tag current_user.photo %>
+          <%= image_tag current_user.photo.attached? ? current_user.photo : 'missing.png' %>
           <div class="user">
             <%= current_user.full_name %>
             <div class="title"><%= current_user.email %></div>

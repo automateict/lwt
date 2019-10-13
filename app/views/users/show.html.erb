@@ -4,7 +4,7 @@
 <div class="panel-body">
 <div class='row'>
   <div class='col-sm-4'>
-    <%= image_tag @user.photo, width: "200px" rescue nil %>
+    <%= image_tag @user.photo.attached? ? @user.photo : 'missing.png', width: "200px" %>
   </div>
   <div class='col-sm-8'>
     <div class='row'>

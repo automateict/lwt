@@ -10,3 +10,5 @@
 //= require highcharts
 //= require select2
 //= require global
+//= require bootstrap-treeview
+//= require organization_units

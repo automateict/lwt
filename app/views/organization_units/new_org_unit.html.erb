@@ -1,0 +1,28 @@
+<%= content_for :header do %>
+    <h2>Organization Registration</h2>
+    <% end %>
+<section class="py-5 bg-light">
+  <div class="mb-5 sb-nav-tabs-wrapper">
+      <ul class="nav nav-tabs sb-nav-tabs border-0" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link nav-link-theme active show" id="theme-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">Register Your Organization</a>
+        </li>
+      </ul>
+  </div>
+  <div class="tab-pane fade active show" id="theme" role="tabpanel" aria-labelledby="theme-tab">
+<%= simple_form_for(@organization_unit, url: create_new_org_unit_organization_units_path) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name, class: "form-control show-tick" %>
+    <%= f.input :accept_petition, label_html: {class: 'transparent_label'} %>
+    <%= f.input :accept_complaint, label_html: {class: 'transparent_label'} %>
+    <%= f.input :organization_type_id, prompt: true, collection: OrganizationType.all, class: "form-control show-tick" %>
+    <%= f.input :url, label: 'URL' %>
+    <%= f.input :contact_person, class: "form-control show-tick" %>
+    <%= f.input :contact_phone, class: "form-control show-tick" %>
+    <%= f.input :contact_email, class: "form-control show-tick" %>
+    <div class="form-actions">
+      <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+    </div>
+<% end %>
+  </div>
+</section>

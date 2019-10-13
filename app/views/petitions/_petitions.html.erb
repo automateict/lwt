@@ -20,7 +20,11 @@
         <td><%= petition.user %></td>
         <td><%= petition.organization_unit %></td>
         <td><%= petition.sector %></td>
-        <td><%= petition.status %></td>
+        <td><label class="label <%= petition.status == Constants::PENDING ? 'label-warning' :
+                                            (petition.status == Constants::REJECTED ? 'label-danger' :
+                                                 (petition.status == Constants::RESOLVED ? 'label-success' : 'label-default')) %>">
+        <%= petition.status %>
+      </label>
         <td>
           <%= link_to 'Details', petition %> |
           <%= link_to 'Edit', edit_petition_path(petition) %>

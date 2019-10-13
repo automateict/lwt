@@ -3,7 +3,7 @@ class PrCommitteesController < ApplicationController
   before_action :load, only: [:new, :create, :edit, :update]
 
   def load
-    @organization_members = User.where(organization_unit_id: current_user.organization_unit_id)
+    @organization_members = User.where(organization_unit_id: current_user.organization_unit_id, role: User::COMMITEE)
   end
   # GET /pr_committees
   # GET /pr_committees.json
@@ -49,7 +49,6 @@ class PrCommitteesController < ApplicationController
         format.html { redirect_to @pr_committee.petition, notice: 'Petition Review committee was successfully updated.' }
         format.json { render :show, status: :ok, location: @pr_committee }
       else
-        logger.info("---------------------#{@pr_committee.errors.inspect}")
         format.html { render :edit }
         format.json { render json: @pr_committee.errors, status: :unprocessable_entity }
       end

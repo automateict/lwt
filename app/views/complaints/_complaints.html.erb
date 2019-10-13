@@ -18,7 +18,12 @@
         <td><%= link_to complaint.user, complaint.user %></td>
         <td><%= complaint.organization_unit %></td>
         <td><%= complaint.title %></td>
-        <td><%= complaint.status %></td>
+        <td><label class="label <%= complaint.status == Constants::PENDING ? 'label-warning' :
+                                        (complaint.status == Constants::REJECTED ? 'label-danger' :
+                                             (complaint.status == Constants::RESOLVED ? 'label-success' : 'label-default')) %>">
+          <%= complaint.status %>
+        </label>
+        <td>
         <td><%= link_to 'Details', complaint %> |
           <%= link_to 'Edit', edit_complaint_path(complaint) %> |
           <%= link_to 'Delete', complaint, method: :delete, data: { confirm: 'Are you sure?' } %>

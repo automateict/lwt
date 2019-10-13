@@ -5,6 +5,7 @@ class Complaint < ApplicationRecord
   has_many :documents, as: :documentable
   has_many :comments, as: :commentable
   has_many :complaint_reports
+  has_many :complaint_user_visits
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 
@@ -35,6 +36,10 @@ class Complaint < ApplicationRecord
 
   def complaint_status
     complaint_reports ? complaint_reports.order(:created_at).last.decision : status
+  end
+
+  def read(user)
+    !complaint_user_visits.where(user_id: user).blank?
   end
 
 end

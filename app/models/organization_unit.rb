@@ -8,8 +8,8 @@ class OrganizationUnit < ApplicationRecord
   has_many :petitions
   has_many :petition_review_members
 
-  validates :name, :short_name, :organization_type_id, presence: true
-  validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?
+  validates :name, :organization_type_id, :contact_person, :contact_phone, :contact_email, presence: true
+  #validates :parent_organization_unit_id, presence: true, if: :top_organization_unit_exists?
 
   scope :petition_org_units, -> {where(accept_petition: true)}
 

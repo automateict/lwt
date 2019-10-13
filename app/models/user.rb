@@ -20,6 +20,10 @@ class User < ApplicationRecord
     return petitions
   end
 
+  def all_unread_petitions
+    load_petitions.select{|x| !x.read(self.id)}
+  end
+
   def load_complaints
     complaints = []
     unless organization_unit.blank?
@@ -28,6 +32,10 @@ class User < ApplicationRecord
       complaints = self.complaints
     end
     return complaints
+  end
+
+  def all_unread_complaints
+    load_complaints.select{|x| !x.read(self.id)}
   end
 
   def signed(petition)

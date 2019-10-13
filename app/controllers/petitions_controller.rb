@@ -56,6 +56,12 @@ class PetitionsController < ApplicationController
   # GET /petitions/1.json
   def show
     @comment = @petition.comments.build
+    if current_user
+    unless @petition.read(current_user.id)
+      puv = @petition.petition_user_visits.build(user_id: current_user.id)
+      puv.save
+    end
+    end
   end
 
   # GET /petitions/new
@@ -71,7 +77,7 @@ class PetitionsController < ApplicationController
   # POST /petitions.json
   def create
     @petition = Petition.new(petition_params)
-    params[:petition][:status] = 'Pending'
+    @petition.status = Constants::PENDING
     respond_to do |format|
       if @petition.save
         format.html { redirect_to @petition, notice: 'Petition was successfully created.' }

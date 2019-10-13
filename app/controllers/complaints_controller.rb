@@ -1,4 +1,5 @@
 class ComplaintsController < ApplicationController
+  before_action :authenticate_user!, except: [:joined_organizations]
   before_action :set_complaint, only: [:show, :edit, :update, :destroy]
 
   # GET /complaints
@@ -30,6 +31,14 @@ class ComplaintsController < ApplicationController
   # GET /complaints/1
   # GET /complaints/1.json
   def show
+    unless @complaint.read(current_user.id)
+      cuv = @complaint.complaint_user_visits.build(user_id: current_user.id)
+      cuv.save
+    end
+  end
+
+  def joined_organizations
+    @organizations = OrganizationUnit.all
   end
 
   # GET /complaints/new
@@ -46,6 +55,7 @@ class ComplaintsController < ApplicationController
   def create
     @complaint = Complaint.new(complaint_params)
     @complaint.user_id = current_user.id
+    @complaint.status = Constants::PENDING
     respond_to do |format|
       if @complaint.save
         format.html { redirect_to @complaint, notice: 'Complaint was successfully created.' }

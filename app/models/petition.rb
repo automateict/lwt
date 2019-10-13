@@ -8,6 +8,7 @@ class Petition < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :petition_reports
   has_one_attached :cover_image
+  has_many :petition_user_visits
 
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :comments, allow_destroy: true
@@ -45,6 +46,10 @@ class Petition < ApplicationRecord
 
   def self.active_petitions(user)
     user.load_petitions.where('status')
+  end
+
+  def read(user)
+    !petition_user_visits.where(user_id: user).blank?
   end
 
 end

@@ -42,11 +42,31 @@ class OrganizationUnitsController < ApplicationController
   def show
   end
 
+  def new_org_unit
+    @organization_unit = OrganizationUnit.new
+    render layout: 'guest-complaints'
+  end
+
+  def create_new_org_unit
+    @organization_unit = OrganizationUnit.new(organization_unit_params)
+
+    respond_to do |format|
+      if @organization_unit.save
+        format.html { redirect_to @organization_unit, notice: 'You have successfully registered your organization.' }
+        format.json { render :show, status: :created, location: @organization_unit }
+      else
+        format.html { render :new_org_unit }
+        format.json { render json: @organization_unit.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /organization_units/new
   def new
     @parent = OrganizationUnit.find_by_id(params[:parent])
     @organization_unit = OrganizationUnit.new
     @organization_unit.parent_organization_unit = @parent
+    session[:return_to] = request.referer
   end
 
   # GET /organization_units/1/edit

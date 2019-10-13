@@ -3,7 +3,7 @@ class CrCommitteesController < ApplicationController
   before_action :load, only: [:new, :create, :edit, :update]
 
   def load
-    @organization_members = User.where(organization_unit_id: current_user.organization_unit_id)
+    @organization_members = User.where(organization_unit_id: current_user.organization_unit_id, role: User::COMMITEE)
   end
   # GET /cr_committees
   # GET /cr_committees.json

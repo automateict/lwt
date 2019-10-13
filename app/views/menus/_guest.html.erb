@@ -22,22 +22,45 @@
               <% end %>
               <div class="dropdown-divider"></div>
               <%= link_to petitions_path(type: Constants::ACTIVE) do %>
-                  <span class="dropdown-item font-weight-bold"> <i class="icon-cursor"></i> Active Petitions</span>
+                  <span class="dropdown-item font-weight-bold"><i class="icon-cursor"></i> Active Petitions</span>
               <% end %>
               <%= link_to petitions_path(type: Constants::RESOLVED) do %>
-                  <span class="dropdown-item font-weight-bold"> <i class="icon-check"></i> Resolved Petitions</span>
+                  <span class="dropdown-item font-weight-bold"><i class="icon-check"></i> Resolved Petitions</span>
               <% end %>
               <%= link_to petitions_path(type: Constants::UNDER_REVIEW) do %>
-                  <span class="dropdown-item font-weight-bold"> <i class="icon-question"> </i> Petitions Under Review</span>
+                  <span class="dropdown-item font-weight-bold"><i class="icon-question"></i> Petitions Under Review</span>
               <% end %>
             </div>
           </div>
         </div>
       </li>
-      <li class="nav-item">
-        <%= link_to home_complaints_path do %>
-            <span class="nav-link">Complaints</span>
-        <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="templatesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Complaints
+        </a>
+        <div class="dropdown-menu dropdown-templates border-0 shadow animate slideIn" aria-labelledby="templatesDropdown">
+          <div class="d-lg-flex flex-row">
+            <div class="dropdown-themes-callout d-none d-lg-flex p-5 text-center text-white align-items-center">
+              <div>
+                <h5>Complaints Management Platform</h5>
+                <p>Public and private organizations are using this platform to accept complaints from clients</p>
+                <%= link_to 'Register Your Organization Now', new_org_unit_organization_units_path, class: 'btn btn-theme btn-xl' %>
+              </div>
+            </div>
+            <div class="py-lg-3">
+              <%= link_to 'Joined Organizations', joined_organizations_complaints_path, class: "dropdown-item font-weight-bold" %>
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header"></h6>
+              <%= link_to home_complaints_path do %>
+                  <span class="dropdown-item font-weight-bold"><i class="icon-book-open"></i> How it works</span>
+              <% end %>
+              <div class="dropdown-divider"></div>
+              <%= link_to new_complaint_path do %>
+                  <span class="dropdown-item font-weight-bold"><i class="icon-arrow-right"></i> Send Complaint</span>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </li>
       <li class="nav-item">
         <%= link_to home_guides_path do %>

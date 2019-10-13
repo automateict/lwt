@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get 'complaints_by_status'
       get 'complaints_by_org_unit_by_status'
       get 'load_complaints'
+      get 'joined_organizations'
     end
   end
   resources :pr_committee_members
@@ -51,6 +52,8 @@ Rails.application.routes.draw do
       get 'org_unit_facilities'
       get 'load_petition_tree'
       get 'load_petition_sub_units'
+      get 'new_org_unit'
+      post 'create_new_org_unit'
     end
   end
   resources :organization_types
