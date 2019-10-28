@@ -20,4 +20,5 @@
 //= require chartkick
 //= require highcharts
 //= require AdminBSBSenstive/index
+//= require channels/jquery.raty
 //= require global

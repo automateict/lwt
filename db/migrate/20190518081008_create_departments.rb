@@ -1,7 +1,7 @@
 class CreateDepartments < ActiveRecord::Migration[5.2]
   def change
-    create_table :departments do |t|
-      t.references :organization_unit, foreign_key: true
+    create_table :departments, id: :uuid do |t|
+      t.references :organization_unit, type: :uuid, foreign_key: true
       t.string :name
       t.string :phone
       t.string :email

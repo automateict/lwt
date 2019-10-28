@@ -57,4 +57,19 @@ $(function () {
 
     });
 
+    $("#petition-rating").raty({
+        path: "/assets/",
+        scoreName: "petition_client_satisfaction[rating]",
+        number: 10
+    });
+
+    $(".petition-rating-review").raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr("data-score");
+        },
+        path: "/assets/",
+        number: 10
+    });
+
 });

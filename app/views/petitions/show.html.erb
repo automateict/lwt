@@ -27,9 +27,14 @@
                     <% end %>
                 <% end %>
                 <hr/>
-                <%= link_to 'Publish', nil, class: 'btn btn-primary' %>
+                <h3><label class="label <%= @petition.status == Constants::PENDING ? 'label-warning' :
+                                                        (@petition.status == Constants::REJECTED ? 'label-danger' :
+                                                             (@petition.status == Constants::RESOLVED ? 'label-success' : 'label-default')) %>">
+                  <%= @petition.status %>
+                </label> &nbsp;&nbsp;&nbsp;<%= link_to 'Accept', publish_petition_path(id: @petition.id), class: 'btn btn-primary' if @petition.status==Constants::PENDING %>
+                  <%= link_to 'Reject', reject_petition_path(id: @petition.id), class: 'btn btn-danger' if @petition.status==Constants::PENDING %>
+                </h3>
               </div>
-
               <div role="tabpanel" class="tab-pane fade" id="pr_commitee">
                 <% if @petition.pr_committee %>
                     <table class="table table-bordered">
@@ -93,16 +98,16 @@
                     <b><%= c.user.email rescue nil %> <%= c.updated_at.strftime("%B %d, %Y") rescue nil %></b><br/>
                     <span><%= c.content %></span>
                   </div>
-                  <hr class="my-2">
-              <% end %>
+                <hr class="my-2">
+          <% end %>
             <%= simple_nested_form_for(@petition, url: add_comment_petition_path) do |f| %>
                 <%= f.simple_fields_for :comments, @comment do |cf| %>
                   <%= cf.error_notification %>
                     <%= cf.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
-                  <%= cf.input :content %>
+                  <%= cf.input :content, wrapper: 'vertical_form', label: 'Add Your Comment', input_html: {class: 'wysihtml5'} %>
                 <% end %>
                 <div class="form-actions">
-                  <%= f.button :submit %>
+                  <%= f.button :submit, 'Submit Comment' %>
                 </div>
             <% end %>
 
@@ -144,6 +149,41 @@
               <% end %>
             </div>
           </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Client Feedback
+            </div>
+            <div class="panel-body">
+                  <div class="d-flex justify-content-between small" style="width: 100%">
+                    <% if @petition.petition_client_satisfaction %>
+                      <div class="petition-rating-review" data-score = "<%= @petition.petition_client_satisfaction.rating rescue nil %>"></div>
+                      <%= @petition.petition_client_satisfaction.feedback rescue nil %>
+                    <% else %>
+                      <h4>No feedback yet</h4>
+                        <hr/>
+                    <% end %>
+
+                    <% if @petition.petition_client_satisfaction.blank? and @petition.user_id == current_user.id  %>
+                        <h4>Are you satisfied with the given solution?</h4>
+                        <hr/>
+                    <%= simple_form_for(PetitionClientSatisfaction.new) do |f| %>
+                        <%= f.error_notification %>
+
+                        <div class="form-inputs">
+                          <%= f.association :petition, as: :hidden, input_html: {value: @petition.id} %>
+                          <div id="petition-rating"><label>Rating</label> </div>
+                          <%= f.input :feedback, wrapper: 'vertical_form' %>
+                        </div>
+
+                        <div class="form-actions">
+                          <%= f.button :submit, 'Submit' %>
+                        </div>
+                    <% end %>
+                    <% end %>
+                  </div>
+          </div>
+
         </div>
       </div>
     </div>

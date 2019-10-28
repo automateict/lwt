@@ -28,7 +28,7 @@ class ComplaintClientSatisfactionsController < ApplicationController
 
     respond_to do |format|
       if @complaint_client_satisfaction.save
-        format.html { redirect_to @complaint_client_satisfaction, notice: 'Complaint client satisfaction was successfully created.' }
+        format.html { redirect_to @complaint_client_satisfaction.complaint, notice: 'client feedback was successfully submitted.' }
         format.json { render :show, status: :created, location: @complaint_client_satisfaction }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ComplaintClientSatisfactionsController < ApplicationController
   def update
     respond_to do |format|
       if @complaint_client_satisfaction.update(complaint_client_satisfaction_params)
-        format.html { redirect_to @complaint_client_satisfaction, notice: 'Complaint client satisfaction was successfully updated.' }
+        format.html { redirect_to @complaint_client_satisfaction.complaint, notice: 'client feedback was successfully updated.' }
         format.json { render :show, status: :ok, location: @complaint_client_satisfaction }
       else
         format.html { render :edit }

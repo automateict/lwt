@@ -1,6 +1,6 @@
 class PetitionsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_petition, only: [:show, :edit, :update, :destroy, :sign, :add_comment]
+  before_action :set_petition, only: [:show, :edit, :update, :destroy, :sign, :add_comment, :publish, :reject]
   before_action :load_org_units, only: [:new, :create, :edit, :update]
 
   def load_org_units
@@ -17,6 +17,16 @@ class PetitionsController < ApplicationController
     @organization_unit  = OrganizationUnit.find(params[:node])
     @petitions = @organization_unit.sub_petitions
     render partial: 'petitions'
+  end
+
+  def publish
+    @petition.update_attribute('status', Constants::ACTIVE)
+    redirect_to @petition
+  end
+
+  def reject
+    @petition.update_attribute('status', Constants::REJECTED)
+    redirect_to @petition
   end
 
   def add_comment

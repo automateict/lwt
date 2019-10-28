@@ -1,6 +1,6 @@
 <% content_for :header do %>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-8">
         <div class="panel panel-default">
           <div class="panel-heading">
             Complaint Details
@@ -11,7 +11,6 @@
               <li role="presentation" class="active"><a href="#complaint_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Complaint Details</a></li>
               <li role="presentation"><a href="#complaint_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Complaint Review Commitee</a></li>
               <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
-              <li role="presentation"><a href="#client_satisfaction" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Client Satisfaction</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -80,10 +79,46 @@
                 </table>
                 <%= link_to 'Add Review Report', new_complaint_report_path(complaint: @complaint.id), class: 'btn btn-primary' %>
               </div>
-              <div role="tabpanel" class="tab-pane fade" id="client_satisfaction">
-                #TODO
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Client Feedback
+            </div>
+            <div class="panel-body">
+              <div class="d-flex justify-content-between small" style="width: 100%">
+                <% if @complaint.complaint_client_satisfaction %>
+                    <div class="complaint-rating-review" data-score = "<%= @complaint.complaint_client_satisfaction.rating rescue nil %>"></div>
+                    <%= @complaint.complaint_client_satisfaction.feedback rescue nil %>
+                <% else %>
+                    <h4>No feedback yet</h4>
+                    <hr/>
+                <% end %>
+
+                <% if @complaint.complaint_client_satisfaction.blank? and @complaint.user_id == current_user.id  %>
+                    <h4>Are you satisfied with the solution?</h4>
+                    <hr/>
+                    <%= simple_form_for(ComplaintClientSatisfaction.new) do |f| %>
+                        <%= f.error_notification %>
+
+                        <div class="form-inputs">
+                          <%= f.association :complaint, as: :hidden, input_html: {value: @complaint.id} %>
+                          <div id="complaint-rating"><label>Rating</label> </div>
+                          <%= f.input :feedback, wrapper: 'vertical_form' %>
+                        </div>
+
+                        <div class="form-actions">
+                          <%= f.button :submit, 'Submit' %>
+                        </div>
+                    <% end %>
+                <% end %>
               </div>
             </div>
+
           </div>
         </div>
       </div>

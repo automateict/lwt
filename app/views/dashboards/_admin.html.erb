@@ -2,7 +2,7 @@
     <div class="row clearfix">
       <div class="col-sm-6">
         <fieldset class="sub_form">
-          <legend>PETITIONS</legend>
+          <legend class="label label-danger"><h4>PETITIONS</h4></legend>
         <%= link_to petitions_path(type: 'all') do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="content" style="min-height: 1486px;">
                   <div class="text">Total Petitions</div>
-                  <div class="number"><%= Petition.all_petitions(current_user).count %></div>
+                  <div><%= Petition.all_petitions(current_user).count %></div>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
               Petitions by Status
             </div>
             <div class="panel-body">
-              <%= column_chart petitions_by_status_petitions_path %>
+              <%= pie_chart petitions_by_status_petitions_path, donut: true %>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
       </div>
       <div class="col-sm-6">
         <fieldset class="sub_form">
-          <legend>COMPLAINTS</legend>
+          <legend class="label label-info"><h4>COMPLAINTS</h4></legend>
         <%= link_to complaints_path(type: 'all') do %>
             <div class="col-sm-6">
               <div class="info-box infobox-type-5 hover-zoom-effect">
@@ -153,7 +153,7 @@
               Complaints by Status
             </div>
             <div class="panel-body">
-              <%= column_chart complaints_by_status_complaints_path %>
+              <%= pie_chart complaints_by_status_complaints_path %>
             </div>
           </div>
         </div>

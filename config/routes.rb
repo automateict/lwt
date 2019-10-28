@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :petition_client_satisfactions
   get 'reports/petitions'
   post 'reports/petitions'
   get 'reports/complaints'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
     member do
       get 'sign'
       patch 'add_comment'
+      get 'publish'
+      get 'reject'
     end
     collection do
       get 'petitions_by_status'

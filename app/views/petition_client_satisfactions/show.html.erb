@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Petition:</strong>
+  <%= @petition_client_satisfaction.petition %>
+</p>
+
+<p>
+  <strong>Rating:</strong>
+  <%= @petition_client_satisfaction.rating %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= @petition_client_satisfaction.feedback %>
+</p>
+
+<%= link_to 'Edit', edit_petition_client_satisfaction_path(@petition_client_satisfaction) %> |
+<%= link_to 'Back', petition_client_satisfactions_path %>

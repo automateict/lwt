@@ -9,9 +9,11 @@ class Petition < ApplicationRecord
   has_many :petition_reports
   has_one_attached :cover_image
   has_many :petition_user_visits
+  has_one :petition_client_satisfaction
 
   accepts_nested_attributes_for :documents, allow_destroy: true
   accepts_nested_attributes_for :comments, allow_destroy: true
+
 
   scope :all_petitions, -> (user){ user.load_petitions }
   scope :org_unit_petitions_by_status, -> (user, org_unit, status){ all_petitions(user).where('organization_unit_id in (?) and status = ?',

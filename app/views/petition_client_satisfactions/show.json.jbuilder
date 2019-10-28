@@ -1,0 +1,1 @@
+json.partial! "petition_client_satisfactions/petition_client_satisfaction", petition_client_satisfaction: @petition_client_satisfaction

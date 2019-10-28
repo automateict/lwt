@@ -1,0 +1,2 @@
+module PetitionClientSatisfactionsHelper
+end
