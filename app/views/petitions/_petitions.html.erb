@@ -26,8 +26,12 @@
         <%= petition.status %>
       </label>
         <td>
-          <%= link_to 'Details', petition %> |
-          <%= link_to 'Edit', edit_petition_path(petition) %>
+          <%= link_to petition do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+          <% end %>
+          <%= link_to edit_petition_path(petition) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
         </td>
       </tr>
   <% end %>

@@ -12,6 +12,7 @@
               <li role="presentation" class="active"><a href="#petition_details" data-toggle="tab" aria-expanded="false"><i class="fa fa-user m-r-5"></i> Petition Details</a></li>
               <li role="presentation"><a href="#pr_commitee" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Petition Review Commitee</a></li>
               <li role="presentation"><a href="#review_report" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Review Report</a></li>
+              <li role="presentation"><a href="#signers" data-toggle="tab" aria-expanded="false"><i class="fa fa-graduation-cap m-r-5"></i> Signed People </a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -84,6 +85,30 @@
                 </table>
                 <%= link_to 'Add Review Report', new_petition_report_path(petition: @petition.id), class: 'btn btn-primary' %>
               </div>
+              <div role="tabpanel" class="tab-pane fade" id="signers">
+                <table class="table table-striped dataTable js-exportable">
+                  <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Signed Date</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @petition.signatures.each do |pr| %>
+                      <tr>
+                        <td><%= link_to pr.user do %>
+                              <%= image_tag pr.user.photo.attached? ? pr.user.photo : 'missing.png', size: '30x30', class: 'img-circle' %>
+                              <% end %>
+                          <%= pr.user %>
+                        </td>
+                        <td><%= pr.user.email %></td>
+                        <td><%= pr.created_at.strftime("%B %d, %Y") %></td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -95,8 +120,11 @@
           <div class="panel-body">
               <% @petition.comments.each do |c| %>
                   <div class="d-flex justify-content-between small" style="width: 100%">
-                    <b><%= c.user.email rescue nil %> <%= c.updated_at.strftime("%B %d, %Y") rescue nil %></b><br/>
-                    <span><%= c.content %></span>
+                    <%= link_to c.user do %>
+                        <%= image_tag c.user.photo.attached? ? c.user.photo : 'missing.png', size: '30x30', class: 'img-circle' rescue nil %>
+                    <% end %>
+                    <b><%= c.user rescue nil %></b> <%= c.updated_at.strftime("%b %d, %Y %H:%M") rescue nil %><br/>
+                    <span><%= raw c.content %></span>
                   </div>
                 <hr class="my-2">
           <% end %>
@@ -142,8 +170,12 @@
             <div class="panel-body">
               <% @petition.recent_signers.each do |rs| %>
                   <div class="d-flex justify-content-between small" style="width: 100%">
-                    <span class="font-weight-bold"><%= rs.user %></span>
-                    <span style="float: right">Jan 7, 2014</span>
+                    <span class="font-weight-bold">
+                      <%= link_to rs.user do %>
+                              <%= image_tag rs.user.photo.attached? ? rs.user.photo : 'missing.png', size: '30x30', class: 'img-circle' %>
+                          <% end %>
+                      <%= rs.user %></span>
+                    <span style="float: right"><%= rs.created_at.strftime("%b %d, %Y") %></span>
                   </div>
                   <hr class="my-2">
               <% end %>
@@ -297,15 +329,13 @@
             <div class="card-body">
               <h5 class="m-0">Comments</h5>
               <hr>
-              <ul class="mb-0">
                 <% @petition.comments.each do |c| %>
-                  <li>
-                    <div class="col-sm-3"><%= c.user %></div>
-                    <div class="col-sm-9"><%= c.content %></div>
-                  </li>
-                    <hr/>
+                    <%= link_to c.user do %>
+                        <%= image_tag c.user.photo.attached? ? c.user.photo : 'missing.png', size: '30x30', class: 'img-circle' rescue nil %>
+                    <% end %>
+                    <b><%= c.user rescue nil %></b> <%= c.updated_at.strftime("%b %d, %Y %H:%M") rescue nil %><br/>
+                    <span><%= raw c.content %></span>
                 <% end %>
-              </ul>
             </div>
           </div>
 
@@ -344,8 +374,12 @@
               <hr class="my-2">
               <% @petition.recent_signers.each do |rs| %>
                   <div class="d-flex justify-content-between small">
-                    <span class="font-weight-bold"><%= rs.user %></span>
-                    <span>Jan 7, 2014</span>
+                    <span>
+                    <%= link_to rs.user do %>
+                        <%= image_tag rs.user.photo.attached? ? rs.user.photo : 'missing.png', size: '30x30', class: 'img-circle' %>
+                    <% end %>
+                    <%= rs.user %></span>
+                    <span style="float: right"><%= rs.created_at.strftime("%b %d, %Y") %></span>
                   </div>
                   <hr class="my-2">
               <% end %>

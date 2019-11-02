@@ -16,9 +16,29 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane fade in active" id="complaint_details">
-                <h3><%= @complaint.title %></h3>
-                <p><strong>Complaint by:</strong> <%= link_to @complaint.user, @complaint.user %></p>
-                <p><strong>Status:</strong> <%= @complaint.complaint_status %></p>
+                <br/>
+                <div class="row">
+                <label class="col-sm-2">Submitted By</label>
+                  <div class="col-sm-10">
+                    <%= link_to @complaint.user do %>
+                        <%= image_tag @complaint.user.photo.attached? ? @complaint.user.photo : 'missing.png', size: '50x50', class: 'img-circle' rescue nil %>
+                    <% end %>
+                    <%= @complaint.user %></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2">Subject</label>
+                  <div class="col-sm-10">
+                    <%= @complaint.title %>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label class="col-sm-2">Status</label>
+                  <div class="col-sm-10">
+                    <%= @complaint.complaint_status %>
+                  </div>
+                </div>
                 <hr/>
                 <p><%= raw @complaint.body %></p>
                 <% if @complaint.documents %>
@@ -38,7 +58,10 @@
                       <legend>Committee Members</legend>
                       <% @complaint.cr_committee.cr_committee_members.each do |member| %>
                           <div>
-                            <span><%= image_tag member.user.photo, width: '100px', class: 'img-circle' rescue nil %>
+                            <span>
+                              <%= link_to member.user do %>
+                                <%= image_tag member.user.photo.attached? ? member.user.photo : 'missing.png', width: '100px', class: 'img-circle' rescue nil %>
+                              <% end %>
                               <label><span class="font-20"><%= member.user %></span><br/> <%= member.role %></label>
                             </span>
                           </div>

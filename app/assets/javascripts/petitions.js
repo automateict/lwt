@@ -12,11 +12,9 @@ $(function () {
                         success: function (response) {
                             $('#petitions').html(response)
                             $('.js-exportable').DataTable({
-                                dom: 'lrBfrtip',
                                 responsive: true,
-                                buttons: [
-                                    'copy', 'csv', 'excel', 'pdf', 'print'
-                                ]
+                                dom: '<"html5buttons"B>lTfgtip',
+                                buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
                             });
                         }
                     })
@@ -59,8 +57,7 @@ $(function () {
 
     $("#petition-rating").raty({
         path: "/assets/",
-        scoreName: "petition_client_satisfaction[rating]",
-        number: 10
+        scoreName: "petition_client_satisfaction[rating]"
     });
 
     $(".petition-rating-review").raty({
@@ -68,8 +65,7 @@ $(function () {
         score: function() {
             return $(this).attr("data-score");
         },
-        path: "/assets/",
-        number: 10
+        path: "/assets/"
     });
 
 });

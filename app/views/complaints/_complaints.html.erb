@@ -15,7 +15,10 @@
   <% @complaints.each do |complaint| %>
       <tr>
         <td><%= counter %></td>
-        <td><%= link_to complaint.user, complaint.user %></td>
+        <td><%= link_to complaint.user do %>
+              <%= image_tag complaint.user.photo.attached? ? complaint.user.photo : 'missing.png', size: '30x30', class: 'img-circle' %>
+              <% end %>
+          <%= complaint.user %></td>
         <td><%= complaint.organization_unit %></td>
         <td><%= complaint.title %></td>
         <td><label class="label <%= complaint.status == Constants::PENDING ? 'label-warning' :
@@ -24,9 +27,13 @@
           <%= complaint.status %>
         </label>
         <td>
-        <td><%= link_to 'Details', complaint %> |
-          <%= link_to 'Edit', edit_complaint_path(complaint) %> |
-          <%= link_to 'Delete', complaint, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td>
+          <%= link_to complaint do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-list"></i> Details</button>
+          <% end %>
+          <%= link_to edit_complaint_path(complaint) do %>
+              <button type="button" class="btn btn-outline btn-primary"><i class="fa fa-edit"></i> Edit</button>
+          <% end %>
         </td>
       </tr>
       <% counter += 1 %>

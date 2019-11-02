@@ -28,5 +28,11 @@
             theme: "bootstrap"
         });
 
+        $('.js-exportable').DataTable({
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        });
+
     });
 }(jQuery))
