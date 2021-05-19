@@ -20,7 +20,7 @@ gem 'jquery-rails'
 gem 'rails', '~> 5.2.2'
 # Use mysql as the database for Active Record
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'pg', '>= 0.18', '< 2.0'
 # Use SCSS for stylesheets
